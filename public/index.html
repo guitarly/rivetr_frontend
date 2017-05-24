@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="Rivetr">
   <head>
     <meta charset="utf-8">
     <title>RIVETR .</title>
+    <!-- ================== ANGULAR =================== -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+    <!-- ================== SCRIPTS =================== -->
+    <script src="js/app.js" charset="utf-8"></script>
+    <script src="js/controllers/routes.js" charset="utf-8"></script>
+    <script src="js/controllers/landing.js" charset="utf-8"></script>
+    </script>
   </head>
   <body>
-    
+    <section ng-view></section>
   </body>
 </html>

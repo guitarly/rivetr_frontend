@@ -2,7 +2,7 @@
 
 *to rivet is to join things together. to be riveted by something is to be completely engrossed by it.*
 
-*rivetr aims to join your language learning and your everyday life together and have you completely engrossed by the language so that soon enough, it's no longer foreign*
+<blockquote>rivetr aims to join your language learning and your everyday life together and have you completely engrossed by the language so that soon enough, it's no longer foreign</blockquote>
 
 # WHAT IS IT .
 

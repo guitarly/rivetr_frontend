@@ -1,1 +1,18 @@
-{{vm.message}}
+<!-- ================= REGISTRATION FORM ================= -->
+<h1>register</h1>
+<form ng-submit="vm.register();">
+  <input type="text" ng-model="vm.newUserData.username" placeholder="username">
+  <input type="text" ng-model="vm.newUserData.password" placeholder="password">
+  <input type="text" ng-model="vm.newUserData.display_name" placeholder="display name">
+  <input type="text" ng-model="vm.newUserData.profile_photo" placeholder="profile photo">
+  <input type="text" ng-model="vm.newUserData.language_learning" placeholder="language learning">
+  <input type="text" ng-model="vm.newUserData.language_known" placeholder="language known">
+  <input type="submit" value="register" />
+</form>
+
+<h2>riv</h2>
+<form ng-submit="vm.postRiv();">
+  <input type="text" ng-model="vm.newRivData.content" placeholder="share your thoughts" />
+  <input type="number" ng-model="vm.newRivData.user_id" />
+  <input type="submit" />
+</form>

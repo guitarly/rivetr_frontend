@@ -16,3 +16,17 @@
   <input type="number" ng-model="vm.newRivData.user_id" />
   <input type="submit" />
 </form>
+
+<h2>login</h2>
+<form ng-submit="vm.login();">
+  <input type="text" ng-model="vm.loginData.username" placeholder="username" />
+  <input type="password" ng-model="vm.loginData.password" placeholder="password"/>
+  <input type="submit" />
+</form>
+
+{{currentUser.username}}
+
+<h2>logout</h2>
+<div ng-click="vm.logout();">
+  logout
+</div>

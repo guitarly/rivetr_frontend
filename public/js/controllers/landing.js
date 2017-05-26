@@ -3,7 +3,7 @@
 // ================================================
 
 (function(){
-  var app = angular.module('Rivetr');
+  const app = angular.module('Rivetr');
 
   app.controller('LandingCtrl', ['$http', '$rootScope', function($http, $rootScope){
 
@@ -37,6 +37,38 @@
           console.log(result);
       }.bind(this));
     };
+
+    // to login
+    this.login = function(){
+      $http({
+        method: 'POST',
+        url: URL + 'users/login',
+        data: { user: this.loginData }
+      }).then(function(result){
+          localStorage.setItem('token', JSON.stringify(result.data.token));
+          localStorage.setItem('user', result.data.user.id);
+      }.bind(this))
+    }
+
+    // to logout
+    this.logout = function(){
+      localStorage.clear('token');
+      location.reload();
+    }
+
+    this.sessionCheck = function(){
+      if(localStorage.length !== 0){
+        let id = localStorage.user;
+        $http({
+          method: 'GET',
+          url: URL + 'users/' + id
+        }).then(function(result){
+            $rootScope.currentUser = result.data;
+        })
+      }
+    }
+
+    this.sessionCheck();
 
   }]); // ends controller
 

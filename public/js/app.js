@@ -1,5 +1,5 @@
 (function() {
 
-  angular.module('Rivetr', ['ngRoute']);
+  angular.module('Rivetr', ['ngRoute', 'ngStorage']);
 
 })();

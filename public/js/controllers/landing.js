@@ -47,6 +47,7 @@
       }).then(function(result){
           localStorage.setItem('token', JSON.stringify(result.data.token));
           localStorage.setItem('user', result.data.user.id);
+          this.sessionCheck();
       }.bind(this))
     }
 

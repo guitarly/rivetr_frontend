@@ -234,7 +234,7 @@ nav {
 .landing-container {
   display: flex;
   flex-direction: column-reverse;
-  background: url("../img/idk.png");
+  background: url("../img/landingpg.png");
   background-size: cover; }
   @media (min-width: 900px) {
     .landing-container {

@@ -122,9 +122,6 @@ nav {
   margin: 5px 10px;
   position: fixed;
   right: 17.5%; }
-  @media (min-width: 900px) {
-    .close {
-      color: #67AECA; } }
   .close i {
     transition: 0.5s ease-in;
     -moz-transition: 0.5s ease-in;
@@ -138,43 +135,44 @@ nav {
       -webkit-transition: 0.5s ease-in;
       -o-transition: 0.5s ease-in; }
 
-.registration-container {
+/* SHARED */
+.registration-container, .login-container {
   width: 65%;
   height: 54vh;
   background: #E9E9E9;
   display: flex;
   flex-direction: column; }
   @media (min-width: 900px) {
-    .registration-container {
+    .registration-container, .login-container {
       justify-content: space-between;
       flex-direction: row; } }
 
-.registration-info {
-  background: #67AECA;
+.registration-info, .login-info {
   text-align: center;
   justify-content: center;
   align-items: center; }
   @media (min-width: 900px) {
-    .registration-info {
+    .registration-info, .login-info {
       width: 45%;
       height: 54vh; } }
-  .registration-info h1 {
+  .registration-info p, .login-info p {
+    width: 80%; }
+  .registration-info h1, .login-info h1 {
     font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
     font-size: 40px;
     color: whitesmoke; }
-  .registration-info p {
-    width: 80%;
-    margin: 0 auto;
+  .registration-info p, .login-info p {
     font-size: 12px;
     font-weight: 300;
-    color: white; }
-  .registration-info div {
+    color: white;
+    margin: 0 auto; }
+  .registration-info div, .login-info div {
     padding: 25px; }
     @media (min-width: 900px) {
-      .registration-info div {
+      .registration-info div, .login-info div {
         margin-top: 35px;
         padding: 0px; }
-        .registration-info div::before, .registration-info div::after {
+        .registration-info div::before, .registration-info div::after, .login-info div::before, .login-info div::after {
           content: '';
           background: whitesmoke;
           width: 2px;
@@ -182,54 +180,94 @@ nav {
           display: block;
           margin: 10px auto;
           transform: rotate(20deg); }
-        .registration-info div::after {
+        .registration-info div::after, .login-info div::after {
           margin-top: 20px; } }
 
-.registration-form {
+.registration-form, .login-form {
   padding: 25px;
   box-sizing: border-box;
   overflow: auto; }
   @media (min-width: 900px) {
-    .registration-form {
+    .registration-form, .login-form {
       width: 55%; } }
-  .registration-form h1 {
+  .registration-form h1, .login-form h1 {
     font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
     font-size: 25px;
-    color: #E52A6F;
     text-transform: uppercase; }
-    .registration-form h1::after {
+    .registration-form h1::after, .login-form h1::after {
       content: '';
       width: 10%;
       height: 2px;
       margin-bottom: 10px;
-      display: block;
-      background: #E52A6F; }
-    .registration-form h1:nth-of-type(2) {
-      margin-top: 5px; }
+      display: block; }
+
+/* REGISTRATION */
+@media (min-width: 900px) {
+  .registration-container .close {
+    color: #67AECA; } }
+
+.registration-info {
+  background: #67AECA; }
+
+.registration-form h1 {
+  color: #E52A6F; }
+  .registration-form h1::after {
+    background: #E52A6F; }
+  .registration-form h1:nth-of-type(2) {
+    margin-top: 5px; }
+.registration-form input {
+  width: 92%; }
+  .registration-form input[type="submit"] {
+    width: 98%;
+    background: #E52A6F;
+    font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 15px;
+    color: #E9E9E9; }
+    .registration-form input[type="submit"]:focus {
+      border: 0px; }
+@media (min-width: 900px) {
   .registration-form input {
-    width: 92%; }
+    width: 85%; }
     .registration-form input[type="submit"] {
+      width: 92%; } }
+@media (min-width: 1088px) {
+  .registration-form input {
+    width: 40%; }
+    .registration-form input:nth-of-type(7) {
+      width: calc(80% + 35px); }
+    .registration-form input[type="submit"] {
+      width: calc(80% + 56px); } }
+
+/* LOGIN */
+@media (min-width: 900px) {
+  .login-container .close {
+    color: #eb578e; } }
+
+.login-info {
+  background: #eb578e; }
+
+.login-form {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .login-form h1 {
+    color: #67AECA; }
+    .login-form h1::after {
+      background: #67AECA; }
+  .login-form input {
+    width: 92%; }
+    .login-form input[type="submit"] {
       width: 98%;
-      background: #E52A6F;
+      background: #67AECA;
       font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
       text-transform: uppercase;
       font-weight: 700;
       font-size: 15px;
       color: #E9E9E9; }
-      .registration-form input[type="submit"]:focus {
+      .login-form input[type="submit"]:focus {
         border: 0px; }
-  @media (min-width: 900px) {
-    .registration-form input {
-      width: 85%; }
-      .registration-form input[type="submit"] {
-        width: 92%; } }
-  @media (min-width: 1088px) {
-    .registration-form input {
-      width: 40%; }
-      .registration-form input:nth-of-type(7) {
-        width: calc(80% + 35px); }
-      .registration-form input[type="submit"] {
-        width: calc(80% + 56px); } }
 
 /* ================ LANDING ================= */
 .landing-container {

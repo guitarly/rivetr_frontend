@@ -60,12 +60,16 @@
     // ============ MODAL DE/ACTIVATION =============
     // default variables
     this.showRegister = false;
+    this.showLogin = false;
 
     // toggle switch
     this.modalToggle = function(modal) {
       switch(modal) {
         case 'register':
           this.showRegister = !this.showRegister;
+          break;
+        case 'login':
+          this.showLogin = !this.showLogin;
           break;
       }
     }

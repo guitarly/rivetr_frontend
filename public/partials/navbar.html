@@ -16,12 +16,16 @@
   <!-- =============== LINKS =============== -->
   <section class="nav-links">
     <ul>
-      <li><a ng-click="vm.modalToggle('register')" data-hover="register">register</a></li>
-      <li><a href="#" data-hover="login">login</a></li>
+      <li ng-if="!currentUser"><a ng-click="vm.modalToggle('register');" data-hover="register">register</a></li>
+      <li ng-if="!currentUser"><a ng-click="vm.modalToggle('login');" data-hover="login">login</a></li>
+      <li ng-if="currentUser"><a href="" data-hover="home">home</a></li>
+      <li ng-if="currentUser"><a data-hover="messages">messages</a></li>
+      <li ng-if="currentUser"><a ng-click="vm.logout();" data-hover="logout">logout</a></li>
       <li><a href="https://github.com/jlboba/rivetr_frontend" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></li>
     </ul>
   </section>
 </nav>
 
 <!-- =============== MODALS =============== -->
-<section ng-include="'../partials/modals.html'"></section>
+<section ng-include="'../partials/modals/registration.html'"></section>
+<section ng-include="'../partials/modals/login.html'"></section>

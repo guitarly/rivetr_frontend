@@ -15,7 +15,7 @@
       var URL = 'herokulater'
     };
 
-    // =========== HTTP REQS ==========================
+    // =========== HTTP REQUESTS ======================
     // to create a user
     this.register = function(){
       $http({
@@ -51,12 +51,27 @@
       }.bind(this))
     }
 
+    // ============ MODAL DE/ACTIVATION =============
+    // default variables
+    this.showRegister = false;
+
+    // toggle switch
+    this.modalToggle = function(modal) {
+      switch(modal) {
+        case 'register':
+          this.showRegister = !this.showRegister;
+          break;
+      }
+    }
+
+    // ============ LOGOUT AND SESSIONS =============
     // to logout
     this.logout = function(){
       localStorage.clear('token');
       location.reload();
     }
 
+    // checks if session active
     this.sessionCheck = function(){
       if(localStorage.length !== 0){
         let id = localStorage.user;

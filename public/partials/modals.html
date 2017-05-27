@@ -1,7 +1,7 @@
 <!-- ============= REGISTRATION MODAL ============= -->
-<section class="modal">
+<section class="modal" ng-if="vm.showRegister">
   <div class="registration-container">
-    <div class="close">
+    <div class="close" ng-click="vm.modalToggle('register')">
       <i class="fa fa-times" aria-hidden="true"></i>
     </div>
     <div class="registration-info">

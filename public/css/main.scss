@@ -7,8 +7,8 @@ $pink        : #E52A6F;
 $grey        : #E9E9E9;
 
 /* FONTS */
-$font        : 'Open Sans', sans-serif;
-$accent-font : 'Open Sans Condensed', sans-serif;
+$font        : 'Open Sans', 'Microsoft YaHei', '微软雅黑', STXihei, '华文细黑', 'MS PGothic', Osaka, 'Apple SD Gothic Neo', sans-serif;
+$accent-font : 'Open Sans Condensed', 'Microsoft YaHei', '微软雅黑', STXihei, '华文细黑', 'MS PGothic', Osaka, 'Apple SD Gothic Neo', sans-serif;
 
 /* ================ MIXINS ================== */
 /* BREAKPOINTS */
@@ -153,9 +153,6 @@ nav {
   margin: 5px 10px;
   position: fixed;
   right: 17.5%;
-  @include for-medium {
-    color: $blue;
-  }
   i {
     @include transition(0.5s ease-in);
     &:hover {
@@ -165,7 +162,8 @@ nav {
     }
   }
 }
-.registration-container {
+/* SHARED */
+.registration-container, .login-container {
   width: 65%;
   height: 54vh;
   background: $grey;
@@ -176,8 +174,7 @@ nav {
     flex-direction: row;
   }
 }
-.registration-info {
-  background: $blue;
+.registration-info, .login-info {
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -185,17 +182,19 @@ nav {
     width: 45%;
     height: 54vh;
   }
+  p {
+    width: 80%;
+  }
   h1 {
     font-family: $accent-font;
     font-size: 40px;
     color: whitesmoke;
   }
   p {
-    width: 80%;
-    margin: 0 auto;
     font-size: 12px;
     font-weight: 300;
     color: white;
+    margin: 0 auto;
   }
   div {
     padding: 25px;
@@ -217,7 +216,7 @@ nav {
     }
   }
 }
-.registration-form {
+.registration-form, .login-form {
   padding: 25px;
   box-sizing: border-box;
   overflow: auto;
@@ -227,7 +226,6 @@ nav {
   h1 {
     font-family: $accent-font;
     font-size: 25px;
-    color: $pink;
     text-transform: uppercase;
     &::after {
       content: '';
@@ -235,6 +233,24 @@ nav {
       height: 2px;
       margin-bottom: 10px;
       display: block;
+    }
+  }
+}
+/* REGISTRATION */
+.registration-container {
+  .close {
+    @include for-medium {
+      color: $blue;
+    }
+  }
+}
+.registration-info {
+  background: $blue;
+}
+.registration-form {
+  h1 {
+    color: $pink;
+    &::after {
       background: $pink;
     }
     &:nth-of-type(2) {
@@ -276,6 +292,44 @@ nav {
     }
   }
 }
+/* LOGIN */
+.login-container {
+  .close {
+    @include for-medium {
+      color: lighten($pink, 10%);
+    }
+  }
+}
+.login-info {
+  background: lighten($pink, 10%);
+}
+.login-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    color: $blue;
+    &::after {
+      background: $blue;
+    }
+  }
+  input {
+    width: 92%;
+    &[type="submit"] {
+      width: 98%;
+      background: $blue;
+      font-family: $accent-font;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 15px;
+      color: $grey;
+      &:focus {
+        border: 0px;
+      }
+    }
+  }
+}
+
 /* ================ LANDING ================= */
 .landing-container {
   @include for-medium {

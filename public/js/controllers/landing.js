@@ -22,8 +22,16 @@
         method: 'POST',
         url: URL + 'users',
         data: this.newUserData
-      }).then(function(result){
-          console.log(result);
+      }).then(function(err, result){
+          if(err){
+            console.log(err);
+          } else {
+            console.log(this.newUserData);
+            this.loginData = {
+              username: result.data.username,
+              password: this.newUserData.password
+            }
+          }
       }.bind(this));
     };
 

@@ -18,6 +18,7 @@
     // =========== HTTP REQUESTS ======================
     // to create a user
     this.register = function(){
+      this.newUserData.username = this.newUserData.username.toLowerCase();
       $http({
         method: 'POST',
         url: URL + 'users',
@@ -45,12 +46,12 @@
 
     // to login
     this.login = function(){
+      this.loginData.username = this.loginData.username.toLowerCase();
       $http({
         method: 'POST',
         url: URL + 'users/login',
         data: { user: this.loginData }
       }).then(function(response){
-          console.log('hello');
           localStorage.setItem('token', JSON.stringify(response.data.token));
           localStorage.setItem('user', response.data.user.id);
           this.sessionCheck();

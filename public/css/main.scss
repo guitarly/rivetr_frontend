@@ -1,0 +1,397 @@
+/* ================ VARIABLES =============== */
+/* COLORS */
+$blue        : #67AECA;
+$faded-purp  : #675682;
+$purple      : #5F0F4E;
+$pink        : #E52A6F;
+$grey        : #E9E9E9;
+
+/* FONTS */
+$font        : 'Open Sans', sans-serif;
+$accent-font : 'Open Sans Condensed', sans-serif;
+
+/* ================ MIXINS ================== */
+/* BREAKPOINTS */
+@mixin for-smallest {
+  @media(min-width: 600px) { @content; }
+}
+
+@mixin for-medium {
+  @media(min-width: 900px) { @content; }
+}
+
+@mixin for-large {
+  @media(min-width: 1200px) { @content; }
+}
+
+/* TRANSITION & ANIMATION */
+@mixin transition($tr) {
+  transition: $tr;
+  -moz-transition: $tr;
+  -webkit-transition: $tr;
+  -o-transition: $tr;
+}
+
+@mixin animation($ani) {
+  animation: $ani;
+  -moz-animation: $ani;
+  -webkit-animation: $ani;
+  -o-animation: $ani;
+}
+
+/* ================ GENERAL ================= */
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: $font;
+}
+a {
+  text-decoration: none;
+}
+input {
+  border: 1px solid darken($grey, 2%);
+  padding: 10px;
+  margin: 5px;
+  border-radius: 3px;
+  background: whitesmoke;
+}
+input:focus {
+  outline: none;
+  border: 1px solid lighten($faded-purp, 25%);
+}
+input[placeholder] {
+  text-transform: uppercase;
+  font-family: $font;
+  font-size: 10px;
+}
+
+/* ================ NAVBAR ================== */
+nav {
+  width: 100%;
+  height: 8vh;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  z-index: 1;
+  .logo {
+    padding: 20px;
+    &:hover .logo-name {
+      width: 100%;
+      @include transition(1.5s ease-in);
+    }
+  }
+  .logo-name {
+    width: 0px;
+    overflow: hidden;
+    display: inline-block;
+    position: absolute;
+    margin: -3px 0 0 10px;
+    font-family: $accent-font;
+    font-weight: 700;
+    font-size: 23px;
+    color: $purple;
+    text-transform: uppercase;
+    @include transition(1.5s ease-out);
+  }
+  ul {
+    list-style-type: none;
+    padding: 20px;
+  }
+  li {
+    display: inline-block;
+    margin: 5px 10px;
+  }
+  a {
+    font-family: $accent-font;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: whitesmoke;
+    position: relative;
+    @include transition(color 0.5s);
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      max-width: 0;
+      border-bottom: 2px solid $pink;
+      color: $pink;
+      content: attr(data-hover);
+      @include transition(max-width 0.5s);
+    }
+    &:hover {
+      &::before {
+        max-width: 100%;
+      }
+      color: $pink;
+      @include transition(color 1s);
+    }
+  }
+  svg {
+    width: 10%;
+    color: $pink;
+  }
+}
+
+/* ================ MODALS ================== */
+.modal {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  z-index: 1;
+}
+.close {
+  color: $grey;
+  font-size: 20px;
+  margin: 5px 10px;
+  position: fixed;
+  right: 17.5%;
+  @include for-medium {
+    color: $blue;
+  }
+  i {
+    @include transition(0.5s ease-in);
+    &:hover {
+      cursor: pointer;
+      color: darken($grey, 50%);
+      @include transition(0.5s ease-in);
+    }
+  }
+}
+.registration-container {
+  width: 65%;
+  height: 54vh;
+  background: $grey;
+  display: flex;
+  flex-direction: column;
+  @include for-medium {
+    justify-content: space-between;
+    flex-direction: row;
+  }
+}
+.registration-info {
+  background: $blue;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  @include for-medium {
+    width: 45%;
+    height: 54vh;
+  }
+  h1 {
+    font-family: $accent-font;
+    font-size: 40px;
+    color: whitesmoke;
+  }
+  p {
+    width: 80%;
+    margin: 0 auto;
+    font-size: 12px;
+    font-weight: 300;
+    color: white;
+  }
+  div {
+    padding: 25px;
+    @include for-medium {
+      margin-top: 35px;
+      padding: 0px;
+      &::before, &::after {
+        content: '';
+        background: whitesmoke;
+        width: 2px;
+        height: 7vh;
+        display: block;
+        margin: 10px auto;
+        transform: rotate(20deg);
+      }
+      &::after {
+        margin-top: 20px;
+      }
+    }
+  }
+}
+.registration-form {
+  padding: 25px;
+  box-sizing: border-box;
+  overflow: auto;
+  @include for-medium {
+    width: 55%;
+  }
+  h1 {
+    font-family: $accent-font;
+    font-size: 25px;
+    color: $pink;
+    text-transform: uppercase;
+    &::after {
+      content: '';
+      width: 10%;
+      height: 2px;
+      margin-bottom: 10px;
+      display: block;
+      background: $pink;
+    }
+    &:nth-of-type(2) {
+      margin-top: 5px;
+    }
+  }
+  input {
+    width: 92%;
+    &[type="submit"] {
+      width: 98%;
+      background: $pink;
+      font-family: $accent-font;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 15px;
+      color: $grey;
+      &:focus {
+        border: 0px;
+      }
+    }
+  }
+  @include for-medium {
+    input {
+      width: 85%;
+      &[type="submit"] {
+        width: 92%;
+      }
+    }
+  }
+  @media (min-width: 1088px) {
+    input {
+      width: 40%;
+      &:nth-of-type(7) {
+        width: calc(80% + 35px);
+      }
+      &[type="submit"] {
+        width: calc(80% + 56px);
+      }
+    }
+  }
+}
+/* ================ LANDING ================= */
+.landing-container {
+  @include for-medium {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+  display: flex;
+  flex-direction: column-reverse;
+  h1 {
+    font-family: $accent-font;
+    font-size: 100px;
+  }
+  p {
+    font-size: 13px;
+    font-weight: 300;
+  }
+  background: url('../img/landingpg.png');
+  background-size: cover;
+}
+.accent-box {
+  background: $grey;
+  background-size: cover;
+  height: 50vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  @include for-medium {
+    width: 50%;
+    height: 100vh;
+    -webkit-clip-path: polygon(0 0, 100% 0, 89% 100%, 0% 100%);
+    clip-path: polygon(0 0, 100% 0, 89% 100%, 0% 100%);
+  }
+  svg {
+    @include for-medium {
+      width: 120%;
+      margin-left: -20%;
+    }
+    width: 80%;
+  }
+  .accent {
+    @include animation(fadein 5s);
+  }
+  .hello-world {
+    color: $pink;
+    font-family: $accent-font;
+    font-size: 40px;
+    height: 50px;
+    overflow: hidden;
+    margin: 50px auto 0 auto;
+    -webkit-font-smoothing: antialiased;
+    @include for-medium {
+      margin: 0 0 0 -20%;
+    }
+    ul {
+      list-style-type: none;
+      @include animation(ticker 25s cubic-bezier(1, 0, .5, 0) infinite);
+      line-height: 50px;
+    }
+    @keyframes ticker {
+    	0%   {margin-top: 0}
+    	10%  {margin-top: -50px}
+    	20%  {margin-top: -100px}
+    	30%  {margin-top: -150px}
+    	40%  {margin-top: -200px}
+      50%  {margin-top: -250px}
+      60%  {margin-top: -300px}
+      70%  {margin-top: -350px}
+      80%  {margin-top: -400px}
+      90%  {margin-top: -450px}
+      100% {margin-top: 0}
+    }
+  }
+}
+.info-box {
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: whitesmoke;
+  @include for-medium {
+    width: 50%;
+    height: 100vh;
+  }
+  .info {
+    width: 60%;
+    @include for-medium {
+      width: 70%;
+    }
+    &::before, &::after {
+      content: '';
+      background: whitesmoke;
+      width: 2px;
+      height: 8vh;
+      @include for-medium {
+        height: 15vh;
+      }
+      display: block;
+      margin: 0 auto;
+      transform: rotate(20deg);
+    }
+    &::after {
+      margin: 5% 40%;
+    }
+  }
+  @include animation(fadein 5s);
+}
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}

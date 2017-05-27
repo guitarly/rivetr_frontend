@@ -16,13 +16,13 @@
       <form ng-submit="vm.register();">
         <h1>account details</h1>
         <input type="text" ng-model="vm.newUserData.username" placeholder="username">
-        <input type="text" ng-model="vm.newUserData.password" placeholder="password">
+        <input type="password" ng-model="vm.newUserData.password" placeholder="password">
         <input type="text" ng-model="vm.newUserData.display_name" placeholder="display name">
         <input type="text" ng-model="vm.newUserData.profile_photo" placeholder="profile photo">
         <h1>user details</h1>
         <input type="text" ng-model="vm.newUserData.language_learning" placeholder="language learning">
         <input type="text" ng-model="vm.newUserData.language_known" placeholder="language known">
-        <input type="text" placeholder="a short bio" /><br />
+        <input type="text" ng-model="vm.newUserData.biography" placeholder="a short bio" /><br />
         <input type="submit" value="register" />
       </form>
     </div>

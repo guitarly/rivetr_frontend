@@ -22,16 +22,13 @@
         method: 'POST',
         url: URL + 'users',
         data: this.newUserData
-      }).then(function(err, result){
-          if(err){
-            console.log(err);
-          } else {
-            console.log(this.newUserData);
-            this.loginData = {
-              username: result.data.username,
-              password: this.newUserData.password
-            }
+      }).then(function(response){
+          this.loginData = {
+            username: response.data.username,
+            password: this.newUserData.password
           }
+          this.newUserData = null;
+          this.login();
       }.bind(this));
     };
 
@@ -41,8 +38,8 @@
         method: 'POST',
         url: URL + 'rivs',
         data: this.newRivData
-      }).then(function(result){
-          console.log(result);
+      }).then(function(response){
+          console.log(response);
       }.bind(this));
     };
 
@@ -52,9 +49,10 @@
         method: 'POST',
         url: URL + 'users/login',
         data: { user: this.loginData }
-      }).then(function(result){
-          localStorage.setItem('token', JSON.stringify(result.data.token));
-          localStorage.setItem('user', result.data.user.id);
+      }).then(function(response){
+          console.log('hello');
+          localStorage.setItem('token', JSON.stringify(response.data.token));
+          localStorage.setItem('user', response.data.user.id);
           this.sessionCheck();
       }.bind(this))
     }

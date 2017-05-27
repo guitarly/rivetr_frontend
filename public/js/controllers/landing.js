@@ -12,7 +12,7 @@
     if(window.location.href == 'http://localhost:8000/#!/'){
       var URL = 'http://localhost:3000/';
     } else {
-      var URL = 'http://rivetr.herokuapp.com/'
+      var URL = 'http://rivetrapi.herokuapp.com/'
     };
 
     // =========== HTTP REQUESTS ======================

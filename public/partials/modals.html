@@ -1,0 +1,28 @@
+<!-- ============= REGISTRATION MODAL ============= -->
+<section class="modal">
+  <div class="registration-container">
+    <div class="registration-info">
+      <div>
+        <h1>REGISTER NOW</h1>
+        <p>
+          rivetr is a twitter-esque app tailored for language learners. join to post statuses (called rivs) in the language you're learning, talk to native speakers, let them correct your grammar, and pay it forward by helping others with your native language!
+        </p>
+      </div>
+    </div>
+    <div class="registration-form">
+      <form ng-submit="vm.register();">
+        <h1>account details</h1>
+        <input type="text" ng-model="vm.newUserData.username" placeholder="username">
+        <input type="text" ng-model="vm.newUserData.password" placeholder="password">
+        <input type="text" ng-model="vm.newUserData.display_name" placeholder="display name">
+        <input type="text" ng-model="vm.newUserData.profile_photo" placeholder="profile photo">
+        <h1>user details</h1>
+        <input type="text" ng-model="vm.newUserData.language_learning" placeholder="language learning">
+        <input type="text" ng-model="vm.newUserData.language_known" placeholder="language known">
+        <input type="text" placeholder="a short bio" /><br />
+        <input type="submit" value="register" />
+      </form>
+    </div>
+  </div>
+</section>
+<!-- ============= LOGIN MODAL ==================== -->

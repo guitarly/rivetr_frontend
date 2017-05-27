@@ -4,6 +4,7 @@ $blue        : #67AECA;
 $faded-purp  : #675682;
 $purple      : #5F0F4E;
 $pink        : #E52A6F;
+$grey        : #E9E9E9;
 
 /* FONTS */
 $font        : 'Open Sans', sans-serif;
@@ -49,6 +50,22 @@ body {
 a {
   text-decoration: none;
 }
+input {
+  border: 1px solid darken($grey, 2%);
+  padding: 10px;
+  margin: 5px;
+  border-radius: 3px;
+  background: whitesmoke;
+}
+input:focus {
+  outline: none;
+  border: 1px solid lighten($faded-purp, 25%);
+}
+input[placeholder] {
+  text-transform: uppercase;
+  font-family: $font;
+  font-size: 10px;
+}
 
 /* ================ NAVBAR ================== */
 nav {
@@ -72,8 +89,8 @@ nav {
     display: inline-block;
     position: absolute;
     margin: -3px 0 0 10px;
-    font: $accent-font;
-    font-weight: 800;
+    font-family: $accent-font;
+    font-weight: 700;
     font-size: 23px;
     color: $purple;
     text-transform: uppercase;
@@ -88,8 +105,8 @@ nav {
     margin: 5px 10px;
   }
   a {
-    font: $accent-font;
-    font-weight: 800;
+    font-family: $accent-font;
+    font-weight: 700;
     text-transform: uppercase;
     color: whitesmoke;
     position: relative;
@@ -118,7 +135,100 @@ nav {
     color: $pink;
   }
 }
-
+/* ================ MODALS ================== */
+.modal {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  z-index: 1;
+}
+.registration-container {
+  width: 65%;
+  height: 54vh;
+  background: $grey;
+  display: flex;
+  justify-content: space-between;
+}
+.registration-info {
+  background: $blue;
+  width: 45%;
+  height: 54vh;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    font-family: $accent-font;
+    font-size: 40px;
+    color: whitesmoke;
+  }
+  p {
+    width: 80%;
+    margin: 0 auto;
+    font-size: 12px;
+    font-weight: 300;
+    color: white;
+  }
+  div {
+    margin-top: 35px;
+    &::before, &::after {
+      content: '';
+      background: whitesmoke;
+      width: 2px;
+      height: 7vh;
+      display: block;
+      margin: 10px auto;
+      transform: rotate(20deg);
+    }
+    &::after {
+      margin-top: 20px;
+    }
+  }
+}
+.registration-form {
+  width: 55%;
+  padding: 25px;
+  box-sizing: border-box;
+  overflow: auto;
+  h1 {
+    font-family: $accent-font;
+    font-size: 25px;
+    color: $pink;
+    text-transform: uppercase;
+    &::after {
+      content: '';
+      width: 10%;
+      height: 2px;
+      margin-bottom: 10px;
+      display: block;
+      background: $pink;
+    }
+    &:nth-of-type(2) {
+      margin-top: 5px;
+    }
+  }
+  input {
+    width: 40%;
+    &:nth-of-type(7) {
+      width: calc(80% + 35px);
+    }
+    &[type="submit"] {
+      width: calc(80% + 56px);
+      background: $pink;
+      font-family: $accent-font;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 15px;
+      color: $grey;
+      &:focus {
+        border: 0px;
+      }
+    }
+  }
+}
 /* ================ LANDING ================= */
 .landing-container {
   @include for-medium {
@@ -140,7 +250,7 @@ nav {
   background-size: cover;
 }
 .accent-box {
-  background: #e9e9e9;
+  background: $grey;
   background-size: cover;
   height: 50vh;
   color: white;

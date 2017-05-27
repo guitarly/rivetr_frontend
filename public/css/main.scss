@@ -10,6 +10,7 @@ $font        : 'Open Sans', sans-serif;
 $accent-font : 'Open Sans Condensed', sans-serif;
 
 /* ================ MIXINS ================== */
+/* BREAKPOINTS */
 @mixin for-smallest {
   @media(min-width: 600px) { @content; }
 }
@@ -22,6 +23,21 @@ $accent-font : 'Open Sans Condensed', sans-serif;
   @media(min-width: 1200px) { @content; }
 }
 
+/* TRANSITION & ANIMATION */
+@mixin transition($tr) {
+  transition: $tr;
+  -moz-transition: $tr;
+  -webkit-transition: $tr;
+  -o-transition: $tr;
+}
+
+@mixin animation($ani) {
+  animation: $ani;
+  -moz-animation: $ani;
+  -webkit-animation: $ani;
+  -o-animation: $ani;
+}
+
 /* ================ GENERAL ================= */
 * {
   margin: 0;
@@ -29,6 +45,9 @@ $accent-font : 'Open Sans Condensed', sans-serif;
 }
 body {
   font-family: $font;
+}
+a {
+  text-decoration: none;
 }
 
 /* ================ NAVBAR ================== */
@@ -42,6 +61,23 @@ nav {
   z-index: 1;
   .logo {
     padding: 20px;
+    &:hover .logo-name {
+      width: 100%;
+      @include transition(1.5s ease-in);
+    }
+  }
+  .logo-name {
+    width: 0px;
+    overflow: hidden;
+    display: inline-block;
+    position: absolute;
+    margin: -3px 0 0 10px;
+    font: $accent-font;
+    font-weight: 800;
+    font-size: 23px;
+    color: $purple;
+    text-transform: uppercase;
+    @include transition(1.5s ease-out);
   }
   ul {
     list-style-type: none;
@@ -49,6 +85,37 @@ nav {
   }
   li {
     display: inline-block;
+    margin: 5px 10px;
+  }
+  a {
+    font: $accent-font;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: whitesmoke;
+    position: relative;
+    @include transition(color 0.5s);
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      max-width: 0;
+      border-bottom: 2px solid $pink;
+      color: $pink;
+      content: attr(data-hover);
+      @include transition(max-width 0.5s);
+    }
+    &:hover {
+      &::before {
+        max-width: 100%;
+      }
+      color: $pink;
+      @include transition(color 1s);
+    }
+  }
+  svg {
+    width: 10%;
+    color: $pink;
   }
 }
 
@@ -57,7 +124,10 @@ nav {
   @include for-medium {
     display: flex;
     justify-content: space-between;
+    flex-direction: row;
   }
+  display: flex;
+  flex-direction: column-reverse;
   h1 {
     font-family: $accent-font;
     font-size: 100px;
@@ -89,10 +159,7 @@ nav {
     margin-left: -20%;
   }
   .accent {
-    animation: fadein 5s;
-    -moz-animation: fadein 5s;
-    -webkit-animation: fadein 5s;
-    -o-animation: fadein 5s;
+    @include animation(fadein 5s);
   }
   .hello-world {
     color: $pink;
@@ -104,7 +171,7 @@ nav {
     -webkit-font-smoothing: antialiased;
     ul {
       list-style-type: none;
-      animation: ticker 25s cubic-bezier(1, 0, .5, 0) infinite;
+      @include animation(ticker 25s cubic-bezier(1, 0, .5, 0) infinite);
       line-height: 50px;
     }
     @keyframes ticker {
@@ -139,23 +206,20 @@ nav {
     @include for-medium {
       width: 70%;
     }
+    &::before, &::after {
+      content: '';
+      background: whitesmoke;
+      width: 2px;
+      height: 15vh;
+      display: block;
+      margin: 0 auto;
+      transform: rotate(20deg);
+    }
+    &::after {
+      margin: 5% 40%;
+    }
   }
-  .info::before, .info::after {
-    content: '';
-    background: whitesmoke;
-    width: 2px;
-    height: 15vh;
-    display: block;
-    margin: 0 auto;
-    transform: rotate(20deg);
-  }
-  .info::after {
-    margin: 5% 40%;
-  }
-  animation: fadein 5s;
-  -moz-animation: fadein 5s;
-  -webkit-animation: fadein 5s;
-  -o-animation: fadein 5s;
+  @include animation(fadein 5s);
 }
 @keyframes fadein {
     from {

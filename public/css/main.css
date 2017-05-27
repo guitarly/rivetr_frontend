@@ -2,6 +2,8 @@
 /* COLORS */
 /* FONTS */
 /* ================ MIXINS ================== */
+/* BREAKPOINTS */
+/* TRANSITION & ANIMATION */
 /* ================ GENERAL ================= */
 * {
   margin: 0;
@@ -9,6 +11,9 @@
 
 body {
   font-family: "Open Sans", sans-serif; }
+
+a {
+  text-decoration: none; }
 
 /* ================ NAVBAR ================== */
 nav {
@@ -21,20 +26,79 @@ nav {
   z-index: 1; }
   nav .logo {
     padding: 20px; }
+    nav .logo:hover .logo-name {
+      width: 100%;
+      transition: 1.5s ease-in;
+      -moz-transition: 1.5s ease-in;
+      -webkit-transition: 1.5s ease-in;
+      -o-transition: 1.5s ease-in; }
+  nav .logo-name {
+    width: 0px;
+    overflow: hidden;
+    display: inline-block;
+    position: absolute;
+    margin: -3px 0 0 10px;
+    font: "Open Sans Condensed", sans-serif;
+    font-weight: 800;
+    font-size: 23px;
+    color: #5F0F4E;
+    text-transform: uppercase;
+    transition: 1.5s ease-out;
+    -moz-transition: 1.5s ease-out;
+    -webkit-transition: 1.5s ease-out;
+    -o-transition: 1.5s ease-out; }
   nav ul {
     list-style-type: none;
     padding: 20px; }
   nav li {
-    display: inline-block; }
+    display: inline-block;
+    margin: 5px 10px; }
+  nav a {
+    font: "Open Sans Condensed", sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: whitesmoke;
+    position: relative;
+    transition: color 0.5s;
+    -moz-transition: color 0.5s;
+    -webkit-transition: color 0.5s;
+    -o-transition: color 0.5s; }
+    nav a::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      max-width: 0;
+      border-bottom: 2px solid #E52A6F;
+      color: #E52A6F;
+      content: attr(data-hover);
+      transition: max-width 0.5s;
+      -moz-transition: max-width 0.5s;
+      -webkit-transition: max-width 0.5s;
+      -o-transition: max-width 0.5s; }
+    nav a:hover {
+      color: #E52A6F;
+      transition: color 1s;
+      -moz-transition: color 1s;
+      -webkit-transition: color 1s;
+      -o-transition: color 1s; }
+      nav a:hover::before {
+        max-width: 100%; }
+  nav svg {
+    width: 10%;
+    color: #E52A6F; }
 
 /* ================ LANDING ================= */
 .landing-container {
+  display: flex;
+  flex-direction: column-reverse;
   background: url("../img/idk.png");
   background-size: cover; }
   @media (min-width: 900px) {
     .landing-container {
       display: flex;
-      justify-content: space-between; } }
+      justify-content: space-between;
+      flex-direction: row; } }
   .landing-container h1 {
     font-family: "Open Sans Condensed", sans-serif;
     font-size: 100px; }
@@ -76,6 +140,9 @@ nav {
     .accent-box .hello-world ul {
       list-style-type: none;
       animation: ticker 25s cubic-bezier(1, 0, 0.5, 0) infinite;
+      -moz-animation: ticker 25s cubic-bezier(1, 0, 0.5, 0) infinite;
+      -webkit-animation: ticker 25s cubic-bezier(1, 0, 0.5, 0) infinite;
+      -o-animation: ticker 25s cubic-bezier(1, 0, 0.5, 0) infinite;
       line-height: 50px; }
 @keyframes ticker {
   0% {
@@ -121,16 +188,16 @@ nav {
     @media (min-width: 900px) {
       .info-box .info {
         width: 70%; } }
-  .info-box .info::before, .info-box .info::after {
-    content: '';
-    background: whitesmoke;
-    width: 2px;
-    height: 15vh;
-    display: block;
-    margin: 0 auto;
-    transform: rotate(20deg); }
-  .info-box .info::after {
-    margin: 5% 40%; }
+    .info-box .info::before, .info-box .info::after {
+      content: '';
+      background: whitesmoke;
+      width: 2px;
+      height: 15vh;
+      display: block;
+      margin: 0 auto;
+      transform: rotate(20deg); }
+    .info-box .info::after {
+      margin: 5% 40%; }
 
 @keyframes fadein {
   from {

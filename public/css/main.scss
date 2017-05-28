@@ -7,8 +7,8 @@ $pink        : #E52A6F;
 $grey        : #E9E9E9;
 
 /* FONTS */
-$font        : 'Open Sans', 'Microsoft YaHei', '微软雅黑', STXihei, '华文细黑', 'MS PGothic', Osaka, 'Apple SD Gothic Neo', sans-serif;
-$accent-font : 'Open Sans Condensed', 'Microsoft YaHei', '微软雅黑', STXihei, '华文细黑', 'MS PGothic', Osaka, 'Apple SD Gothic Neo', sans-serif;
+$font: 'Open Sans', 'Microsoft YaHei', '微软雅黑', STXihei, '华文细黑', 'MS PGothic', Osaka, 'Apple SD Gothic Neo', sans-serif;
+$accent-font: 'Open Sans Condensed', 'Microsoft YaHei', '微软雅黑', STXihei, '华文细黑', 'MS PGothic', Osaka, 'Apple SD Gothic Neo', sans-serif;
 
 /* ================ MIXINS ================== */
 /* BREAKPOINTS */
@@ -46,6 +46,7 @@ $accent-font : 'Open Sans Condensed', 'Microsoft YaHei', '微软雅黑', STXihei
 }
 body {
   font-family: $font;
+  background: $grey;
 }
 a {
   text-decoration: none;
@@ -75,7 +76,7 @@ nav {
   display: flex;
   justify-content: space-between;
   color: white;
-  z-index: 1;
+  z-index: 2;
   .logo {
     padding: 20px;
     &:hover .logo-name {
@@ -126,6 +127,7 @@ nav {
       &::before {
         max-width: 100%;
       }
+      cursor: pointer;
       color: $pink;
       @include transition(color 1s);
     }
@@ -145,7 +147,7 @@ nav {
   align-items: center;
   background: rgba(0, 0, 0, 0.6);
   position: fixed;
-  z-index: 1;
+  z-index: 3;
 }
 .close {
   color: $grey;
@@ -448,4 +450,202 @@ nav {
     to {
         opacity:1;
     }
+}
+
+/* ================ PROFILE ================= */
+.profile-container {
+
+}
+.profile-stats-container, .profile-stats-scroll {
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  background: linear-gradient(to right, $blue, $purple);
+}
+.profile-stats-container {
+  height: 105vh;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 44%, 0 44%);
+  clip-path: polygon(0 0, 100% 0, 100% 44%, 0 44%);
+  @include for-medium {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 24%, 0 38%);
+    clip-path: polygon(0 0, 100% 0, 100% 24%, 0 38%);
+  }
+  @include transition(0.7s ease-in);
+}
+.profile-stats-scroll {
+  height: 20vh;
+  @include for-medium {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 54%, 0 54%);
+    clip-path: polygon(0 0, 100% 0, 100% 54%, 0 54%);
+  }
+  @include transition(0.7s ease-in);
+  .profile-stats {
+    display: none;
+  }
+}
+.profile-stats {
+  display: flex;
+  justify-content: space-between;
+  width: 600px;
+  margin: 80px 18%;
+  @include for-medium {
+    margin: 50px 90px;
+  }
+  @include for-large {
+    margin: 55px 140px;
+  }
+}
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border: 0.5px solid $grey;
+  border-radius: 150px;
+}
+.profile-nums {
+  width: 67%;
+  .row {
+    width: 58%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: $grey;
+    text-shadow: 1px 1px $faded-purp;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 300;
+    strong {
+      font-family: $accent-font;
+      font-size: 15px;
+      &::after {
+        content: '';
+        width: 30px;
+        height: 1px;
+        background: $grey;
+        box-shadow: 1px 1px $faded-purp;
+        display: block;
+        margin-top: 2px;
+      }
+    }
+    span {
+      width: 50%;
+    }
+  }
+  h1 {
+    font-size: 40px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px $faded-purp;
+    color: $grey;
+  }
+}
+.content-container {
+  width: 100%;
+  margin-top: 26vh;
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+}
+.sidebar-container {
+  width: 30%;
+  min-height: calc(100vh - 26vh - 8vh);
+  margin-top: 8vh;
+  padding: 49px 20px;
+  box-sizing: border-box;
+  background: whitesmoke;
+  .sidebar-buttons {
+    display: flex;
+    justify-content: space-between;
+    .btn {
+      width: 40%;
+      padding: 10px;
+      background: $pink;
+      border-radius: 3px;
+      font-family: $accent-font;
+      text-align: center;
+      color: $grey;
+      @include transition (0.5s ease-in);
+      &:hover {
+        background: $faded-purp;
+        cursor: pointer;
+        @include transition (0.5s ease-in);
+      }
+    }
+  }
+}
+.rivs-container {
+  width: 50%;
+  padding: 55px 20px;
+  box-sizing: border-box;
+  background: whitesmoke;
+  .rivs-filters {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid $grey;
+    display: flex;
+    justify-content: space-around;
+    strong {
+      font-family: $accent-font;
+      font-size: 22px;
+      text-transform: uppercase;
+      color: $pink;
+    }
+    a {
+      color: $blue;
+      font-family: $accent-font;
+      font-weight: 300;
+      font-size: 22px;
+      text-transform: uppercase;
+      @include transition (0.5s ease-in);
+      &:hover {
+        color: $faded-purp;
+        cursor: pointer;
+        @include transition (0.5s ease-in);
+      }
+    }
+  }
+  .rivs {
+    width: 100%;
+    margin: 20px 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid $grey;
+    display: flex;
+    justify-content: space-between;
+    .rivs-user-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 3px;
+    }
+    .rivs-photo {
+      width: 98%;
+      height: 200px;
+      border-radius: 3px;
+      margin-top: 15px;
+    }
+    .rivs-content {
+      width: 85%;
+      font-size: 12px;
+      strong {
+        color: $faded-purp;
+        font-size: 13px;
+      }
+      span {
+        color: #aaa;
+        font-size: 13px;
+      }
+    }
+    .rivs-actions {
+      color: darken($grey, 30%);
+      width: 50%;
+      margin-top: 7px;
+      display: flex;
+      justify-content: space-between;
+      i {
+        @include transition (0.2s ease-in);
+        &:hover {
+          color: $purple;
+          @include transition (0.2s ease-in);
+        }
+      }
+    }
+  }
 }

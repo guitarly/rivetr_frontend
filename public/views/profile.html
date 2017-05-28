@@ -1,0 +1,78 @@
+<!-- ================= NAVIGATION ================= -->
+<section ng-include="'../partials/navbar.html'"></section>
+
+<!-- ============== START PROFILE PG ============== -->
+<section class="profile-container">
+
+  <!-- ============ PROFILE STATS ================= -->
+  <section ng-class="{'profile-stats-container': fullHeader, 'profile-stats-scroll': !fullHeader}" class="profile-stats-transition">
+    <div class="profile-stats">
+      <div class="profile-img" style="
+        background:url('{{currentUser.profile_photo}}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;">
+      </div>
+      <div class="profile-nums">
+        <h1>{{currentUser.display_name}}</h1>
+        <div class="row">
+          <span>
+            <strong>LEARNING</strong>
+            {{currentUser.language_learning}}</span>
+          <span>
+            <strong>KNOWN</strong>
+            {{currentUser.language_known}}
+          </span>
+        </div>
+        <div class="row">
+          <span>
+            <strong>FOLLOWERS</strong>
+             {{currentUser.follower_follows.length}}
+           </span>
+          <span>
+            <strong>FOLLOWING</strong>
+             {{currentUser.followed_follows.length}}
+           </span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============ PROFILE RIVS ================== -->
+  <section class="content-container" scroll>
+    <div class="sidebar-container">
+      <div class="sidebar-buttons">
+        <div class="btn">
+          EDIT PROFILE
+        </div>
+        <div class="btn">
+          DELETE PROFILE
+        </div>
+      </div>
+    </div>
+    <div class="rivs-container">
+      <div class="rivs-filters">
+        <strong>{{currentUser.display_name}}'s rivs</strong> <a>personal</a> <a>replies</a> <a>corrections</a>
+      </div>
+      <div class="rivs" ng-repeat="riv in currentUser.rivs">
+        <div class="rivs-user-img" style="
+          background:url('{{currentUser.profile_photo}}');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;">
+        </div>
+        <div class="rivs-content">
+          <strong>{{currentUser.display_name}}</strong> <span>@{{currentUser.username}}</span><br />
+          {{riv.content}}
+          <div ng-if="riv.photo" class="rivs-photo" style="background: url('{{riv.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+          <div class="rivs-actions">
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-reply" aria-hidden="true"></i>
+            <i class="fa fa-wrench" aria-hidden="true"></i>
+            <i class="fa fa-globe" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- ============== END PROFILE PG ================ -->
+</section>

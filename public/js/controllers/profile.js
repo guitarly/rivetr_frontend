@@ -36,12 +36,17 @@
 
     // ============ MODAL DE/ACTIVATION =============
     // default variables
+    this.showEdit = false;
+    this.showDelete = false;
 
     // toggle switch
     this.modalToggle = function(modal) {
       switch(modal) {
-        case 'register':
-          this.showRegister = !this.showRegister;
+        case 'edit':
+          this.showEdit = !this.showEdit;
+          break;
+        case 'delete':
+          this.showDelete = !this.showDelete;
           break;
       }
     }

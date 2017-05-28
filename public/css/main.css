@@ -502,18 +502,9 @@ nav {
       border-radius: 3px;
       font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
       text-align: center;
-      color: #E9E9E9;
-      transition: 0.5s ease-in;
-      -moz-transition: 0.5s ease-in;
-      -webkit-transition: 0.5s ease-in;
-      -o-transition: 0.5s ease-in; }
+      color: #E9E9E9; }
       .sidebar-container .sidebar-buttons .btn:hover {
-        background: #675682;
-        cursor: pointer;
-        transition: 0.5s ease-in;
-        -moz-transition: 0.5s ease-in;
-        -webkit-transition: 0.5s ease-in;
-        -o-transition: 0.5s ease-in; }
+        cursor: pointer; }
 
 .rivs-container {
   width: 50%;
@@ -538,17 +529,17 @@ nav {
       font-weight: 300;
       font-size: 22px;
       text-transform: uppercase;
-      transition: 0.5s ease-in;
-      -moz-transition: 0.5s ease-in;
-      -webkit-transition: 0.5s ease-in;
-      -o-transition: 0.5s ease-in; }
+      transition: 0.2s ease-in;
+      -moz-transition: 0.2s ease-in;
+      -webkit-transition: 0.2s ease-in;
+      -o-transition: 0.2s ease-in; }
       .rivs-container .rivs-filters a:hover {
         color: #675682;
         cursor: pointer;
-        transition: 0.5s ease-in;
-        -moz-transition: 0.5s ease-in;
-        -webkit-transition: 0.5s ease-in;
-        -o-transition: 0.5s ease-in; }
+        transition: 0.2s ease-in;
+        -moz-transition: 0.2s ease-in;
+        -webkit-transition: 0.2s ease-in;
+        -o-transition: 0.2s ease-in; }
   .rivs-container .rivs {
     width: 100%;
     margin: 20px 0;
@@ -587,6 +578,7 @@ nav {
         -o-transition: 0.2s ease-in; }
         .rivs-container .rivs .rivs-actions i:hover {
           color: #5F0F4E;
+          cursor: pointer;
           transition: 0.2s ease-in;
           -moz-transition: 0.2s ease-in;
           -webkit-transition: 0.2s ease-in;

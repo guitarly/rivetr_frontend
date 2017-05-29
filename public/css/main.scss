@@ -667,6 +667,7 @@ nav {
         font-style: italic;
         color: darken($grey, 30%);
         a {
+          color: $pink;
           @include transition(0.5s ease-in);
           &:hover {
             color: $blue;

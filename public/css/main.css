@@ -598,6 +598,7 @@ nav {
         font-style: italic;
         color: #9d9d9d; }
         .sidebar-container .sidebar-follow .sidebar-followers-container .follow-info a {
+          color: #E52A6F;
           transition: 0.5s ease-in;
           -moz-transition: 0.5s ease-in;
           -webkit-transition: 0.5s ease-in;

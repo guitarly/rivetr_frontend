@@ -71,15 +71,27 @@
           <a ng-class="{selected: vm.followers}" ng-click="vm.toggleFollow('followers')">followers</a> <a ng-class="{selected: vm.following}" ng-click="vm.toggleFollow('following')">following</a>
         </div>
         <div class="sidebar-followers-container">
-          <div class="empty" ng-if="vm.profileUser.followed_follows.length === 0">
+          <!-- === IF NO FOLLOWERS/FOLLOWING ======= -->
+          <div class="empty" ng-if="(vm.profileUser.follower_follows.length === 0) && (vm.followers)">
             {{vm.profileUser.display_name || vm.profileUser.username}} has no followers
           </div>
-          <!-- === NG-REPEAT ======================== -->
-          <div class="sidebar-followers" ng-if="vm.profileUser.followed_follows.length > 0">
-            <div class="follow-img" style="background: url('http://placehold.it/50x50.png'); background-size: cover; background-position: center;"></div>
+          <div class="empty" ng-if="(vm.profileUser.followed_follows.length === 0) && (vm.following)">
+            {{vm.profileUser.display_name || vm.profileUser.username}} isn't following anyone
+          </div>
+          <!-- === FOLLOWERS ======================= -->
+          <div class="sidebar-followers" ng-if="(vm.profileUser.follower_follows.length > 0) && (vm.followers)" ng-repeat="follower in vm.profileUser.follower_follows">
+            <div class="follow-img" style="background: url('{{follower.follower.profile_photo}}'); background-size: cover; background-position: center;"></div>
             <div class="follow-info">
-              <h3><a>DISPLAYNAME</a></h3>
-              @username
+              <h3><a ng-href="http://localhost:8000/#!/{{follower.follower.username}}">{{follower.follower.display_name}}</a></h3>
+              @ {{follower.follower.username}}
+            </div>
+          </div>
+          <!-- === FOLLOWERS ======================= -->
+          <div class="sidebar-followers" ng-if="(vm.profileUser.followed_follows.length > 0) && (vm.following)" ng-repeat="following in vm.profileUser.followed_follows">
+            <div class="follow-img" style="background: url('{{following.followed.profile_photo}}'); background-size: cover; background-position: center;"></div>
+            <div class="follow-info">
+              <h3><a ng-href="http://localhost:8000/#!/{{following.followed.username}}">{{following.followed.display_name}}</a></h3>
+              @{{following.followed.username}}
             </div>
           </div>
           <!-- === END REPEAT ======================= -->

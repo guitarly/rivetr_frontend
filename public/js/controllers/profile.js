@@ -61,19 +61,85 @@
       }
     };
 
+    // to start delete chain
+    this.deleteChain = function() {
+      if(this.profileUser.id === $rootScope.currentUser.id) {
+        this.deleteFollows();
+        this.deleteRivs();
+        this.deleteLikes();
+        this.deleteReplies();
+        this.deleteUser();
+      }
+    }
+
+    // to delete all of a users follows
+    this.deleteFollows = function() {
+      if(this.profileUser.follower_follows.length > 0 || this.profileUser.followed_follows.length > 0) {
+        // deletes followers
+        this.profileUser.follower_follows.forEach(function(follow) {
+          $http({
+            method: 'DELETE',
+            url: URL + 'follows/' + follow.id
+          }).then(function(response) {});
+        });
+        // deletes following
+        this.profileUser.followed_follows.forEach(function(follow) {
+          $http({
+            method: 'DELETE',
+            url: URL + 'follows/' + follow.id
+          }).then(function(response) {});
+        });
+      }
+    }
+
+    // to delete rivs
+    this.deleteRivs = function() {
+      if(this.profileUser.rivs.length > 0) {
+        this.profileUser.rivs.forEach(function(riv) {
+          $http({
+            method: 'DELETE',
+            url: URL + 'rivs/' + riv.id
+          }).then(function(response) {});
+        })
+      }
+    }
+
+    // to delete likes
+    this.deleteLikes = function() {
+      if(this.profileUser.likes.length > 0) {
+        this.profileUser.likes.forEach(function(like) {
+          $http({
+            method: 'DELETE',
+            url: URL + 'likes/' + like.id
+          }).then(function(response) {});
+        })
+      }
+    }
+
+    // to delete replies
+    this.deleteReplies = function() {
+      if(this.profileUser.replies.length > 0) {
+        this.profileUser.replies.forEach(function(reply) {
+          $http({
+            method: 'DELETE',
+            url: URL + 'replies/' + reply.id
+          }).then(function(response) {});
+        })
+      }
+    }
+
     // to delete user
     this.deleteUser = function() {
-      if(this.profileUser.id === $rootScope.currentUser.id) {
-        $http({
-          method: 'DELETE',
-          url: URL + 'users/' + this.profileUser.id,
-          headers: {
-            'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token'))
-          }
-        }).then(function(response) {
-            this.logout();
-        }.bind(this));
-      }
+      $http({
+        method: 'DELETE',
+        url: URL + 'users/' + this.profileUser.id,
+        headers: {
+          'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token'))
+        }
+      }).then(function(response) {
+          console.log(response);
+          this.logout();
+      }.bind(this));
     }
 
     // to follow user

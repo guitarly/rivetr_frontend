@@ -47,7 +47,7 @@
         <div class="btn" ng-if="vm.isCurrentUser" ng-click="vm.modalToggle('edit');">
           EDIT PROFILE
         </div>
-        <div class="btn" ng-if="vm.isCurrentUser" ng-click="vm.deleteUser();">
+        <div class="btn" ng-if="vm.isCurrentUser" ng-click="vm.deleteChain();">
           DELETE PROFILE
         </div>
         <!-- ====== IF NOT USER ====================== -->
@@ -108,7 +108,7 @@
       <div class="empty" ng-if="vm.profileUser.rivs.length === 0">
         {{vm.profileUser.display_name || vm.profileUser.username}} has no rivs
       </div>
-      <div class="rivs" ng-if="vm.profileUser.rivs.length > 0" ng-repeat="riv in vm.profileUser.rivs">
+      <div class="rivs" ng-if="(vm.profileUser.rivs.length > 0) && (vm.personal)" ng-repeat="riv in vm.profileUser.rivs">
         <div class="rivs-user-img" style="
           background:url('{{vm.profileUser.profile_photo}}');
           background-size: cover;
@@ -124,7 +124,7 @@
             <i class="fa fa-reply" aria-hidden="true" ng-click="vm.toggleAction('reply', riv)"></i>
             <i class="fa fa-wrench" aria-hidden="true"  ng-click="vm.toggleAction('correction', riv)"></i>
             <i class="fa fa-globe" aria-hidden="true" ng-click="vm.toggleAction('translate', riv)"></i>
-            <i class="fa fa-trash" aria-hidden="true"></i>
+            <i class="fa fa-trash" aria-hidden="true" ng-if="vm.isCurrentUser"></i>
           </div>
         </div>
         <!-- ==== REPLY BOX ======================== -->

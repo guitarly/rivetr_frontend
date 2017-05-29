@@ -46,17 +46,19 @@
 
     // to edit user
     this.editUser = function(){
-      this.profileUser.username = this.profileUser.username.toLowerCase();
-      $http({
-        method: 'PUT',
-        url: URL + 'users/' + this.profileUser.id,
-        data: this.profileUser,
-        headers: {
-          'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token'))
-        }
-      }).then(function(response){
-          $location.path('/' + response.data.username);
-      }.bind(this));
+      if(this.profileUser.id === $rootScope.currentUser.id) {
+        this.profileUser.username = this.profileUser.username.toLowerCase();
+        $http({
+          method: 'PUT',
+          url: URL + 'users/' + this.profileUser.id,
+          data: this.profileUser,
+          headers: {
+            'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token'))
+          }
+        }).then(function(response){
+            $location.path('/' + response.data.username);
+        }.bind(this));
+      }
     };
 
     // to delete user
@@ -68,10 +70,24 @@
           headers: {
             'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token'))
           }
-        }).then(function(result) {
+        }).then(function(response) {
             this.logout();
         }.bind(this));
       }
+    }
+
+    // to follow user
+    this.followUser = function(follower, following) {
+      $http({
+        method: 'POST',
+        url: URL + 'follows',
+        data: {
+          follower_id: follower,
+          followed_id: following
+        }
+      }).then(function(response) {
+          location.reload();
+      })
     }
 
     // ============ MODAL DE/ACTIVATION =============

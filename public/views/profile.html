@@ -51,7 +51,7 @@
           DELETE PROFILE
         </div>
         <!-- ====== IF NOT USER ====================== -->
-        <div class="btn" ng-if="!vm.isCurrentUser">
+        <div class="btn" ng-if="!vm.isCurrentUser" ng-click="vm.followUser(currentUser.id, vm.profileUser.id)">
           FOLLOW
         </div>
         <div class="btn" ng-if="!vm.isCurrentUser">
@@ -86,7 +86,7 @@
               @ {{follower.follower.username}}
             </div>
           </div>
-          <!-- === FOLLOWERS ======================= -->
+          <!-- === FOLLOWING ======================= -->
           <div class="sidebar-followers" ng-if="(vm.profileUser.followed_follows.length > 0) && (vm.following)" ng-repeat="following in vm.profileUser.followed_follows">
             <div class="follow-img" style="background: url('{{following.followed.profile_photo}}'); background-size: cover; background-position: center;"></div>
             <div class="follow-info">
@@ -94,7 +94,7 @@
               @{{following.followed.username}}
             </div>
           </div>
-          <!-- === END REPEAT ======================= -->
+          <!-- === END FOLLOWS ====================== -->
         </div>
       </div>
     </div>

@@ -21,7 +21,7 @@
   // ================================================
   //               PROFILE PAGE CTRL               //
   // ================================================
-  app.controller('ProfileCtrl', ['$http', '$scope', '$rootScope', '$location', '$document', function($http, $scope, $rootScope, $location, $document){
+  app.controller('ProfileCtrl', ['$http', '$scope', '$rootScope', '$location', '$document', '$routeParams', function($http, $scope, $rootScope, $location, $document, $routeParams){
 
     // =========== CONTROLLER VARIABLES =============
     const landing = this;
@@ -30,7 +30,19 @@
     $scope.fullHeader = true;
 
     // =========== HTTP REQUESTS ====================
-
+    // finds the information for the user profile being viewed
+    this.findProfileUser = function() {
+      $http({
+        method: 'GET',
+        url: URL + $routeParams.username
+      }).then(function(result){
+          this.profileUser = result.data;
+          console.log(this.profileUser);
+          if(this.profileUser.id === $rootScope.currentUser.id) {
+            this.isCurrentUser = true;
+          }
+      }.bind(this))
+    }
 
     // ============ MODAL DE/ACTIVATION =============
     // default variables
@@ -141,10 +153,12 @@
           url: URL + 'users/' + id
         }).then(function(result){
             $rootScope.currentUser = result.data;
-        })
+            this.findProfileUser();
+        }.bind(this));
       }
     }
 
+    // ============ AUTOMATIC FUNCTION CALLS =======
     this.sessionCheck();
 
   }]); // ends controller

@@ -8,30 +8,30 @@
   <section ng-class="{'profile-stats-container': fullHeader, 'profile-stats-scroll': !fullHeader}" class="profile-stats-transition">
     <div class="profile-stats">
       <div class="profile-img" style="
-        background:url('{{currentUser.profile_photo}}');
+        background:url('{{vm.profileUser.profile_photo}}');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;">
       </div>
       <div class="profile-nums">
-        <h1>{{currentUser.display_name}}</h1>
+        <h1>{{vm.profileUser.display_name}}</h1>
         <div class="row">
           <span>
             <strong>LEARNING</strong>
-            {{currentUser.language_learning}}</span>
+            {{vm.profileUser.language_learning}}</span>
           <span>
             <strong>KNOWN</strong>
-            {{currentUser.language_known}}
+            {{vm.profileUser.language_known}}
           </span>
         </div>
         <div class="row">
           <span>
             <strong>FOLLOWERS</strong>
-             {{currentUser.follower_follows.length}}
+             {{vm.profileUser.follower_follows.length}}
            </span>
           <span>
             <strong>FOLLOWING</strong>
-             {{currentUser.followed_follows.length}}
+             {{vm.profileUser.followed_follows.length}}
            </span>
         </div>
       </div>
@@ -44,25 +44,25 @@
       <!-- ======== ACTION BUTTONS =================== -->
       <div class="sidebar-buttons">
         <!-- ====== IF PROFILE OF USER =============== -->
-        <div class="btn" ng-click="vm.modalToggle('edit');">
+        <div class="btn" ng-if="vm.isCurrentUser" ng-click="vm.modalToggle('edit');">
           EDIT PROFILE
         </div>
-        <div class="btn">
+        <div class="btn" ng-if="vm.isCurrentUser">
           DELETE PROFILE
         </div>
         <!-- ====== IF NOT USER ====================== -->
-        <!-- <div class="btn">
+        <div class="btn" ng-if="!vm.isCurrentUser">
           FOLLOW
         </div>
-        <div class="btn">
+        <div class="btn" ng-if="!vm.isCurrentUser">
           MESSAGE
-        </div> -->
+        </div>
       </div>
       <!-- ======== PROFILE BIOGRAPHY ================ -->
       <div class="sidebar-bio">
-        <h3>about {{currentUser.display_name}}</h3>
+        <h3>about {{vm.profileUser.display_name}}</h3>
         <p>
-          {{currentUser.biography}}
+          {{vm.profileUser.biography}}
         </p>
       </div>
       <!-- ======== PROFILE FOLLOWS ================== -->
@@ -87,18 +87,18 @@
     <div class="rivs-container">
       <!-- ======== RIV FILTERS ===================== -->
       <div class="rivs-filters">
-        <strong>{{currentUser.display_name}}'s rivs</strong> <a ng-class="{selected: vm.personal}" ng-click="vm.toggleRivs('personal')">personal</a> <a ng-class="{selected: vm.replies}" ng-click="vm.toggleRivs('replies')">replies</a> <a ng-class="{selected: vm.corrections}" ng-click="vm.toggleRivs('corrections')">corrections</a>
+        <strong>{{vm.profileUser.display_name}}'s rivs</strong> <a ng-class="{selected: vm.personal}" ng-click="vm.toggleRivs('personal')">personal</a> <a ng-class="{selected: vm.replies}" ng-click="vm.toggleRivs('replies')">replies</a> <a ng-class="{selected: vm.corrections}" ng-click="vm.toggleRivs('corrections')">corrections</a>
       </div>
       <!-- ======= RIVS (NG-REPEAT) ================= -->
-      <div class="rivs" ng-repeat="riv in currentUser.rivs">
+      <div class="rivs" ng-repeat="riv in vm.profileUser.rivs">
         <div class="rivs-user-img" style="
-          background:url('{{currentUser.profile_photo}}');
+          background:url('{{vm.profileUser.profile_photo}}');
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;" ng-click="vm.modalToggle('image', $index)">
         </div>
         <div class="rivs-content">
-          <strong>{{currentUser.display_name}}</strong> <span>@{{currentUser.username}}</span><br />
+          <strong>{{vm.profileUser.display_name}}</strong> <span>@{{vm.profileUser.username}}</span><br />
           {{riv.content}}
           <div ng-if="riv.photo" class="rivs-photo" style="background: url('{{riv.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;" ng-click="vm.modalToggle('image', riv)"></div>
           <div class="rivs-actions">

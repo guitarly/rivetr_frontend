@@ -14,7 +14,7 @@
         background-repeat: no-repeat;">
       </div>
       <div class="profile-nums">
-        <h1>{{vm.profileUser.display_name}}</h1>
+        <h1>{{vm.profileUser.display_name || vm.profileUser.username}}</h1>
         <div class="row">
           <span>
             <strong>LEARNING</strong>
@@ -59,8 +59,8 @@
         </div>
       </div>
       <!-- ======== PROFILE BIOGRAPHY ================ -->
-      <div class="sidebar-bio">
-        <h3>about {{vm.profileUser.display_name}}</h3>
+      <div class="sidebar-bio" ng-if="vm.profileUser.biography">
+        <h3>about {{vm.profileUser.display_name || vm.profileUser.username}}</h3>
         <p>
           {{vm.profileUser.biography}}
         </p>
@@ -71,6 +71,9 @@
           <a ng-class="{selected: vm.followers}" ng-click="vm.toggleFollow('followers')">followers</a> <a ng-class="{selected: vm.following}" ng-click="vm.toggleFollow('following')">following</a>
         </div>
         <div class="sidebar-followers-container">
+          <!-- <div class="empty">
+            {{vm.profileUser.display_name || vm.profileUser.username}} has no followers
+          </div> -->
           <!-- === NG-REPEAT ======================== -->
           <div class="sidebar-followers">
             <div class="follow-img" style="background: url('http://placehold.it/50x50.png'); background-size: cover; background-position: center;"></div>
@@ -87,10 +90,13 @@
     <div class="rivs-container">
       <!-- ======== RIV FILTERS ===================== -->
       <div class="rivs-filters">
-        <strong>{{vm.profileUser.display_name}}'s rivs</strong> <a ng-class="{selected: vm.personal}" ng-click="vm.toggleRivs('personal')">personal</a> <a ng-class="{selected: vm.replies}" ng-click="vm.toggleRivs('replies')">replies</a> <a ng-class="{selected: vm.corrections}" ng-click="vm.toggleRivs('corrections')">corrections</a>
+        <strong>{{vm.profileUser.display_name || vm.profileUser.username}}'s rivs</strong> <a ng-class="{selected: vm.personal}" ng-click="vm.toggleRivs('personal')">personal</a> <a ng-class="{selected: vm.replies}" ng-click="vm.toggleRivs('replies')">replies</a> <a ng-class="{selected: vm.corrections}" ng-click="vm.toggleRivs('corrections')">corrections</a>
       </div>
       <!-- ======= RIVS (NG-REPEAT) ================= -->
-      <div class="rivs" ng-repeat="riv in vm.profileUser.rivs">
+      <div class="empty" ng-if="vm.profileUser.rivs.length === 0">
+        {{vm.profileUser.display_name || vm.profileUser.username}} has no rivs
+      </div>
+      <div class="rivs" ng-if="vm.profileUser.rivs.length > 0" ng-repeat="riv in vm.profileUser.rivs">
         <div class="rivs-user-img" style="
           background:url('{{vm.profileUser.profile_photo}}');
           background-size: cover;
@@ -98,7 +104,7 @@
           background-repeat: no-repeat;" ng-click="vm.modalToggle('image', $index)">
         </div>
         <div class="rivs-content">
-          <strong>{{vm.profileUser.display_name}}</strong> <span>@{{vm.profileUser.username}}</span><br />
+          <strong>{{vm.profileUser.display_name || vm.profileUser.username}}</strong> <span>@{{vm.profileUser.username}}</span><br />
           {{riv.content}}
           <div ng-if="riv.photo" class="rivs-photo" style="background: url('{{riv.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;" ng-click="vm.modalToggle('image', riv)"></div>
           <div class="rivs-actions">

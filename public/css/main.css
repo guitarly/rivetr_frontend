@@ -402,6 +402,23 @@ nav {
   to {
     opacity: 1; } }
 /* ================ PROFILE ================= */
+.empty {
+  font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  color: #9d9d9d;
+  width: 95%;
+  height: 30vh;
+  background: #E9E9E9;
+  margin: 10px auto;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
 .profile-stats-container, .profile-stats-scroll {
   width: 100%;
   position: fixed;
@@ -556,7 +573,7 @@ nav {
           font-weight: 700; }
     .sidebar-container .sidebar-follow .sidebar-followers-container {
       padding: 10px;
-      height: 50vh;
+      max-height: 50vh;
       overflow: auto; }
       .sidebar-container .sidebar-follow .sidebar-followers-container .sidebar-followers {
         display: flex;

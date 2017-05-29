@@ -71,11 +71,11 @@
           <a ng-class="{selected: vm.followers}" ng-click="vm.toggleFollow('followers')">followers</a> <a ng-class="{selected: vm.following}" ng-click="vm.toggleFollow('following')">following</a>
         </div>
         <div class="sidebar-followers-container">
-          <!-- <div class="empty">
+          <div class="empty" ng-if="vm.profileUser.followed_follows.length === 0">
             {{vm.profileUser.display_name || vm.profileUser.username}} has no followers
-          </div> -->
+          </div>
           <!-- === NG-REPEAT ======================== -->
-          <div class="sidebar-followers">
+          <div class="sidebar-followers" ng-if="vm.profileUser.followed_follows.length > 0">
             <div class="follow-img" style="background: url('http://placehold.it/50x50.png'); background-size: cover; background-position: center;"></div>
             <div class="follow-info">
               <h3><a>DISPLAYNAME</a></h3>

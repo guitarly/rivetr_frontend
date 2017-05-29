@@ -337,6 +337,15 @@ nav {
     }
   }
 }
+.login-error {
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: $accent-font;
+  font-size: 13px;
+  font-weight: 700;
+  color: $pink;
+}
 
 /* ================ LANDING ================= */
 .landing-container {

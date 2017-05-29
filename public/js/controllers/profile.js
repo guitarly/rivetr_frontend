@@ -30,18 +30,33 @@
     $scope.fullHeader = true;
 
     // =========== HTTP REQUESTS ====================
-    // finds the information for the user profile being viewed
+    // to find the information for the user profile being viewed
     this.findProfileUser = function() {
       $http({
         method: 'GET',
         url: URL + $routeParams.username
-      }).then(function(result){
+      }).then(function(result) {
           this.profileUser = result.data;
           console.log(this.profileUser);
           if(this.profileUser.id === $rootScope.currentUser.id) {
             this.isCurrentUser = true;
           }
       }.bind(this))
+    }
+
+    // to delete user
+    this.deleteUser = function() {
+      if(this.profileUser.id === $rootScope.currentUser.id) {
+        $http({
+          method: 'DELETE',
+          url: URL + 'users/' + this.profileUser.id,
+          headers: {
+            'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token'))
+          }
+        }).then(function(result) {
+            this.logout();
+        }.bind(this));
+      }
     }
 
     // ============ MODAL DE/ACTIVATION =============

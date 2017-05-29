@@ -276,6 +276,15 @@ nav {
       .login-form input[type="submit"]:focus {
         border: 0px; }
 
+.login-error {
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #E52A6F; }
+
 /* ================ LANDING ================= */
 .landing-container {
   display: flex;

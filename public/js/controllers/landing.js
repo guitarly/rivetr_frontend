@@ -9,11 +9,8 @@
 
     // =========== CONTROLLER VARIABLES ==============
     const landing = this;
-    if(window.location.href == 'http://localhost:8000/#!/'){
-      var URL = 'http://localhost:3000/';
-    } else {
-      var URL = 'http://rivetrapi.herokuapp.com/'
-    };
+    const URL = 'http://localhost:3000/';
+    // const URL = 'http://rivetrapi.herokuapp.com/'
 
     // =========== HTTP REQUESTS ======================
     // to create a user

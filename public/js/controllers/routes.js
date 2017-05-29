@@ -8,6 +8,18 @@
         controller: 'LandingCtrl',
         templateUrl: '/views/landing-page.html',
         controllerAs: 'vm'
+      })
+      .when('/:username', {
+        resolve: {
+          "check": function($location, $rootScope) {
+            if(localStorage.length === 0) {
+              $location.path('/');
+            }
+          }
+        },
+        controller: 'ProfileCtrl',
+        templateUrl: '/views/profile.html',
+        controllerAs: 'vm'
       });
   });
 })();

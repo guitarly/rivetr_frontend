@@ -1,0 +1,7 @@
+<!-- ============= VIEW IMAGE MODAL ============= -->
+<section class="modal" ng-if="vm.showFullImage">
+  <div class="close image-close" ng-click="vm.modalToggle('image', vm.currentRiv)">
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </div>
+  <img ng-src="{{vm.currentRiv.photo}}">
+</section>

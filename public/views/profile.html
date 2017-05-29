@@ -1,0 +1,155 @@
+<!-- ================= NAVIGATION ================= -->
+<section ng-include="'../partials/navbar.html'"></section>
+
+<!-- ============== START PROFILE PG ============== -->
+<section class="profile-container">
+
+  <!-- ============ PROFILE STATS ================= -->
+  <section ng-class="{'profile-stats-container': fullHeader, 'profile-stats-scroll': !fullHeader}" class="profile-stats-transition">
+    <div class="profile-stats">
+      <div class="profile-img" style="
+        background:url('{{currentUser.profile_photo}}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;">
+      </div>
+      <div class="profile-nums">
+        <h1>{{currentUser.display_name}}</h1>
+        <div class="row">
+          <span>
+            <strong>LEARNING</strong>
+            {{currentUser.language_learning}}</span>
+          <span>
+            <strong>KNOWN</strong>
+            {{currentUser.language_known}}
+          </span>
+        </div>
+        <div class="row">
+          <span>
+            <strong>FOLLOWERS</strong>
+             {{currentUser.follower_follows.length}}
+           </span>
+          <span>
+            <strong>FOLLOWING</strong>
+             {{currentUser.followed_follows.length}}
+           </span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============ PROFILE CONTENT ================== -->
+  <section class="content-container" scroll>
+    <!-- ========== SIDEBAR CONTENT ================== -->
+    <div class="sidebar-container" ng-class="{'fixed': !fullHeader}">
+      <!-- ======== ACTION BUTTONS =================== -->
+      <div class="sidebar-buttons">
+        <!-- ====== IF PROFILE OF USER =============== -->
+        <div class="btn" ng-click="vm.modalToggle('edit');">
+          EDIT PROFILE
+        </div>
+        <div class="btn">
+          DELETE PROFILE
+        </div>
+        <!-- ====== IF NOT USER ====================== -->
+        <!-- <div class="btn">
+          FOLLOW
+        </div>
+        <div class="btn">
+          MESSAGE
+        </div> -->
+      </div>
+      <!-- ======== PROFILE BIOGRAPHY ================ -->
+      <div class="sidebar-bio">
+        <h3>about {{currentUser.display_name}}</h3>
+        <p>
+          {{currentUser.biography}}
+        </p>
+      </div>
+      <!-- ======== PROFILE FOLLOWS ================== -->
+      <div class="sidebar-follow">
+        <div class="sidebar-follow-links">
+          <a ng-class="{selected: vm.followers}" ng-click="vm.toggleFollow('followers')">followers</a> <a ng-class="{selected: vm.following}" ng-click="vm.toggleFollow('following')">following</a>
+        </div>
+        <div class="sidebar-followers-container">
+          <!-- === NG-REPEAT ======================== -->
+          <div class="sidebar-followers">
+            <div class="follow-img" style="background: url('http://placehold.it/50x50.png'); background-size: cover; background-position: center;"></div>
+            <div class="follow-info">
+              <h3><a>DISPLAYNAME</a></h3>
+              @username
+            </div>
+          </div>
+          <!-- === END REPEAT ======================= -->
+        </div>
+      </div>
+    </div>
+    <!-- ========== RIV CONTENT ===================== -->
+    <div class="rivs-container">
+      <!-- ======== RIV FILTERS ===================== -->
+      <div class="rivs-filters">
+        <strong>{{currentUser.display_name}}'s rivs</strong> <a ng-class="{selected: vm.personal}" ng-click="vm.toggleRivs('personal')">personal</a> <a ng-class="{selected: vm.replies}" ng-click="vm.toggleRivs('replies')">replies</a> <a ng-class="{selected: vm.corrections}" ng-click="vm.toggleRivs('corrections')">corrections</a>
+      </div>
+      <!-- ======= RIVS (NG-REPEAT) ================= -->
+      <div class="rivs" ng-repeat="riv in currentUser.rivs">
+        <div class="rivs-user-img" style="
+          background:url('{{currentUser.profile_photo}}');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;" ng-click="vm.modalToggle('image', $index)">
+        </div>
+        <div class="rivs-content">
+          <strong>{{currentUser.display_name}}</strong> <span>@{{currentUser.username}}</span><br />
+          {{riv.content}}
+          <div ng-if="riv.photo" class="rivs-photo" style="background: url('{{riv.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;" ng-click="vm.modalToggle('image', riv)"></div>
+          <div class="rivs-actions">
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-reply" aria-hidden="true" ng-click="vm.toggleAction('reply', riv)"></i>
+            <i class="fa fa-wrench" aria-hidden="true"  ng-click="vm.toggleAction('correction', riv)"></i>
+            <i class="fa fa-globe" aria-hidden="true" ng-click="vm.toggleAction('translate', riv)"></i>
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </div>
+        </div>
+        <!-- ==== REPLY BOX ======================== -->
+        <div class="rivs-reply" ng-if="riv.replyBox">
+          <form>
+            <textarea></textarea>
+            <input type="submit" value="reply" />
+          </form>
+        </div>
+        <!-- ==== CORRECTION BOX =================== -->
+        <div class="rivs-correction" ng-if="riv.correctionBox">
+          <form>
+            <textarea>{{riv.content}}</textarea>
+            <input type="submit" value="correct" />
+          </form>
+        </div>
+        <!-- ==== TRANSLATION BOX ================== -->
+        <div class="rivs-translation" ng-if="riv.translationBox">
+          <form>
+            <textarea>{{riv.content}}</textarea>
+            <center>
+              <strong>translate from</strong>
+              <select>
+                <option>language</option>
+              </select>
+              <strong>translate to</strong>
+              <select>
+                <option>language</option>
+              </select>
+            </center>
+            <input type="submit" value="translate" />
+          </form>
+        </div>
+      </div>
+      <!-- ======= RETURN TO TOP =================== -->
+      <div class="window-top">
+        <a ng-click="vm.goToTop();">GO BACK TO TOP</a>
+      </div>
+    </div>
+  </section>
+<!-- ============== END PROFILE PG ================ -->
+</section>
+
+<!-- =============== MODALS =============== -->
+<section ng-include="'../partials/modals/edit.html'"></section>
+<section ng-include="'../partials/modals/image.html'"></section>

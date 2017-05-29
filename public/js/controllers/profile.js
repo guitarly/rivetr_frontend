@@ -86,10 +86,17 @@
         case 'reply':
           riv.replyBox = riv.replyBox === true ? false:true;
           riv.correctionBox = false;
+          riv.translationBox = false;
           break;
         case 'correction':
           riv.correctionBox = riv.correctionBox === true ? false:true;
           riv.replyBox = false;
+          riv.translationBox = false;
+          break;
+        case 'translate':
+          riv.translationBox = riv.translationBox === true ? false:true;
+          riv.replyBox = false;
+          riv.correctionBox = false;
           break;
       }
     }

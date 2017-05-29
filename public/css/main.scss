@@ -54,14 +54,14 @@ a {
     cursor: pointer;
   }
 }
-input, textarea {
+input, textarea, select {
   border: 1px solid darken($grey, 2%);
   padding: 10px;
   margin: 5px;
   border-radius: 3px;
   background: whitesmoke;
 }
-input:focus, textarea:focus {
+input:focus, textarea:focus, select:focus {
   outline: none;
   border: 1px solid lighten($faded-purp, 25%);
 }
@@ -694,6 +694,9 @@ nav {
       height: 200px;
       border-radius: 3px;
       margin-top: 15px;
+      &:hover {
+        cursor: pointer;
+      }
     }
     .rivs-content {
       width: 85%;
@@ -707,9 +710,24 @@ nav {
         font-size: 13px;
       }
     }
-    .rivs-reply, .rivs-correction {
+    .rivs-reply, .rivs-correction, .rivs-translation {
       width: 100%;
       margin-top: 10px;
+      strong {
+        font-family: $accent-font;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: $blue;
+      }
+      div {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+      }
+      select {
+        width: 20%;
+      }
       textarea {
         resize: none;
         width: 93%;

@@ -105,7 +105,7 @@
             <i class="fa fa-star" aria-hidden="true"></i>
             <i class="fa fa-reply" aria-hidden="true" ng-click="vm.toggleAction('reply', riv)"></i>
             <i class="fa fa-wrench" aria-hidden="true"  ng-click="vm.toggleAction('correction', riv)"></i>
-            <i class="fa fa-globe" aria-hidden="true"></i>
+            <i class="fa fa-globe" aria-hidden="true" ng-click="vm.toggleAction('translate', riv)"></i>
             <i class="fa fa-trash" aria-hidden="true"></i>
           </div>
         </div>
@@ -121,6 +121,23 @@
           <form>
             <textarea>{{riv.content}}</textarea>
             <input type="submit" value="correct" />
+          </form>
+        </div>
+        <!-- ==== TRANSLATION BOX ================== -->
+        <div class="rivs-translation" ng-if="riv.translationBox">
+          <form>
+            <textarea>{{riv.content}}</textarea>
+            <center>
+              <strong>translate from</strong>
+              <select>
+                <option>language</option>
+              </select>
+              <strong>translate to</strong>
+              <select>
+                <option>language</option>
+              </select>
+            </center>
+            <input type="submit" value="translate" />
           </form>
         </div>
       </div>

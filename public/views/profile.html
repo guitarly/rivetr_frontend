@@ -100,7 +100,7 @@
         <div class="rivs-content">
           <strong>{{currentUser.display_name}}</strong> <span>@{{currentUser.username}}</span><br />
           {{riv.content}}
-          <div ng-if="riv.photo" class="rivs-photo" style="background: url('{{riv.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+          <div ng-if="riv.photo" class="rivs-photo" style="background: url('{{riv.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;" ng-click="vm.modalToggle('image', riv)"></div>
           <div class="rivs-actions">
             <i class="fa fa-star" aria-hidden="true"></i>
             <i class="fa fa-reply" aria-hidden="true" ng-click="vm.toggleAction('reply', riv)"></i>

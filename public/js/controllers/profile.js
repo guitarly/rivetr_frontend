@@ -36,9 +36,10 @@
     // default variables
     this.showEdit = false;
     this.showDelete = false;
+    this.showFullImage = false;
 
     // toggle switch
-    this.modalToggle = function(modal, index) {
+    this.modalToggle = function(modal, riv) {
       switch(modal) {
         case 'edit':
           this.showEdit = !this.showEdit;
@@ -48,6 +49,7 @@
           break;
         case 'image':
           this.showFullImage = !this.showFullImage;
+          this.currentRiv = riv;
           break;
       }
     }

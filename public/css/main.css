@@ -138,6 +138,10 @@ nav {
       -webkit-transition: 0.5s ease-in;
       -o-transition: 0.5s ease-in; }
 
+.image-close {
+  top: 0;
+  right: 0; }
+
 /* SHARED */
 .registration-container, .login-container {
   width: 65%;

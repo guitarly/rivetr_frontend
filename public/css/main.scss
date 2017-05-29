@@ -459,9 +459,6 @@ nav {
 }
 
 /* ================ PROFILE ================= */
-.profile-container {
-
-}
 .profile-stats-container, .profile-stats-scroll {
   width: 100%;
   position: fixed;
@@ -476,15 +473,17 @@ nav {
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 24%, 0 38%);
     clip-path: polygon(0 0, 100% 0, 100% 24%, 0 38%);
   }
-  @include transition(0.7s ease-in);
+  @include transition(0.2s ease-in);
 }
 .profile-stats-scroll {
   height: 20vh;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 44%, 0 44%);
+  clip-path: polygon(0 0, 100% 0, 100% 44%, 0 44%);
   @include for-medium {
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 54%, 0 54%);
     clip-path: polygon(0 0, 100% 0, 100% 54%, 0 54%);
   }
-  @include transition(0.7s ease-in);
+  @include transition(0.2s ease-in);
   .profile-stats {
     display: none;
   }
@@ -551,19 +550,26 @@ nav {
 }
 .content-container {
   width: 100%;
-  margin-top: 26vh;
+  margin-top: 36vh;
   position: absolute;
-  display: flex;
-  justify-content: space-around;
+  @include for-medium {
+    margin-top: 26vh;
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+  }
 }
 .sidebar-container {
-  width: 30%;
-  min-height: calc(100vh - 26vh - 8vh);
-  max-height: 90vh;
+  height: auto;
   margin-top: 8vh;
   padding: 49px 20px;
   box-sizing: border-box;
-  background: whitesmoke;
+  @include for-medium {
+    width: 30%;
+    background: whitesmoke;
+    min-height: calc(100vh - 26vh - 8vh);
+    max-height: 90vh;
+  }
   .sidebar-buttons {
     display: flex;
     justify-content: space-between;
@@ -597,6 +603,10 @@ nav {
     }
   }
   .sidebar-follow {
+    display: none;
+    @include for-medium {
+      display: block;
+    }
     .sidebar-follow-links {
       display: flex;
       justify-content: space-between;
@@ -613,8 +623,8 @@ nav {
       }
     }
     .sidebar-followers-container {
-      padding: 10px;
       height: 50vh;
+      padding: 10px;
       overflow: auto;
       .sidebar-followers {
         display: flex;
@@ -648,7 +658,11 @@ nav {
   }
 }
 .rivs-container {
-  width: 50%;
+  width: 90%;
+  margin: 0 auto;
+  @include for-medium {
+    width: 50%;
+  }
   padding: 55px 20px;
   box-sizing: border-box;
   background: whitesmoke;
@@ -699,7 +713,10 @@ nav {
       }
     }
     .rivs-content {
-      width: 85%;
+      width: 89%;
+      @include for-medium {
+        width: 85%;
+      }
       font-size: 12px;
       strong {
         color: $faded-purp;
@@ -737,7 +754,10 @@ nav {
       }
       input[type="submit"] {
         background: $pink;
-        width: 97.5%;
+        width: 96%;
+        @include for-medium {
+          width: 97.5%;
+        }
         margin-top: 0px;
         font-family: $accent-font;
         font-size: 15px;

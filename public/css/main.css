@@ -498,14 +498,13 @@ nav {
   @media (min-width: 900px) {
     .content-container {
       margin-top: 26vh;
-      position: absolute;
       display: flex;
       justify-content: space-around; } }
 
 .sidebar-container {
-  height: auto;
   margin-top: 8vh;
   padding: 49px 20px;
+  height: auto;
   box-sizing: border-box; }
   @media (min-width: 900px) {
     .sidebar-container {
@@ -556,8 +555,8 @@ nav {
         .sidebar-container .sidebar-follow .sidebar-follow-links a.selected {
           font-weight: 700; }
     .sidebar-container .sidebar-follow .sidebar-followers-container {
-      height: 50vh;
       padding: 10px;
+      height: 50vh;
       overflow: auto; }
       .sidebar-container .sidebar-follow .sidebar-followers-container .sidebar-followers {
         display: flex;
@@ -590,12 +589,13 @@ nav {
 
 .rivs-container {
   width: 90%;
-  margin: 0 auto;
   padding: 55px 20px;
+  margin: 0 auto;
   box-sizing: border-box;
   background: whitesmoke; }
   @media (min-width: 900px) {
     .rivs-container {
+      margin: 0 0;
       width: 50%; } }
   .rivs-container .rivs-filters {
     width: 100%;
@@ -637,7 +637,7 @@ nav {
       .rivs-container .rivs .rivs-photo:hover {
         cursor: pointer; }
     .rivs-container .rivs .rivs-content {
-      width: 89%;
+      width: 88%;
       font-size: 12px; }
       @media (min-width: 900px) {
         .rivs-container .rivs .rivs-content {

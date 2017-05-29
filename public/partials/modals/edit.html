@@ -10,16 +10,16 @@
       </div>
     </div>
     <div class="registration-form">
-      <form ng-submit="vm.register();">
+      <form ng-submit="vm.editUser();">
         <h1>account details</h1>
-        <input type="text" ng-model="vm.newUserData.username" placeholder="username">
-        <input type="password" ng-model="vm.newUserData.password" placeholder="password">
-        <input type="text" ng-model="vm.newUserData.display_name" placeholder="display name">
-        <input type="text" ng-model="vm.newUserData.profile_photo" placeholder="profile photo">
+        <input type="text" ng-model="vm.profileUser.username" placeholder="username">
+        <input type="password" ng-model="vm.profileUser.password" placeholder="password">
+        <input type="text" ng-model="vm.profileUser.display_name" placeholder="display name">
+        <input type="text" ng-model="vm.profileUser.profile_photo" placeholder="profile photo">
         <h1>user details</h1>
-        <input type="text" ng-model="vm.newUserData.language_learning" placeholder="language learning">
-        <input type="text" ng-model="vm.newUserData.language_known" placeholder="language known">
-        <input type="text" ng-model="vm.newUserData.biography" placeholder="a short bio" /><br />
+        <input type="text" ng-model="vm.profileUser.language_learning" placeholder="language learning">
+        <input type="text" ng-model="vm.profileUser.language_known" placeholder="language known">
+        <input type="text" ng-model="vm.profileUser.biography" placeholder="a short bio" /><br />
         <input type="submit" value="edit" />
       </form>
     </div>

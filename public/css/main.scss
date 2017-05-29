@@ -337,6 +337,15 @@ nav {
     }
   }
 }
+.login-error {
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: $accent-font;
+  font-size: 13px;
+  font-weight: 700;
+  color: $pink;
+}
 
 /* ================ LANDING ================= */
 .landing-container {
@@ -459,6 +468,23 @@ nav {
 }
 
 /* ================ PROFILE ================= */
+.empty {
+  font-family: $accent-font;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  color: darken($grey, 30%);
+  width: 95%;
+  height: 30vh;
+  background: $grey;
+  margin: 10px auto;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .profile-stats-container, .profile-stats-scroll {
   width: 100%;
   position: fixed;
@@ -623,7 +649,7 @@ nav {
     }
     .sidebar-followers-container {
       padding: 10px;
-      height: 50vh;
+      max-height: 50vh;
       overflow: auto;
       .sidebar-followers {
         display: flex;
@@ -641,6 +667,7 @@ nav {
         font-style: italic;
         color: darken($grey, 30%);
         a {
+          color: $pink;
           @include transition(0.5s ease-in);
           &:hover {
             color: $blue;

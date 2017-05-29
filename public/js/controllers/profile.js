@@ -21,7 +21,7 @@
   // ================================================
   //               PROFILE PAGE CTRL               //
   // ================================================
-  app.controller('ProfileCtrl', ['$http', '$scope', '$rootScope', '$location', '$document', function($http, $scope, $rootScope, $location, $document){
+  app.controller('ProfileCtrl', ['$http', '$scope', '$rootScope', '$location', '$document', '$routeParams', function($http, $scope, $rootScope, $location, $document, $routeParams){
 
     // =========== CONTROLLER VARIABLES =============
     const landing = this;
@@ -30,7 +30,65 @@
     $scope.fullHeader = true;
 
     // =========== HTTP REQUESTS ====================
+    // to find the information for the user profile being viewed
+    this.findProfileUser = function() {
+      $http({
+        method: 'GET',
+        url: URL + $routeParams.username
+      }).then(function(result) {
+          this.profileUser = result.data;
+          console.log(this.profileUser);
+          if(this.profileUser.id === $rootScope.currentUser.id) {
+            this.isCurrentUser = true;
+          }
+      }.bind(this))
+    }
 
+    // to edit user
+    this.editUser = function(){
+      if(this.profileUser.id === $rootScope.currentUser.id) {
+        this.profileUser.username = this.profileUser.username.toLowerCase();
+        $http({
+          method: 'PUT',
+          url: URL + 'users/' + this.profileUser.id,
+          data: this.profileUser,
+          headers: {
+            'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token'))
+          }
+        }).then(function(response){
+            $location.path('/' + response.data.username);
+        }.bind(this));
+      }
+    };
+
+    // to delete user
+    this.deleteUser = function() {
+      if(this.profileUser.id === $rootScope.currentUser.id) {
+        $http({
+          method: 'DELETE',
+          url: URL + 'users/' + this.profileUser.id,
+          headers: {
+            'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token'))
+          }
+        }).then(function(response) {
+            this.logout();
+        }.bind(this));
+      }
+    }
+
+    // to follow user
+    this.followUser = function(follower, following) {
+      $http({
+        method: 'POST',
+        url: URL + 'follows',
+        data: {
+          follower_id: follower,
+          followed_id: following
+        }
+      }).then(function(response) {
+          location.reload();
+      })
+    }
 
     // ============ MODAL DE/ACTIVATION =============
     // default variables
@@ -141,10 +199,12 @@
           url: URL + 'users/' + id
         }).then(function(result){
             $rootScope.currentUser = result.data;
-        })
+            this.findProfileUser();
+        }.bind(this));
       }
     }
 
+    // ============ AUTOMATIC FUNCTION CALLS =======
     this.sessionCheck();
 
   }]); // ends controller

@@ -44,14 +44,19 @@
     // to login
     this.login = function(){
       this.loginData.username = this.loginData.username.toLowerCase();
+      this.loginError = null;
       $http({
         method: 'POST',
         url: URL + 'users/login',
         data: { user: this.loginData }
       }).then(function(response){
-          localStorage.setItem('token', JSON.stringify(response.data.token));
-          localStorage.setItem('user', response.data.user.id);
-          this.sessionCheck();
+          if(response.data.status === 401) {
+            this.loginError = response.data.message;
+          } else {
+            localStorage.setItem('token', JSON.stringify(response.data.token));
+            localStorage.setItem('user', response.data.user.id);
+            this.sessionCheck();
+          }
       }.bind(this))
     }
 
@@ -65,6 +70,7 @@
       switch(modal) {
         case 'register':
           this.showRegister = !this.showRegister;
+          this.loginError = null;
           break;
         case 'login':
           this.showLogin = !this.showLogin;

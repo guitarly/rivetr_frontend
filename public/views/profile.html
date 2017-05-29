@@ -37,28 +37,65 @@
       </div>
     </div>
   </section>
-  <!-- ============ PROFILE RIVS ================== -->
+  <!-- ============ PROFILE CONTENT ================== -->
   <section class="content-container" scroll>
-    <div class="sidebar-container">
+    <!-- ========== SIDEBAR CONTENT ================== -->
+    <div class="sidebar-container" ng-class="{'fixed': !fullHeader}">
+      <!-- ======== ACTION BUTTONS =================== -->
       <div class="sidebar-buttons">
+        <!-- ====== IF PROFILE OF USER =============== -->
         <div class="btn" ng-click="vm.modalToggle('edit');">
           EDIT PROFILE
         </div>
         <div class="btn">
           DELETE PROFILE
         </div>
+        <!-- ====== IF NOT USER ====================== -->
+        <!-- <div class="btn">
+          FOLLOW
+        </div>
+        <div class="btn">
+          MESSAGE
+        </div> -->
+      </div>
+      <!-- ======== PROFILE BIOGRAPHY ================ -->
+      <div class="sidebar-bio">
+        <h3>about {{currentUser.display_name}}</h3>
+        <p>
+          {{currentUser.biography}}
+        </p>
+      </div>
+      <!-- ======== PROFILE FOLLOWS ================== -->
+      <div class="sidebar-follow">
+        <div class="sidebar-follow-links">
+          <a ng-class="{selected: vm.followers}" ng-click="vm.toggleFollow('followers')">followers</a> <a ng-class="{selected: vm.following}" ng-click="vm.toggleFollow('following')">following</a>
+        </div>
+        <div class="sidebar-followers-container">
+          <!-- === NG-REPEAT ======================== -->
+          <div class="sidebar-followers">
+            <div class="follow-img" style="background: url('http://placehold.it/50x50.png'); background-size: cover; background-position: center;"></div>
+            <div class="follow-info">
+              <h3><a>DISPLAYNAME</a></h3>
+              @username
+            </div>
+          </div>
+          <!-- === END REPEAT ======================= -->
+        </div>
       </div>
     </div>
+    <!-- ========== RIV CONTENT ===================== -->
     <div class="rivs-container">
+      <!-- ======== RIV FILTERS ===================== -->
       <div class="rivs-filters">
-        <strong>{{currentUser.display_name}}'s rivs</strong> <a>personal</a> <a>replies</a> <a>corrections</a>
+        <strong>{{currentUser.display_name}}'s rivs</strong> <a ng-class="{selected: vm.personal}" ng-click="vm.toggleRivs('personal')">personal</a> <a ng-class="{selected: vm.replies}" ng-click="vm.toggleRivs('replies')">replies</a> <a ng-class="{selected: vm.corrections}" ng-click="vm.toggleRivs('corrections')">corrections</a>
       </div>
+      <!-- ======= RIVS (NG-REPEAT) ================= -->
       <div class="rivs" ng-repeat="riv in currentUser.rivs">
         <div class="rivs-user-img" style="
           background:url('{{currentUser.profile_photo}}');
           background-size: cover;
           background-position: center;
-          background-repeat: no-repeat;">
+          background-repeat: no-repeat;" ng-click="vm.modalToggle('image', $index)">
         </div>
         <div class="rivs-content">
           <strong>{{currentUser.display_name}}</strong> <span>@{{currentUser.username}}</span><br />
@@ -72,6 +109,10 @@
           </div>
         </div>
       </div>
+      <!-- ======= RETURN TO TOP =================== -->
+      <div class="window-top">
+        <a ng-click="vm.goToTop();">GO BACK TO TOP</a>
+      </div>
     </div>
   </section>
 <!-- ============== END PROFILE PG ================ -->
@@ -79,3 +120,4 @@
 
 <!-- =============== MODALS =============== -->
 <section ng-include="'../partials/modals/edit.html'"></section>
+<section ng-include="'../partials/modals/image.html'"></section>

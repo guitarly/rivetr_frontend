@@ -50,6 +50,9 @@ body {
 }
 a {
   text-decoration: none;
+  &:hover {
+    cursor: pointer;
+  }
 }
 input {
   border: 1px solid darken($grey, 2%);
@@ -127,7 +130,6 @@ nav {
       &::before {
         max-width: 100%;
       }
-      cursor: pointer;
       color: $pink;
       @include transition(color 1s);
     }
@@ -537,6 +539,12 @@ nav {
     color: $grey;
   }
 }
+.window-top {
+  text-align: center;
+  font-family: $accent-font;
+  font-weight: 700;
+  color: darken($grey, 30%);
+}
 .content-container {
   width: 100%;
   margin-top: 26vh;
@@ -547,6 +555,7 @@ nav {
 .sidebar-container {
   width: 30%;
   min-height: calc(100vh - 26vh - 8vh);
+  max-height: 90vh;
   margin-top: 8vh;
   padding: 49px 20px;
   box-sizing: border-box;
@@ -554,6 +563,7 @@ nav {
   .sidebar-buttons {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 15px;
     .btn {
       width: 40%;
       padding: 10px;
@@ -564,6 +574,71 @@ nav {
       color: $grey;
       &:hover {
         cursor: pointer;
+      }
+    }
+  }
+  .sidebar-bio {
+    h3 {
+      font-family: $accent-font;
+      text-transform: uppercase;
+      font-size: 22px;
+      color: $faded-purp;
+      padding: 10px;
+      border-bottom: 1px solid $grey;
+    }
+    p {
+      font-size: 13px;
+      font-weight: 300;
+      padding: 10px;
+    }
+  }
+  .sidebar-follow {
+    .sidebar-follow-links {
+      display: flex;
+      justify-content: space-between;
+      font-family: $accent-font;
+      text-transform: uppercase;
+      font-size: 22px;
+      border-bottom: 1px solid $grey;
+      padding: 10px;
+      a {
+        color: $faded-purp;
+        &.selected {
+          font-weight: 700;
+        }
+      }
+    }
+    .sidebar-followers-container {
+      padding: 10px;
+      height: 50vh;
+      overflow: auto;
+      .sidebar-followers {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+      }
+      .follow-img {
+        width: 50px;
+        height: 50px;
+        border-radius: 3px;
+      }
+      .follow-info {
+        width: calc(100% - 70px);
+        font-size: 13px;
+        font-style: italic;
+        color: darken($grey, 30%);
+        a {
+          @include transition(0.5s ease-in);
+          &:hover {
+            color: $blue;
+            @include transition(0.5s ease-in);
+          }
+        }
+      }
+      h3 {
+        font-size: 17px;
+        font-style: normal;
+        color: $pink;
       }
     }
   }
@@ -595,8 +670,10 @@ nav {
       @include transition (0.2s ease-in);
       &:hover {
         color: $faded-purp;
-        cursor: pointer;
         @include transition (0.2s ease-in);
+      }
+      &.selected {
+          color: $faded-purp;
       }
     }
   }
@@ -633,7 +710,7 @@ nav {
     .rivs-actions {
       color: darken($grey, 30%);
       width: 50%;
-      margin-top: 7px;
+      margin-top: 10px;
       display: flex;
       justify-content: space-between;
       i {

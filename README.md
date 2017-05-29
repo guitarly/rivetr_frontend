@@ -14,7 +14,7 @@
 
 # TECHNOLOGICAL .
 
-**FRONTEND:** AngularJS, Node/Express, Socket.io, HTML/SCSS
+**FRONTEND:** AngularJS, Node/Express, <a href="https://github.com/oblador/angular-scroll">Angular-Scroll</a>, HTML/SCSS
 
 **BACKEND:** Ruby on Rails, POSTGRESQL
 

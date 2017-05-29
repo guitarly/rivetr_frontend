@@ -16,6 +16,8 @@ body {
 
 a {
   text-decoration: none; }
+  a:hover {
+    cursor: pointer; }
 
 input {
   border: 1px solid #e4e4e4;
@@ -95,7 +97,6 @@ nav {
       -webkit-transition: max-width 0.5s;
       -o-transition: max-width 0.5s; }
     nav a:hover {
-      cursor: pointer;
       color: #E52A6F;
       transition: color 1s;
       -moz-transition: color 1s;
@@ -478,6 +479,12 @@ nav {
     text-shadow: 1px 1px #675682;
     color: #E9E9E9; }
 
+.window-top {
+  text-align: center;
+  font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
+  font-weight: 700;
+  color: #9d9d9d; }
+
 .content-container {
   width: 100%;
   margin-top: 26vh;
@@ -488,13 +495,15 @@ nav {
 .sidebar-container {
   width: 30%;
   min-height: calc(100vh - 26vh - 8vh);
+  max-height: 90vh;
   margin-top: 8vh;
   padding: 49px 20px;
   box-sizing: border-box;
   background: whitesmoke; }
   .sidebar-container .sidebar-buttons {
     display: flex;
-    justify-content: space-between; }
+    justify-content: space-between;
+    margin-bottom: 15px; }
     .sidebar-container .sidebar-buttons .btn {
       width: 40%;
       padding: 10px;
@@ -505,6 +514,61 @@ nav {
       color: #E9E9E9; }
       .sidebar-container .sidebar-buttons .btn:hover {
         cursor: pointer; }
+  .sidebar-container .sidebar-bio h3 {
+    font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
+    text-transform: uppercase;
+    font-size: 22px;
+    color: #675682;
+    padding: 10px;
+    border-bottom: 1px solid #E9E9E9; }
+  .sidebar-container .sidebar-bio p {
+    font-size: 13px;
+    font-weight: 300;
+    padding: 10px; }
+  .sidebar-container .sidebar-follow .sidebar-follow-links {
+    display: flex;
+    justify-content: space-between;
+    font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
+    text-transform: uppercase;
+    font-size: 22px;
+    border-bottom: 1px solid #E9E9E9;
+    padding: 10px; }
+    .sidebar-container .sidebar-follow .sidebar-follow-links a {
+      color: #675682; }
+      .sidebar-container .sidebar-follow .sidebar-follow-links a.selected {
+        font-weight: 700; }
+  .sidebar-container .sidebar-follow .sidebar-followers-container {
+    padding: 10px;
+    height: 50vh;
+    overflow: auto; }
+    .sidebar-container .sidebar-follow .sidebar-followers-container .sidebar-followers {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px; }
+    .sidebar-container .sidebar-follow .sidebar-followers-container .follow-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 3px; }
+    .sidebar-container .sidebar-follow .sidebar-followers-container .follow-info {
+      width: calc(100% - 70px);
+      font-size: 13px;
+      font-style: italic;
+      color: #9d9d9d; }
+      .sidebar-container .sidebar-follow .sidebar-followers-container .follow-info a {
+        transition: 0.5s ease-in;
+        -moz-transition: 0.5s ease-in;
+        -webkit-transition: 0.5s ease-in;
+        -o-transition: 0.5s ease-in; }
+        .sidebar-container .sidebar-follow .sidebar-followers-container .follow-info a:hover {
+          color: #67AECA;
+          transition: 0.5s ease-in;
+          -moz-transition: 0.5s ease-in;
+          -webkit-transition: 0.5s ease-in;
+          -o-transition: 0.5s ease-in; }
+    .sidebar-container .sidebar-follow .sidebar-followers-container h3 {
+      font-size: 17px;
+      font-style: normal;
+      color: #E52A6F; }
 
 .rivs-container {
   width: 50%;
@@ -535,11 +599,12 @@ nav {
       -o-transition: 0.2s ease-in; }
       .rivs-container .rivs-filters a:hover {
         color: #675682;
-        cursor: pointer;
         transition: 0.2s ease-in;
         -moz-transition: 0.2s ease-in;
         -webkit-transition: 0.2s ease-in;
         -o-transition: 0.2s ease-in; }
+      .rivs-container .rivs-filters a.selected {
+        color: #675682; }
   .rivs-container .rivs {
     width: 100%;
     margin: 20px 0;
@@ -568,7 +633,7 @@ nav {
     .rivs-container .rivs .rivs-actions {
       color: #9d9d9d;
       width: 50%;
-      margin-top: 7px;
+      margin-top: 10px;
       display: flex;
       justify-content: space-between; }
       .rivs-container .rivs .rivs-actions i {

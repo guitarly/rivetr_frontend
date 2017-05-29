@@ -10,10 +10,8 @@
           angular.element($window).bind("scroll", function() {
               if (this.pageYOffset >= 100) {
                    scope.fullHeader = false;
-                   console.log('Scrolled below header.');
                } else {
                    scope.fullHeader = true;
-                   console.log('Header is in view.');
                }
               scope.$apply();
           });
@@ -23,7 +21,7 @@
   // ================================================
   //               PROFILE PAGE CTRL               //
   // ================================================
-  app.controller('ProfileCtrl', ['$http', '$scope', '$rootScope', function($http, $scope, $rootScope){
+  app.controller('ProfileCtrl', ['$http', '$scope', '$rootScope', '$location', '$document', function($http, $scope, $rootScope, $location, $document){
 
     // =========== CONTROLLER VARIABLES =============
     const landing = this;
@@ -40,7 +38,7 @@
     this.showDelete = false;
 
     // toggle switch
-    this.modalToggle = function(modal) {
+    this.modalToggle = function(modal, index) {
       switch(modal) {
         case 'edit':
           this.showEdit = !this.showEdit;
@@ -48,7 +46,61 @@
         case 'delete':
           this.showDelete = !this.showDelete;
           break;
+        case 'image':
+          this.showFullImage = !this.showFullImage;
+          break;
       }
+    }
+
+    // ================= RIVS ======================
+    // default variables
+    this.personal = true;
+    this.replies = false;
+    this.corrections = false;
+
+    // toggle type of riv
+    this.toggleRivs = function(riv) {
+      switch(riv) {
+        case 'personal':
+          this.personal = true;
+          this.replies = false;
+          this.corrections = false;
+          break;
+        case 'replies':
+          this.personal = false;
+          this.replies = true;
+          this.corrections = false;
+          break;
+        case 'corrections':
+          this.personal = false;
+          this.replies = false;
+          this.corrections = true;
+      }
+    }
+
+    // ================= SIDEBAR ===================
+    // default variables
+    this.followers = true;
+    this.following = false;
+
+    // toggle follower/following
+    this.toggleFollow = function(follow) {
+      switch(follow) {
+        case 'followers':
+          this.followers = true;
+          this.following = false;
+          break;
+        case 'following':
+          this.followers = false;
+          this.following = true;
+          break;
+      }
+    }
+
+    // ========== ETC. DOM MANIPULATION ============
+    // scrolls window back to top
+    this.goToTop = function() {
+      $document.scrollTop(0, 500);
     }
 
     // ============ LOGOUT AND SESSIONS ============

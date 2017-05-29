@@ -54,14 +54,14 @@ a {
     cursor: pointer;
   }
 }
-input {
+input, textarea {
   border: 1px solid darken($grey, 2%);
   padding: 10px;
   margin: 5px;
   border-radius: 3px;
   background: whitesmoke;
 }
-input:focus {
+input:focus, textarea:focus {
   outline: none;
   border: 1px solid lighten($faded-purp, 25%);
 }
@@ -667,11 +667,6 @@ nav {
       font-weight: 300;
       font-size: 22px;
       text-transform: uppercase;
-      @include transition (0.2s ease-in);
-      &:hover {
-        color: $faded-purp;
-        @include transition (0.2s ease-in);
-      }
       &.selected {
           color: $faded-purp;
       }
@@ -684,6 +679,7 @@ nav {
     border-bottom: 1px solid $grey;
     display: flex;
     justify-content: space-between;
+    flex-flow: row wrap;
     .rivs-user-img {
       width: 60px;
       height: 60px;
@@ -705,6 +701,30 @@ nav {
       span {
         color: #aaa;
         font-size: 13px;
+      }
+    }
+    .rivs-reply, .rivs-correction {
+      width: 100%;
+      margin-top: 10px;
+      textarea {
+        resize: none;
+        width: 93%;
+        height: 6vh;
+        border: 1px solid darken($grey, 10%);
+        margin-bottom: 0px;
+      }
+      input[type="submit"] {
+        background: $pink;
+        width: 97.5%;
+        margin-top: 0px;
+        font-family: $accent-font;
+        font-size: 15px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: $grey;
+        &:focus {
+          border: 1px solid $pink;
+        }
       }
     }
     .rivs-actions {

@@ -59,8 +59,8 @@
     this.corrections = false;
 
     // toggle type of riv
-    this.toggleRivs = function(riv) {
-      switch(riv) {
+    this.toggleRivs = function(filter) {
+      switch(filter) {
         case 'personal':
           this.personal = true;
           this.replies = false;
@@ -78,6 +78,19 @@
       }
     }
 
+    // toggle riv actions
+    this.toggleAction = function(action, riv) {
+      switch(action) {
+        case 'reply':
+          riv.replyBox = riv.replyBox === true ? false:true;
+          riv.correctionBox = false;
+          break;
+        case 'correction':
+          riv.correctionBox = riv.correctionBox === true ? false:true;
+          riv.replyBox = false;
+          break;
+      }
+    }
     // ================= SIDEBAR ===================
     // default variables
     this.followers = true;

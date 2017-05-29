@@ -19,14 +19,14 @@ a {
   a:hover {
     cursor: pointer; }
 
-input {
+input, textarea {
   border: 1px solid #e4e4e4;
   padding: 10px;
   margin: 5px;
   border-radius: 3px;
   background: whitesmoke; }
 
-input:focus {
+input:focus, textarea:focus {
   outline: none;
   border: 1px solid #a89bbd; }
 
@@ -592,17 +592,7 @@ nav {
       font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
       font-weight: 300;
       font-size: 22px;
-      text-transform: uppercase;
-      transition: 0.2s ease-in;
-      -moz-transition: 0.2s ease-in;
-      -webkit-transition: 0.2s ease-in;
-      -o-transition: 0.2s ease-in; }
-      .rivs-container .rivs-filters a:hover {
-        color: #675682;
-        transition: 0.2s ease-in;
-        -moz-transition: 0.2s ease-in;
-        -webkit-transition: 0.2s ease-in;
-        -o-transition: 0.2s ease-in; }
+      text-transform: uppercase; }
       .rivs-container .rivs-filters a.selected {
         color: #675682; }
   .rivs-container .rivs {
@@ -611,7 +601,8 @@ nav {
     padding-bottom: 20px;
     border-bottom: 1px solid #E9E9E9;
     display: flex;
-    justify-content: space-between; }
+    justify-content: space-between;
+    flex-flow: row wrap; }
     .rivs-container .rivs .rivs-user-img {
       width: 60px;
       height: 60px;
@@ -630,6 +621,26 @@ nav {
       .rivs-container .rivs .rivs-content span {
         color: #aaa;
         font-size: 13px; }
+    .rivs-container .rivs .rivs-reply, .rivs-container .rivs .rivs-correction {
+      width: 100%;
+      margin-top: 10px; }
+      .rivs-container .rivs .rivs-reply textarea, .rivs-container .rivs .rivs-correction textarea {
+        resize: none;
+        width: 93%;
+        height: 6vh;
+        border: 1px solid #d0d0d0;
+        margin-bottom: 0px; }
+      .rivs-container .rivs .rivs-reply input[type="submit"], .rivs-container .rivs .rivs-correction input[type="submit"] {
+        background: #E52A6F;
+        width: 97.5%;
+        margin-top: 0px;
+        font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #E9E9E9; }
+        .rivs-container .rivs .rivs-reply input[type="submit"]:focus, .rivs-container .rivs .rivs-correction input[type="submit"]:focus {
+          border: 1px solid #E52A6F; }
     .rivs-container .rivs .rivs-actions {
       color: #9d9d9d;
       width: 50%;

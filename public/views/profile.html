@@ -103,10 +103,25 @@
           <div ng-if="riv.photo" class="rivs-photo" style="background: url('{{riv.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
           <div class="rivs-actions">
             <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-reply" aria-hidden="true"></i>
-            <i class="fa fa-wrench" aria-hidden="true"></i>
+            <i class="fa fa-reply" aria-hidden="true" ng-click="vm.toggleAction('reply', riv)"></i>
+            <i class="fa fa-wrench" aria-hidden="true"  ng-click="vm.toggleAction('correction', riv)"></i>
             <i class="fa fa-globe" aria-hidden="true"></i>
+            <i class="fa fa-trash" aria-hidden="true"></i>
           </div>
+        </div>
+        <!-- ==== REPLY BOX ======================== -->
+        <div class="rivs-reply" ng-if="riv.replyBox">
+          <form>
+            <textarea></textarea>
+            <input type="submit" value="reply" />
+          </form>
+        </div>
+        <!-- ==== CORRECTION BOX =================== -->
+        <div class="rivs-correction" ng-if="riv.correctionBox">
+          <form>
+            <textarea>{{riv.content}}</textarea>
+            <input type="submit" value="correct" />
+          </form>
         </div>
       </div>
       <!-- ======= RETURN TO TOP =================== -->

@@ -44,6 +44,21 @@
       }.bind(this))
     }
 
+    // to edit user
+    this.editUser = function(){
+      this.profileUser.username = this.profileUser.username.toLowerCase();
+      $http({
+        method: 'PUT',
+        url: URL + 'users/' + this.profileUser.id,
+        data: this.profileUser,
+        headers: {
+          'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token'))
+        }
+      }).then(function(response){
+          $location.path('/' + response.data.username);
+      }.bind(this));
+    };
+
     // to delete user
     this.deleteUser = function() {
       if(this.profileUser.id === $rootScope.currentUser.id) {

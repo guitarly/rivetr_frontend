@@ -366,6 +366,12 @@
       $document.scrollTop(0, 500);
     }
 
+    // goes to index page
+    this.indexPage = function() {
+      console.log('index page');
+      $location.url('/');
+    }
+    
     // ============ LOGOUT AND SESSIONS ============
     // to logout
     this.logout = function(){

@@ -1,0 +1,98 @@
+<!-- ================= NAVIGATION ================= -->
+<section ng-include="'../partials/navbar.html'"></section>
+<div class="home-nav"></div>
+
+<!-- ============== START HOME PG ================= -->
+<section class="home-container">
+
+  <!-- ============ USER STATS ==================== -->
+  <div class="user-stats">
+    <h3>{{currentUser.display_name}}</h3>
+    <div class="user-content">
+      <div class="user-img" style="background:url('{{currentUser.profile_photo}}'); background-size:cover;background-position:center"></div>
+      <div class="user-num">
+        <div class="row">
+          <span>
+            <strong>learning</strong>
+            {{currentUser.language_learning}}
+          </span>
+          <span>
+            <strong>known</strong>
+            {{currentUser.language_known}}
+          </span>
+        </div>
+        <div class="row">
+          <span>
+            <strong>followers</strong>
+            {{currentUser.follower_follows.length}}
+          </span>
+          <span>
+            <strong>following</strong>
+            {{currentUser.followed_follows.length}}
+          </span>
+        </div>
+      </div>
+    </div>
+    <h3>ABOUT</h3>
+    <span>{{currentUser.biography}}</span>
+  </div>
+
+  <!-- ============ TIMELINE ====================== -->
+  <div class="timeline">
+    <div class="rivs" ng-repeat="riv in compiledRivs | orderBy: '-riv.created_at'">
+      <div class="rivs-user-img" style="
+        background:url('{{riv.user.profile_photo}}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;">
+      </div>
+      <div class="rivs-content">
+        <strong>{{riv.user.display_name || riv.user.username}}</strong> <span ng-hide="">@{{riv.user.username}}</span><br />
+        {{riv.riv.content}}
+        <div ng-if="riv.riv.photo" class="rivs-photo" style="background: url('{{riv.riv.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;" ng-click="vm.modalToggle('image', riv)"></div>
+        <div class="rivs-actions">
+          <i class="fa fa-star" aria-hidden="true" ng-click="vm.favoriteRivReply('riv', currentUser.id, riv)" ng-class="{'liked': riv.liked}"></i>
+          <i class="fa fa-reply" aria-hidden="true" ng-click="vm.toggleAction('reply', riv)"></i>
+          <i class="fa fa-wrench" aria-hidden="true"  ng-click="vm.toggleAction('correction', riv)"></i>
+          <i class="fa fa-globe" aria-hidden="true" ng-click="vm.toggleAction('translate', riv)"></i>
+          <i class="fa fa-trash" aria-hidden="true" ng-if="vm.isCurrentUser" ng-click="vm.deleteOneRiv(riv.id)"></i>
+        </div>
+      </div>
+      <!-- ==== REPLY BOX ======================== -->
+      <div class="rivs-reply" ng-if="riv.replyBox">
+        <form ng-submit="vm.sendReply('reply', currentUser.id, riv)">
+          <textarea ng-model="vm.replyData.content"></textarea>
+          <input type="submit" value="reply" />
+        </form>
+      </div>
+      <!-- ==== CORRECTION BOX =================== -->
+      <div class="rivs-correction" ng-if="riv.correctionBox">
+        <form ng-submit="vm.sendReply('correction', currentUser.id, riv)">
+          <textarea ng-model="vm.correctionData.content"></textarea>
+          <input type="submit" value="correct" />
+        </form>
+      </div>
+      <!-- ==== TRANSLATION BOX ================== -->
+      <div class="rivs-translation" ng-if="riv.translationBox">
+        <form>
+          <textarea>{{riv.riv.content}}</textarea>
+          <center>
+            <strong>translate from</strong>
+            <select>
+              <option>language</option>
+            </select>
+            <strong>translate to</strong>
+            <select>
+              <option>language</option>
+            </select>
+          </center>
+          <input type="submit" value="translate" />
+        </form>
+      </div>
+    </div>
+    <div class="window-top">
+      <a ng-click="vm.goToTop();">GO BACK TO TOP</a>
+    </div>
+  </div>
+<!-- ============== END HOME PG =================== -->
+</section>

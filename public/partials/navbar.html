@@ -1,7 +1,7 @@
 <!-- ================= NAVIGATION ================= -->
 <nav>
   <!-- =============== LOGO ================ -->
-  <section class="logo">
+  <section class="logo" ng-click="vm.indexPage()">
     <?xml version='1.0' encoding='iso-8859-1'?>
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 470 470" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 470 470">
       <g>
@@ -18,7 +18,8 @@
     <ul>
       <li ng-if="!currentUser"><a ng-click="vm.modalToggle('register');" data-hover="register">register</a></li>
       <li ng-if="!currentUser"><a ng-click="vm.modalToggle('login');" data-hover="login">login</a></li>
-      <li ng-if="currentUser"><a href="" data-hover="home">home</a></li>
+      <li ng-if="currentUser"><a ng-href="#!/h/home" data-hover="home">home</a></li>
+      <li ng-if="currentUser"><a ng-href="#!/{{currentUser.username}}" data-hover="profile">profile</a></li>
       <li ng-if="currentUser"><a data-hover="messages">messages</a></li>
       <li ng-if="currentUser"><a ng-click="vm.logout();" data-hover="logout">logout</a></li>
       <li><a href="https://github.com/jlboba/rivetr_frontend" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></li>

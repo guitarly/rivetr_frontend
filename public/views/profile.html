@@ -212,8 +212,9 @@
           background-position: center;
           background-repeat: no-repeat;" ng-click="vm.modalToggle('image', $index)">
         </div>
-        <div class="rivs-content">
+        <div class="rivs-content correction">
           <strong>{{vm.profileUser.display_name || vm.profileUser.username}}</strong> <span>@{{vm.profileUser.username}}</span><br />
+          <s>{{correction.riv.content}}</s><br />
           {{correction.content}}
           <div ng-if="correction.photo" class="rivs-photo" style="background: url('{{correction.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;" ng-click="vm.modalToggle('image', correction)"></div>
           <div class="rivs-actions">

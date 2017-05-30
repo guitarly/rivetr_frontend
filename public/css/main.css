@@ -675,6 +675,10 @@ nav {
       .rivs-container .rivs .rivs-content span {
         color: #aaa;
         font-size: 13px; }
+    .rivs-container .rivs .correction {
+      color: #67AECA; }
+      .rivs-container .rivs .correction s {
+        color: #E52A6F; }
     .rivs-container .rivs .rivs-reply, .rivs-container .rivs .rivs-correction, .rivs-container .rivs .rivs-translation {
       width: 100%;
       margin-top: 10px; }

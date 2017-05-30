@@ -754,6 +754,12 @@ nav {
         font-size: 13px;
       }
     }
+    .correction {
+      color: $blue;
+      s {
+        color: $pink;
+      }
+    }
     .rivs-reply, .rivs-correction, .rivs-translation {
       width: 100%;
       margin-top: 10px;

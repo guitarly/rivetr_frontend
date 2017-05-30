@@ -745,7 +745,7 @@ nav {
       @include for-medium {
         width: 85%;
       }
-      strong {
+      strong, strong a {
         color: $faded-purp;
         font-size: 13px;
       }

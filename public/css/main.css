@@ -716,17 +716,10 @@ nav {
       margin-top: 10px;
       display: flex;
       justify-content: space-between; }
-      .rivs-container .rivs .rivs-actions i {
-        transition: 0.2s ease-in;
-        -moz-transition: 0.2s ease-in;
-        -webkit-transition: 0.2s ease-in;
-        -o-transition: 0.2s ease-in; }
-        .rivs-container .rivs .rivs-actions i:hover {
-          color: #5F0F4E;
-          cursor: pointer;
-          transition: 0.2s ease-in;
-          -moz-transition: 0.2s ease-in;
-          -webkit-transition: 0.2s ease-in;
-          -o-transition: 0.2s ease-in; }
+      .rivs-container .rivs .rivs-actions i:hover {
+        color: #5F0F4E;
+        cursor: pointer; }
+      .rivs-container .rivs .rivs-actions i.liked {
+        color: #5F0F4E; }
 
 /*# sourceMappingURL=main.css.map */

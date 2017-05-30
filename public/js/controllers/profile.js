@@ -45,6 +45,18 @@
                 landing.followed = true;
               }
             });
+            $rootScope.currentUser.likes.forEach(function(liked) {
+              landing.profileUser.rivs.forEach(function(riv) {
+                if(liked.riv_id === riv.id) {
+                  riv.liked = true;
+                }
+              })
+              landing.profileUser.replies.forEach(function(reply) {
+                if(liked.reply_id === reply.id) {
+                  reply.liked = true;
+                }
+              })
+            })
           }
       }.bind(this))
     }
@@ -170,6 +182,48 @@
         }).then(function(response) {
             location.reload();
         })
+      }
+    }
+
+    // to delete a single reply
+    this.deleteOneReply = function(id) {
+      if(this.profileUser.id === $rootScope.currentUser.id) {
+        $http({
+          method: 'DELETE',
+          url: URL + 'replies/' + id
+        }).then(function(response) {
+            location.reload();
+        })
+      }
+    }
+
+    // to favorite a riv/reply
+    this.favoriteRivReply = function(type, user, riv) {
+      switch(type) {
+        case 'riv':
+          $http({
+            method: 'POST',
+            url: URL + 'likes',
+            data: {
+              user_id: user,
+              riv_id: riv.id
+            }
+          }).then(function(response) {
+            riv.liked = true;
+          })
+          break;
+        case 'reply':
+          $http({
+            method: 'POST',
+            url: URL + 'likes',
+            data: {
+              user_id: user,
+              reply_id: riv.id
+            }
+          }).then(function(response) {
+              riv.liked = true;
+          })
+          break;
       }
     }
 

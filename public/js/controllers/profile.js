@@ -61,7 +61,7 @@
       }
     };
 
-    // to start delete chain
+    // to start delete user chain
     this.deleteChain = function() {
       if(this.profileUser.id === $rootScope.currentUser.id) {
         this.deleteFollows();
@@ -92,7 +92,7 @@
       }
     }
 
-    // to delete rivs
+    // to delete all rivs
     this.deleteRivs = function() {
       if(this.profileUser.rivs.length > 0) {
         this.profileUser.rivs.forEach(function(riv) {
@@ -154,6 +154,18 @@
       }).then(function(response) {
           location.reload();
       })
+    }
+
+    // to delete a single riv
+    this.deleteOneRiv = function(id) {
+      if(this.profileUser.id === $rootScope.currentUser.id) {
+        $http({
+          method: 'DELETE',
+          url: URL + 'rivs/' + id
+        }).then(function(response) {
+            location.reload();
+        })
+      }
     }
 
     // ============ MODAL DE/ACTIVATION =============

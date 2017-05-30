@@ -86,7 +86,7 @@
             <div class="follow-img" style="background: url('{{follower.follower.profile_photo}}'); background-size: cover; background-position: center;"></div>
             <div class="follow-info">
               <h3><a ng-href="http://localhost:8000/#!/{{follower.follower.username}}">{{follower.follower.display_name}}</a></h3>
-              @ {{follower.follower.username}}
+              @{{follower.follower.username}}
             </div>
           </div>
           <!-- === FOLLOWING ======================= -->
@@ -132,15 +132,15 @@
         </div>
         <!-- ==== REPLY BOX ======================== -->
         <div class="rivs-reply" ng-if="riv.replyBox">
-          <form>
-            <textarea></textarea>
+          <form ng-submit="vm.sendReply('reply', currentUser.id, riv)">
+            <textarea ng-model="vm.replyData.content"></textarea>
             <input type="submit" value="reply" />
           </form>
         </div>
         <!-- ==== CORRECTION BOX =================== -->
         <div class="rivs-correction" ng-if="riv.correctionBox">
-          <form>
-            <textarea>{{riv.content}}</textarea>
+          <form ng-submit="vm.sendReply('correction', currentUser.id, riv)">
+            <textarea ng-model="vm.correctionData.content">{{riv.content}}</textarea>
             <input type="submit" value="correct" />
           </form>
         </div>

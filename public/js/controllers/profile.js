@@ -227,6 +227,41 @@
       }
     }
 
+    // to send a reply
+    this.sendReply = function(type, user, riv) {
+      switch(type) {
+        case 'reply':
+          $http({
+            method: 'POST',
+            url: URL + 'replies',
+            data: {
+              user_id: user,
+              riv_id: riv.id,
+              content: landing.replyData.content,
+              photo: landing.replyData.photo
+            }
+          }).then(function(response) {
+              riv.replied = true;
+          });
+          break;
+        case 'correction':
+          $http({
+            method: 'POST',
+            url: URL + 'replies',
+            data: {
+              user_id: user,
+              riv_id: riv.id,
+              content: landing.correctionData.content,
+              photo: landing.correctionData.photo,
+              correction: true
+            }
+          }).then(function(response) {
+              riv.corrected = true;
+          });
+          break;
+      }
+    }
+
     // ============ MODAL DE/ACTIVATION =============
     // default variables
     this.showEdit = false;

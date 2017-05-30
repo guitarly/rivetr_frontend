@@ -37,9 +37,26 @@
         url: URL + $routeParams.username
       }).then(function(result) {
           this.profileUser = result.data;
-          console.log(this.profileUser);
           if(this.profileUser.id === $rootScope.currentUser.id) {
             this.isCurrentUser = true;
+          } else {
+            $rootScope.currentUser.followed_follows.forEach(function(followed) {
+              if(followed.followed.id === landing.profileUser.id) {
+                landing.followed = true;
+              }
+            });
+            $rootScope.currentUser.likes.forEach(function(liked) {
+              landing.profileUser.rivs.forEach(function(riv) {
+                if(liked.riv_id === riv.id) {
+                  riv.liked = true;
+                }
+              })
+              landing.profileUser.replies.forEach(function(reply) {
+                if(liked.reply_id === reply.id) {
+                  reply.liked = true;
+                }
+              })
+            })
           }
       }.bind(this))
     }
@@ -61,7 +78,7 @@
       }
     };
 
-    // to start delete chain
+    // to start delete user chain
     this.deleteChain = function() {
       if(this.profileUser.id === $rootScope.currentUser.id) {
         this.deleteFollows();
@@ -92,7 +109,7 @@
       }
     }
 
-    // to delete rivs
+    // to delete all rivs
     this.deleteRivs = function() {
       if(this.profileUser.rivs.length > 0) {
         this.profileUser.rivs.forEach(function(riv) {
@@ -154,6 +171,95 @@
       }).then(function(response) {
           location.reload();
       })
+    }
+
+    // to delete a single riv
+    this.deleteOneRiv = function(id) {
+      if(this.profileUser.id === $rootScope.currentUser.id) {
+        $http({
+          method: 'DELETE',
+          url: URL + 'rivs/' + id
+        }).then(function(response) {
+            location.reload();
+        })
+      }
+    }
+
+    // to delete a single reply
+    this.deleteOneReply = function(id) {
+      if(this.profileUser.id === $rootScope.currentUser.id) {
+        $http({
+          method: 'DELETE',
+          url: URL + 'replies/' + id
+        }).then(function(response) {
+            location.reload();
+        })
+      }
+    }
+
+    // to favorite a riv/reply
+    this.favoriteRivReply = function(type, user, riv) {
+      switch(type) {
+        case 'riv':
+          $http({
+            method: 'POST',
+            url: URL + 'likes',
+            data: {
+              user_id: user,
+              riv_id: riv.id
+            }
+          }).then(function(response) {
+            riv.liked = true;
+          })
+          break;
+        case 'reply':
+          $http({
+            method: 'POST',
+            url: URL + 'likes',
+            data: {
+              user_id: user,
+              reply_id: riv.id
+            }
+          }).then(function(response) {
+              riv.liked = true;
+          })
+          break;
+      }
+    }
+
+    // to send a reply
+    this.sendReply = function(type, user, riv) {
+      switch(type) {
+        case 'reply':
+          $http({
+            method: 'POST',
+            url: URL + 'replies',
+            data: {
+              user_id: user,
+              riv_id: riv.id,
+              content: landing.replyData.content,
+              photo: landing.replyData.photo
+            }
+          }).then(function(response) {
+              riv.replied = true;
+          });
+          break;
+        case 'correction':
+          $http({
+            method: 'POST',
+            url: URL + 'replies',
+            data: {
+              user_id: user,
+              riv_id: riv.id,
+              content: landing.correctionData.content,
+              photo: landing.correctionData.photo,
+              correction: true
+            }
+          }).then(function(response) {
+              riv.corrected = true;
+          });
+          break;
+      }
     }
 
     // ============ MODAL DE/ACTIVATION =============

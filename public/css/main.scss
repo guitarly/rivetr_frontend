@@ -676,7 +676,7 @@ nav {
         }
       }
       h3 {
-        font-size: 17px;
+        font-size: 15px;
         font-style: normal;
         color: $pink;
       }
@@ -754,6 +754,12 @@ nav {
         font-size: 13px;
       }
     }
+    .correction {
+      color: $blue;
+      s {
+        color: $pink;
+      }
+    }
     .rivs-reply, .rivs-correction, .rivs-translation {
       width: 100%;
       margin-top: 10px;
@@ -803,11 +809,12 @@ nav {
       display: flex;
       justify-content: space-between;
       i {
-        @include transition (0.2s ease-in);
         &:hover {
           color: $purple;
           cursor: pointer;
-          @include transition (0.2s ease-in);
+        }
+        &.liked {
+          color: $purple;
         }
       }
     }

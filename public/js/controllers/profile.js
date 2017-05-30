@@ -37,9 +37,14 @@
         url: URL + $routeParams.username
       }).then(function(result) {
           this.profileUser = result.data;
-          console.log(this.profileUser);
           if(this.profileUser.id === $rootScope.currentUser.id) {
             this.isCurrentUser = true;
+          } else {
+            $rootScope.currentUser.followed_follows.forEach(function(followed) {
+              if(followed.followed.id === landing.profileUser.id) {
+                landing.followed = true;
+              }
+            });
           }
       }.bind(this))
     }

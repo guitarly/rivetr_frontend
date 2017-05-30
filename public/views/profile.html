@@ -51,8 +51,11 @@
           DELETE PROFILE
         </div>
         <!-- ====== IF NOT USER ====================== -->
-        <div class="btn" ng-if="!vm.isCurrentUser" ng-click="vm.followUser(currentUser.id, vm.profileUser.id)">
+        <div class="btn" ng-if="!vm.isCurrentUser && !vm.followed" ng-click="vm.followUser(currentUser.id, vm.profileUser.id)">
           FOLLOW
+        </div>
+        <div class="btn" ng-if="!vm.isCurrentUser && vm.followed" ng-click="vm.unfollowUser(currentUser.id, vm.profileUser.id)">
+          UNFOLLOW
         </div>
         <div class="btn" ng-if="!vm.isCurrentUser">
           MESSAGE

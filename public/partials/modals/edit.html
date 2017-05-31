@@ -20,8 +20,16 @@
         <input type="text" ng-model="vm.profileUser.display_name" placeholder="DISPLAY NAME">
         <input type="text" ng-model="vm.profileUser.profile_photo" placeholder="PROFILE PHOTO">
         <h1>user details</h1>
-        <input type="text" ng-model="vm.profileUser.language_learning" placeholder="LANGUAGE LEARNING">
-        <input type="text" ng-model="vm.profileUser.language_known" placeholder="LANGUAGE KNOWN">
+        <section class="languages">
+          <strong>LANGUAGE LEARNING</strong>
+          <select ng-model="vm.profileUser.language_learning">
+            <option ng-repeat="lang in vm.languages" value="{{lang.languageName}}">{{lang.languageName}}</option>
+          </select><br/>
+          <strong>LANGUAGE KNOWN</strong>
+          <select ng-model="vm.profileUser.language_known">
+            <option ng-repeat="lang in vm.languages" value="{{lang.languageName}}">{{lang.languageName}}</option>
+          </select>
+        </section>
         <input type="text" ng-model="vm.profileUser.biography" placeholder="A SHORT BIO" /><br />
         <input type="submit" value="edit" />
       </form>

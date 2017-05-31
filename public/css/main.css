@@ -677,13 +677,13 @@ nav {
     .rivs .rivs-content strong, .rivs .rivs-content strong a {
       color: #675682;
       font-size: 13px; }
-    .rivs .rivs-content span {
+    .rivs .rivs-content span.at-user {
       color: #aaa;
       font-size: 13px; }
-  .rivs .correction {
+  .rivs s.correction {
+    color: #E52A6F; }
+  .rivs span.correction {
     color: #67AECA; }
-    .rivs .correction s {
-      color: #E52A6F; }
   .rivs .rivs-reply, .rivs .rivs-correction, .rivs .rivs-translation {
     width: 100%;
     margin-top: 10px; }

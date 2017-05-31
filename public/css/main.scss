@@ -754,16 +754,16 @@ nav {
       color: $faded-purp;
       font-size: 13px;
     }
-    span {
+    span.at-user {
       color: #aaa;
       font-size: 13px;
     }
   }
-  .correction {
+  s.correction {
+    color: $pink;
+  }
+  span.correction {
     color: $blue;
-    s {
-      color: $pink;
-    }
   }
   .rivs-reply, .rivs-correction, .rivs-translation {
     width: 100%;

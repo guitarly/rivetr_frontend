@@ -68,6 +68,8 @@
 
     // compiles the user's followers' rivs
     this.compileRivs = function() {
+      // clears previous compilation
+      $scope.compiledRivs = [];
       // pushes followed rivs
       $rootScope.currentUser.followed_follows.forEach(function(followed) {
         // regular
@@ -87,7 +89,11 @@
       $rootScope.currentUser.replies.forEach(function(reply) {
         $scope.compiledRivs.push({'riv': reply, 'user': $rootScope.currentUser, 'reply': true});
       });
-      console.log($scope.compiledRivs);
+    }
+
+    // refreshes data
+    this.refresh = function() {
+      this.sessionCheck();
     }
 
     // ============ AUTOMATIC FUNCTION CALLS =======

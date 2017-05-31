@@ -39,6 +39,7 @@
 
   <!-- ============ TIMELINE ====================== -->
   <div class="timeline">
+    <a ng-click="vm.refresh()">refresh</a>
     <div class="rivs" ng-repeat="riv in compiledRivs | orderBy: '-riv.created_at'">
       <div class="rivs-user-img" style="
         background:url('{{riv.user.profile_photo}}');
@@ -47,8 +48,18 @@
         background-repeat: no-repeat;">
       </div>
       <div class="rivs-content">
-        <strong>{{riv.user.display_name || riv.user.username}}</strong> <span ng-hide="">@{{riv.user.username}}</span><br />
-        {{riv.riv.content}}
+        <strong>{{riv.user.display_name || riv.user.username}}</strong> <span ng-if="!riv.reply" class="at-user">@{{riv.user.username}}</span>
+        <!-- if reply/correction -->
+        <!-- reply -->
+        <span ng-if="riv.reply && !riv.riv.correction" class="at-user">replied to</span>
+        <!-- correction -->
+        <span ng-if="riv.reply && riv.riv.correction" class="at-user">corrected</span>
+        <!-- replied to/corrected user -->
+        <strong ng-if="riv.reply">{{riv.riv.riv.user.username}}</strong><br />
+        <!-- original riv if correction -->
+        <s ng-if="riv.riv.correction" class="correction">{{riv.riv.riv.content}}</s> <br ng-if="riv.riv.correction" />
+        <!-- riv content -->
+        <span ng-class="{'correction': riv.riv.correction, 'normal': !riv.riv.correction}">{{riv.riv.content}}</span>
         <div ng-if="riv.riv.photo" class="rivs-photo" style="background: url('{{riv.riv.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;" ng-click="vm.modalToggle('image', riv)"></div>
         <div class="rivs-actions">
           <i class="fa fa-star" aria-hidden="true" ng-click="vm.favoriteRivReply('riv', currentUser.id, riv)" ng-class="{'liked': riv.liked}"></i>

@@ -18,7 +18,8 @@
         <div class="row">
           <span>
             <strong>LEARNING</strong>
-            {{vm.profileUser.language_learning}}</span>
+            {{vm.profileUser.language_learning}}
+          </span>
           <span>
             <strong>KNOWN</strong>
             {{vm.profileUser.language_known}}
@@ -54,7 +55,7 @@
         <div class="btn" ng-if="!vm.isCurrentUser && !vm.followed" ng-click="vm.followUser(currentUser.id, vm.profileUser.id)">
           FOLLOW
         </div>
-        <div class="btn" ng-if="!vm.isCurrentUser && vm.followed" ng-click="vm.unfollowUser(currentUser.id, vm.profileUser.id)">
+        <div class="btn" ng-if="!vm.isCurrentUser && vm.followed" ng-click="vm.unfollowUser()">
           UNFOLLOW
         </div>
         <div class="btn" ng-if="!vm.isCurrentUser">
@@ -119,7 +120,7 @@
           background-repeat: no-repeat;" ng-click="vm.modalToggle('image', $index)">
         </div>
         <div class="rivs-content">
-          <strong>{{vm.profileUser.display_name || vm.profileUser.username}}</strong> <span>@{{vm.profileUser.username}}</span><br />
+          <strong>{{vm.profileUser.display_name || vm.profileUser.username}}</strong> <span class="at-user">@{{vm.profileUser.username}}</span><br />
           {{riv.content}}
           <div ng-if="riv.photo" class="rivs-photo" style="background: url('{{riv.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;" ng-click="vm.modalToggle('image', riv)"></div>
           <div class="rivs-actions">
@@ -174,7 +175,7 @@
           background-repeat: no-repeat;" ng-click="vm.modalToggle('image', $index)">
         </div>
         <div class="rivs-content">
-          <strong>{{vm.profileUser.display_name || vm.profileUser.username}}</strong> <span>replied to</span> <strong><a ng-href="http://localhost:8000/#!/{{reply.riv.user.username}}">{{reply.riv.user.display_name}}</a></strong><br />
+          <strong>{{vm.profileUser.display_name || vm.profileUser.username}}</strong> <span class="at-user">replied to</span> <strong><a ng-href="http://localhost:8000/#!/{{reply.riv.user.username}}">{{reply.riv.user.display_name}}</a></strong><br />
           {{reply.content}}
           <div ng-if="reply.photo" class="rivs-photo" style="background: url('{{reply.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;" ng-click="vm.modalToggle('image', reply)"></div>
           <div class="rivs-actions">
@@ -212,10 +213,10 @@
           background-position: center;
           background-repeat: no-repeat;" ng-click="vm.modalToggle('image', $index)">
         </div>
-        <div class="rivs-content correction">
-          <strong>{{vm.profileUser.display_name || vm.profileUser.username}}</strong> <span>corrected</span> <strong><a ng-href="http://localhost:8000/#!/{{correction.riv.user.username}}">{{correction.riv.user.display_name}}</a></strong><br />
-          <s>{{correction.riv.content}}</s><br />
-          {{correction.content}}
+        <div class="rivs-content">
+          <strong>{{vm.profileUser.display_name || vm.profileUser.username}}</strong> <span class="at-user">corrected</span> <strong><a ng-href="http://localhost:8000/#!/{{correction.riv.user.username}}">{{correction.riv.user.display_name}}</a></strong><br />
+          <s class="correction">{{correction.riv.content}}</s><br />
+          <span class="correction">{{correction.content}}</span>
           <div ng-if="correction.photo" class="rivs-photo" style="background: url('{{correction.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;" ng-click="vm.modalToggle('image', correction)"></div>
           <div class="rivs-actions">
             <i class="fa fa-star" aria-hidden="true" ng-click="vm.favoriteRivReply('reply', currentUser.id, correction)" ng-class="{liked: correction.liked}"></i>

@@ -25,8 +25,8 @@
 
     // =========== CONTROLLER VARIABLES =============
     const landing = this;
-    // const URL = 'http://localhost:3000/';
-    const URL = 'http://rivetrapi.herokuapp.com/'
+    const URL = 'http://localhost:3000/';
+    // const URL = 'http://rivetrapi.herokuapp.com/'
     $scope.fullHeader = true;
 
     // =========== HTTP REQUESTS ====================
@@ -43,6 +43,7 @@
             $rootScope.currentUser.followed_follows.forEach(function(followed) {
               if(followed.followed.id === landing.profileUser.id) {
                 landing.followed = true;
+                landing.followedId = followed.id;
               }
             });
             $rootScope.currentUser.likes.forEach(function(liked) {
@@ -171,6 +172,16 @@
       }).then(function(response) {
           location.reload();
       })
+    }
+
+    // to unfollow a user
+    this.unfollowUser = function() {
+      $http({
+        method: 'DELETE',
+        url: URL + 'follows/' + this.followedId
+      }).then(function(response) {
+          location.reload();
+      });
     }
 
     // to delete a single riv
@@ -355,6 +366,12 @@
       $document.scrollTop(0, 500);
     }
 
+    // goes to index page
+    this.indexPage = function() {
+      console.log('index page');
+      $location.url('/');
+    }
+    
     // ============ LOGOUT AND SESSIONS ============
     // to logout
     this.logout = function(){

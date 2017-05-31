@@ -65,10 +65,15 @@ input:focus, textarea:focus, select:focus {
   outline: none;
   border: 1px solid lighten($faded-purp, 25%);
 }
-input[placeholder] {
+input[placeholder], textarea[placeholder] {
   text-transform: uppercase;
   font-family: $font;
   font-size: 10px;
+}
+input[type="submit"] {
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 /* ================ NAVBAR ================== */
@@ -84,6 +89,7 @@ nav {
     padding: 20px;
     &:hover .logo-name {
       width: 100%;
+      cursor: pointer;
       @include transition(1.5s ease-in);
     }
   }
@@ -137,6 +143,9 @@ nav {
   svg {
     width: 10%;
     color: $pink;
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
@@ -693,130 +702,251 @@ nav {
     margin: 0 0;
     width: 50%;
   }
-  .rivs-filters {
+}
+.rivs-filters {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border-bottom: 1px solid $grey;
+  display: flex;
+  justify-content: space-around;
+  strong {
+    font-family: $accent-font;
+    font-size: 22px;
+    text-transform: uppercase;
+    color: $pink;
+  }
+  a {
+    color: $blue;
+    font-family: $accent-font;
+    font-weight: 300;
+    font-size: 22px;
+    text-transform: uppercase;
+    &.selected {
+        color: $faded-purp;
+    }
+  }
+}
+.rivs {
+  width: 100%;
+  margin: 20px 0;
+  padding-bottom: 20px;
+  border-bottom: 1px solid $grey;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  .rivs-user-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 3px;
+  }
+  .rivs-photo {
+    width: 98%;
+    height: 200px;
+    border-radius: 3px;
+    margin-top: 15px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .rivs-content {
+    width: 88%;
+    font-size: 12px;
+    @include for-medium {
+      width: 85%;
+    }
+    strong, strong a {
+      color: $faded-purp;
+      font-size: 13px;
+    }
+    span.at-user {
+      color: #aaa;
+      font-size: 13px;
+    }
+  }
+  s.correction {
+    color: $pink;
+  }
+  span.correction {
+    color: $blue;
+  }
+  .rivs-reply, .rivs-correction, .rivs-translation {
     width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    border-bottom: 1px solid $grey;
-    display: flex;
-    justify-content: space-around;
+    margin-top: 10px;
     strong {
       font-family: $accent-font;
-      font-size: 22px;
+      font-size: 14px;
+      font-weight: 700;
       text-transform: uppercase;
-      color: $pink;
-    }
-    a {
       color: $blue;
+    }
+    div {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+    }
+    select {
+      width: 20%;
+    }
+    textarea {
+      resize: none;
+      width: 93%;
+      height: 6vh;
+      border: 1px solid darken($grey, 10%);
+      margin-bottom: 0px;
+    }
+    input[type="submit"] {
+      background: $pink;
+      width: 96%;
+      @include for-medium {
+        width: 97.5%;
+      }
+      margin-top: 0px;
       font-family: $accent-font;
-      font-weight: 300;
-      font-size: 22px;
+      font-size: 15px;
+      font-weight: 700;
       text-transform: uppercase;
-      &.selected {
-          color: $faded-purp;
+      color: $grey;
+      &:focus {
+        border: 1px solid $pink;
       }
     }
   }
-  .rivs {
-    width: 100%;
-    margin: 20px 0;
-    padding-bottom: 20px;
-    border-bottom: 1px solid $grey;
+  .rivs-actions {
+    color: darken($grey, 30%);
+    width: 50%;
+    margin-top: 10px;
     display: flex;
     justify-content: space-between;
-    flex-flow: row wrap;
-    .rivs-user-img {
-      width: 60px;
-      height: 60px;
-      border-radius: 3px;
+    i {
+      &:hover {
+        color: $purple;
+        cursor: pointer;
+      }
+      &.liked {
+        color: $purple;
+      }
     }
-    .rivs-photo {
-      width: 98%;
-      height: 200px;
+  }
+}
+
+/* ============ HOME (TIMELINE) ============= */
+.home-nav {
+  width: 100%;
+  height: 10vh;
+  background: linear-gradient(to right, $blue, $purple);
+  position: fixed;
+}
+.home-container {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 100px;
+  h3 {
+    color: $pink;
+    text-transform: uppercase;
+    font-family: $accent-font;
+    font-size: 30px;
+    border-bottom: 1px solid $grey;
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+}
+.user-stats {
+  width: 30%;
+  max-height: 44vh;
+  padding: 20px;
+  background: whitesmoke;
+  box-sizing: border-box;
+  font-weight: 300;
+  span {
+    font-size: 13px;
+  }
+}
+.user-content {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  .row {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    &:nth-of-type(1) {
+      margin-bottom: 5px;
+    }
+    span {
+      width: 50%;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    strong {
+      display: block;
+      color: $blue;
+      font-family: $accent-font;
+      font-size: 15px;
+    }
+  }
+}
+.user-img {
+  width: 75px;
+  height: 75px;
+  border-radius: 75px;
+}
+.user-num {
+  width: 70%;
+}
+.timeline {
+  width: 50%;
+  min-height: 90vh;
+  padding: 20px;
+  box-sizing: border-box;
+  background: whitesmoke;
+}
+.timeline-actions {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid $grey;
+  padding-bottom: 10px;
+  .actions {
+    width: 30%;
+    margin-top: 5px;
+    .btn {
+      width: 85%;
+      padding: 5px;
+      margin-bottom: 7px;
+      background: $pink;
       border-radius: 3px;
-      margin-top: 15px;
+      font-family: $accent-font;
+      font-size: 15px;
+      font-weight: 700;
+      text-align: center;
+      text-transform: uppercase;
+      color: $grey;
       &:hover {
         cursor: pointer;
       }
     }
-    .rivs-content {
-      width: 88%;
-      font-size: 12px;
-      @include for-medium {
-        width: 85%;
-      }
-      strong, strong a {
-        color: $faded-purp;
-        font-size: 13px;
-      }
-      span {
-        color: #aaa;
-        font-size: 13px;
-      }
+  }
+  .post-riv {
+    width: 70%;
+    textarea {
+      width: 90%;
+      height: 6vh;
+      display: block;
+      resize: none;
     }
-    .correction {
-      color: $blue;
-      s {
-        color: $pink;
-      }
+    input[type="text"] {
+      width: 90%;
     }
-    .rivs-reply, .rivs-correction, .rivs-translation {
-      width: 100%;
-      margin-top: 10px;
-      strong {
-        font-family: $accent-font;
-        font-size: 14px;
-        font-weight: 700;
-        text-transform: uppercase;
-        color: $blue;
-      }
-      div {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px;
-      }
-      select {
-        width: 20%;
-      }
-      textarea {
-        resize: none;
-        width: 93%;
-        height: 6vh;
-        border: 1px solid darken($grey, 10%);
-        margin-bottom: 0px;
-      }
-      input[type="submit"] {
-        background: $pink;
-        width: 96%;
-        @include for-medium {
-          width: 97.5%;
-        }
-        margin-top: 0px;
-        font-family: $accent-font;
-        font-size: 15px;
-        font-weight: 700;
-        text-transform: uppercase;
-        color: $grey;
-        &:focus {
-          border: 1px solid $pink;
-        }
-      }
-    }
-    .rivs-actions {
-      color: darken($grey, 30%);
-      width: 50%;
-      margin-top: 10px;
-      display: flex;
-      justify-content: space-between;
-      i {
-        &:hover {
-          color: $purple;
-          cursor: pointer;
-        }
-        &.liked {
-          color: $purple;
-        }
-      }
+    input[type="submit"] {
+      width: 96%;
+      font-family: $accent-font;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: $grey;
+      border: 1px solid $blue;
+      padding: 5px;
+      background: $blue;
     }
   }
 }

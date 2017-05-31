@@ -5,12 +5,12 @@
 (function(){
   const app = angular.module('Rivetr');
 
-  app.controller('LandingCtrl', ['$http', '$rootScope', function($http, $rootScope){
+  app.controller('LandingCtrl', ['$http', '$rootScope', '$location', function($http, $rootScope, $location){
 
     // =========== CONTROLLER VARIABLES ==============
     const landing = this;
-    // const URL = 'http://localhost:3000/';
-    const URL = 'http://rivetrapi.herokuapp.com/'
+    const URL = 'http://localhost:3000/';
+    // const URL = 'http://rivetrapi.herokuapp.com/'
 
     // =========== HTTP REQUESTS ======================
     // to create a user
@@ -58,6 +58,7 @@
             this.loginData = null;
             this.showLogin = false;
             this.sessionCheck();
+            $location.path('/h/home');
           }
       }.bind(this))
     }

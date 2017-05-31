@@ -14,11 +14,9 @@
 
 # TECHNOLOGICAL .
 
-**FRONTEND:** AngularJS, Node/Express, <a href="https://github.com/oblador/angular-scroll">Angular-Scroll</a>, HTML/SCSS
+**FRONTEND:** AngularJS, Node/Express, <a href="https://github.com/oblador/angular-scroll">Angular-Scroll</a>, <a href="http://transltr.org/">Transltr</a>, HTML/SCSS
 
 **BACKEND:** Ruby on Rails, POSTGRESQL
-
-**CURRENTLY LOOKING INTO:** <a href="https://www.microsoft.com/en-us/translator/getstarted.aspx">microsoft translation api</a>, <a href="https://tech.yandex.com/translate/">yandex translation api</a>
 
 ## User Stories
 

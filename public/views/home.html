@@ -104,36 +104,11 @@
         </div>
       </div>
       <!-- ==== REPLY BOX ======================== -->
-      <div class="rivs-reply" ng-if="riv.replyBox">
-        <form ng-submit="vm.sendReply('reply', currentUser.id, riv)">
-          <textarea ng-model="vm.replyData.content"></textarea>
-          <input type="submit" value="reply" />
-        </form>
-      </div>
+      <div class="rivs-reply" ng-if="riv.replyBox" ng-include="'../partials/riv-forms/reply.html'"></div>
       <!-- ==== CORRECTION BOX =================== -->
-      <div class="rivs-correction" ng-if="riv.correctionBox">
-        <form ng-submit="vm.sendReply('correction', currentUser.id, riv)">
-          <textarea ng-model="vm.correctionData.content"></textarea>
-          <input type="submit" value="correct" />
-        </form>
-      </div>
+      <div class="rivs-correction" ng-if="riv.correctionBox"  ng-include="'../partials/riv-forms/correct.html'"></div>
       <!-- ==== TRANSLATION BOX ================== -->
-      <div class="rivs-translation" ng-if="riv.translationBox">
-        <form>
-          <textarea>{{riv.riv.content}}</textarea>
-          <center>
-            <strong>translate from</strong>
-            <select>
-              <option>language</option>
-            </select>
-            <strong>translate to</strong>
-            <select>
-              <option>language</option>
-            </select>
-          </center>
-          <input type="submit" value="translate" />
-        </form>
-      </div>
+      <div class="rivs-translation" ng-if="riv.translationBox" ng-include="'../partials/riv-forms/translate.html'"></div>
     </div>
     <div class="window-top">
       <a ng-click="vm.goToTop();">GO BACK TO TOP</a>

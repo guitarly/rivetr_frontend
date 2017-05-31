@@ -118,6 +118,31 @@
       }
     }
 
+    // gets languages available
+    this.getLanguages = function() {
+      $http({
+        method: 'GET',
+        url: 'http://transltr.org/api/getlanguagesfortranslate'
+      }).then(function(response){
+          this.languages =  response.data;
+      }.bind(this))
+    }
+
+    // to translate
+    this.translateText = function() {
+      // sets variables for url params
+      let text = this.translate.text;
+      let from = this.translate.from;
+      let to = this.translate.to;
+      // sends request to translatr
+      $http({
+        method: 'GET',
+        url: 'http://transltr.org/api/translate?text=' + text + '&to=' + to + '&from=' + from,
+      }).then(function(response){
+        console.log(response);
+      }.bind(this))
+    }
+
     // ========== TIMELINE RIVS ====================
     // toggle riv actions
     this.toggleAction = function(action, riv) {
@@ -136,6 +161,10 @@
           riv.translationBox = false;
           break;
         case 'translate':
+          // sets ng-model to populate translation box
+          this.translate = {};
+          this.translate.text = riv.riv.content;
+          // opens translation box
           riv.translationBox = riv.translationBox === true ? false:true;
           riv.replyBox = false;
           riv.correctionBox = false;
@@ -222,7 +251,7 @@
 
     // ============ AUTOMATIC FUNCTION CALLS =======
     this.sessionCheck();
-
+    this.getLanguages();
   }]); // ends controller
 
 })(); // ends closure

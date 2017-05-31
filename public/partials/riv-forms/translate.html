@@ -1,0 +1,14 @@
+<form ng-submit="vm.translateText()">
+  <textarea ng-model="vm.translate.text"></textarea>
+  <center>
+    <strong>translate from</strong>
+    <select ng-model="vm.translate.from">
+      <option ng-repeat="lang in vm.languages" value="{{lang.languageCode}}">{{lang.languageName}}</option>
+    </select>
+    <strong>translate to</strong>
+    <select ng-model="vm.translate.to">
+      <option ng-repeat="lang in vm.languages" value="{{lang.languageCode}}">{{lang.languageName}}</option>
+    </select>
+  </center>
+  <input type="submit" value="translate" />
+</form>

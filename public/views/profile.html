@@ -132,36 +132,11 @@
           </div>
         </div>
         <!-- ==== REPLY BOX ======================== -->
-        <div class="rivs-reply" ng-if="riv.replyBox">
-          <form ng-submit="vm.sendReply('reply', currentUser.id, riv)">
-            <textarea ng-model="vm.replyData.content"></textarea>
-            <input type="submit" value="reply" />
-          </form>
-        </div>
+        <div class="rivs-reply" ng-if="riv.replyBox" ng-include="'../partials/riv-forms/reply.html'"></div>
         <!-- ==== CORRECTION BOX =================== -->
-        <div class="rivs-correction" ng-if="riv.correctionBox">
-          <form ng-submit="vm.sendReply('correction', currentUser.id, riv)">
-            <textarea ng-model="vm.correctionData.content">{{riv.content}}</textarea>
-            <input type="submit" value="correct" />
-          </form>
-        </div>
+        <div class="rivs-correction" ng-if="riv.correctionBox"  ng-include="'../partials/riv-forms/correct.html'"></div>
         <!-- ==== TRANSLATION BOX ================== -->
-        <div class="rivs-translation" ng-if="riv.translationBox">
-          <form>
-            <textarea>{{riv.content}}</textarea>
-            <center>
-              <strong>translate from</strong>
-              <select>
-                <option>language</option>
-              </select>
-              <strong>translate to</strong>
-              <select>
-                <option>language</option>
-              </select>
-            </center>
-            <input type="submit" value="translate" />
-          </form>
-        </div>
+        <div class="rivs-translation" ng-if="riv.translationBox" ng-include="'../partials/riv-forms/translate.html'"></div>
       </div>
       <!-- ======= RIVS (REPLIES) ================= -->
       <div class="empty" ng-if="(vm.profileUser.replies.length === 0) && vm.replies">
@@ -185,22 +160,7 @@
           </div>
         </div>
         <!-- ==== TRANSLATION BOX ================== -->
-        <div class="rivs-translation" ng-if="reply.translationBox">
-          <form>
-            <textarea>{{reply.content}}</textarea>
-            <center>
-              <strong>translate from</strong>
-              <select>
-                <option>language</option>
-              </select>
-              <strong>translate to</strong>
-              <select>
-                <option>language</option>
-              </select>
-            </center>
-            <input type="submit" value="translate" />
-          </form>
-        </div>
+        <div class="rivs-translation" ng-if="reply.translationBox" ng-include="'../partials/riv-forms/translate.html'"></div>
       </div>
       <!-- ======= RIVS (CORRECTIONS) ================= -->
       <div class="empty" ng-if="(vm.profileUser.replies.length === 0) && vm.corrections">
@@ -225,22 +185,7 @@
           </div>
         </div>
         <!-- ==== TRANSLATION BOX ================== -->
-        <div class="rivs-translation" ng-if="correction.translationBox">
-          <form>
-            <textarea>{{correction.content}}</textarea>
-            <center>
-              <strong>translate from</strong>
-              <select>
-                <option>language</option>
-              </select>
-              <strong>translate to</strong>
-              <select>
-                <option>language</option>
-              </select>
-            </center>
-            <input type="submit" value="translate" />
-          </form>
-        </div>
+        <div class="rivs-translation" ng-if="correction.translationBox" ng-include="'../partials/riv-forms/translate.html'"></div>
       </div>
       <!-- ======= RETURN TO TOP =================== -->
       <div class="window-top">

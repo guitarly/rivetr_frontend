@@ -37,8 +37,8 @@
         method: 'DELETE',
         url: URL + 'rivs/' + id
       }).then(function(response) {
-          location.reload();
-      })
+          this.refresh();
+      }.bind(this))
     }
 
     // to delete a single reply
@@ -47,8 +47,8 @@
         method: 'DELETE',
         url: URL + 'replies/' + id
       }).then(function(response) {
-          location.reload();
-      })
+          this.refresh();
+      }.bind(this))
     }
 
     // to favorite a riv/reply

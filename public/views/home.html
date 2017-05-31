@@ -60,7 +60,10 @@
         </div>
       </div>
     </section>
-    <div class="rivs" ng-repeat="riv in compiledRivs | orderBy: '-riv.created_at'">
+    <div class="empty" ng-if="compiledRivs.length === 0">
+      no rivs, post now or follow people
+    </div>
+    <div class="rivs" ng-repeat="riv in compiledRivs | orderBy: '-riv.created_at'" ng-if="compiledRivs.length > 0">
       <div class="rivs-user-img" style="
         background:url('{{riv.user.profile_photo}}');
         background-size: cover;
@@ -91,7 +94,10 @@
           <i class="fa fa-reply" aria-hidden="true" ng-if="!riv.reply" ng-click="vm.toggleAction('reply', riv)"></i>
           <i class="fa fa-wrench" aria-hidden="true" ng-if="!riv.reply" ng-click="vm.toggleAction('correction', riv)"></i>
           <i class="fa fa-globe" aria-hidden="true" ng-click="vm.toggleAction('translate', riv)"></i>
-          <i class="fa fa-trash" aria-hidden="true" ng-if="currentUser.id === riv.user.id" ng-click="vm.deleteOneRiv(riv.id)"></i>
+          <!-- delete if regular riv -->
+          <i class="fa fa-trash" aria-hidden="true" ng-if="(currentUser.id === riv.user.id) && !riv.reply" ng-click="vm.deleteOneRiv(riv.riv.id)"></i>
+          <!-- delete if reply -->
+          <i class="fa fa-trash" aria-hidden="true" ng-if="(currentUser.id === riv.user.id) && riv.reply" ng-click="vm.deleteOneReply(riv.riv.id)"></i>
         </div>
       </div>
       <!-- ==== REPLY BOX ======================== -->

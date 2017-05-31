@@ -40,6 +40,7 @@
   <!-- ============ TIMELINE ====================== -->
   <div class="timeline">
     <h3>TIMELINE</h3>
+    <!-- ========== POST RIV FORM & ETC. ACTIONS == -->
     <section class="timeline-actions">
       <div class="post-riv">
         <form ng-submit="vm.postRiv(currentUser.id)">
@@ -60,9 +61,11 @@
         </div>
       </div>
     </section>
+    <!-- ========== EMPTY MESSAGE IF NO RIVS ====== -->
     <div class="empty" ng-if="compiledRivs.length === 0">
       no rivs, post now or follow people
     </div>
+    <!-- ========== RIVS ORDERED BY NEWEST ========= -->
     <div class="rivs" ng-repeat="riv in compiledRivs | orderBy: '-riv.created_at'" ng-if="compiledRivs.length > 0">
       <div class="rivs-user-img" style="
         background:url('{{riv.user.profile_photo}}');

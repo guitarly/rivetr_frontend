@@ -5,7 +5,7 @@
 (function(){
   const app = angular.module('Rivetr');
 
-  app.controller('LandingCtrl', ['$http', '$rootScope', function($http, $rootScope){
+  app.controller('LandingCtrl', ['$http', '$rootScope', '$location', function($http, $rootScope, $location){
 
     // =========== CONTROLLER VARIABLES ==============
     const landing = this;
@@ -58,6 +58,7 @@
             this.loginData = null;
             this.showLogin = false;
             this.sessionCheck();
+            $location.path('/h/home');
           }
       }.bind(this))
     }

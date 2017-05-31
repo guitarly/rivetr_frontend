@@ -39,7 +39,26 @@
 
   <!-- ============ TIMELINE ====================== -->
   <div class="timeline">
-    <a ng-click="vm.refresh()">refresh</a>
+    <h3>TIMELINE</h3>
+    <section class="timeline-actions">
+      <div class="post-riv">
+        <form ng-submit="vm.postRiv(currentUser.id)">
+          <textarea ng-model="vm.newPostData.content"></textarea>
+          <input type="submit" value="share your thoughts" />
+        </form>
+      </div>
+      <div class="actions">
+        <div class="btn" ng-click="vm.refresh()">
+          REFRESH
+        </div>
+        <div class="btn">
+          TRANSLATE
+        </div>
+        <div class="btn">
+          ADD PHOTO
+        </div>
+      </div>
+    </section>
     <div class="rivs" ng-repeat="riv in compiledRivs | orderBy: '-riv.created_at'">
       <div class="rivs-user-img" style="
         background:url('{{riv.user.profile_photo}}');

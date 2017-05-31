@@ -15,6 +15,22 @@
     $scope.compiledRivs = [];
 
     // =========== HTTP REQUESTS ====================
+    // to post a riv
+    this.postRiv = function(id) {
+      $http({
+        method: 'POST',
+        url: URL + 'rivs',
+        data: {
+          user_id: id,
+          content: this.newPostData.content,
+          photo: this.newPostData.photo
+        }
+      }).then(function(response) {
+          this.refresh();
+          this.newPostData = null;
+      }.bind(this))
+    }
+
     // to delete a single riv
     this.deleteOneRiv = function(id) {
       $http({

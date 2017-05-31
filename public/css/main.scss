@@ -70,6 +70,11 @@ input[placeholder] {
   font-family: $font;
   font-size: 10px;
 }
+input[type="submit"] {
+  &:hover {
+    cursor: pointer;
+  }
+}
 
 /* ================ NAVBAR ================== */
 nav {
@@ -836,14 +841,6 @@ nav {
   display: flex;
   justify-content: space-around;
   padding-top: 100px;
-}
-.user-stats {
-  width: 30%;
-  max-height: 44vh;
-  padding: 20px;
-  background: whitesmoke;
-  box-sizing: border-box;
-  font-weight: 300;
   h3 {
     color: $pink;
     text-transform: uppercase;
@@ -853,6 +850,14 @@ nav {
     padding: 5px;
     margin-bottom: 10px;
   }
+}
+.user-stats {
+  width: 30%;
+  max-height: 44vh;
+  padding: 20px;
+  background: whitesmoke;
+  box-sizing: border-box;
+  font-weight: 300;
   span {
     font-size: 13px;
   }
@@ -892,7 +897,53 @@ nav {
 .timeline {
   width: 50%;
   min-height: 90vh;
-  padding: 0px 20px 20px 20px;
+  padding: 20px;
   box-sizing: border-box;
   background: whitesmoke;
+}
+.timeline-actions {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid $grey;
+  padding-bottom: 10px;
+  .actions {
+    width: 30%;
+    margin-top: 5px;
+    .btn {
+      width: 85%;
+      padding: 5px;
+      margin-bottom: 7px;
+      background: $pink;
+      border-radius: 3px;
+      font-family: $accent-font;
+      font-size: 15px;
+      font-weight: 700;
+      text-align: center;
+      text-transform: uppercase;
+      color: $grey;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  .post-riv {
+    width: 70%;
+    textarea {
+      width: 90%;
+      height: 6vh;
+      display: block;
+      resize: none;
+    }
+    input[type="submit"] {
+      width: 96%;
+      font-family: $accent-font;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: $grey;
+      border: 1px solid $blue;
+      padding: 5px;
+      background: $blue;
+    }
+  }
 }

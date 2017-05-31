@@ -35,6 +35,9 @@ input[placeholder] {
   font-family: "Open Sans", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
   font-size: 10px; }
 
+input[type="submit"]:hover {
+  cursor: pointer; }
+
 /* ================ NAVBAR ================== */
 nav {
   width: 100%;
@@ -742,6 +745,14 @@ nav {
   display: flex;
   justify-content: space-around;
   padding-top: 100px; }
+  .home-container h3 {
+    color: #E52A6F;
+    text-transform: uppercase;
+    font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
+    font-size: 30px;
+    border-bottom: 1px solid #E9E9E9;
+    padding: 5px;
+    margin-bottom: 10px; }
 
 .user-stats {
   width: 30%;
@@ -750,14 +761,6 @@ nav {
   background: whitesmoke;
   box-sizing: border-box;
   font-weight: 300; }
-  .user-stats h3 {
-    color: #E52A6F;
-    text-transform: uppercase;
-    font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
-    font-size: 30px;
-    border-bottom: 1px solid #E9E9E9;
-    padding: 5px;
-    margin-bottom: 10px; }
   .user-stats span {
     font-size: 13px; }
 
@@ -792,8 +795,48 @@ nav {
 .timeline {
   width: 50%;
   min-height: 90vh;
-  padding: 0px 20px 20px 20px;
+  padding: 20px;
   box-sizing: border-box;
   background: whitesmoke; }
+
+.timeline-actions {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid #E9E9E9;
+  padding-bottom: 10px; }
+  .timeline-actions .actions {
+    width: 30%;
+    margin-top: 5px; }
+    .timeline-actions .actions .btn {
+      width: 85%;
+      padding: 5px;
+      margin-bottom: 7px;
+      background: #E52A6F;
+      border-radius: 3px;
+      font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      text-align: center;
+      text-transform: uppercase;
+      color: #E9E9E9; }
+      .timeline-actions .actions .btn:hover {
+        cursor: pointer; }
+  .timeline-actions .post-riv {
+    width: 70%; }
+    .timeline-actions .post-riv textarea {
+      width: 90%;
+      height: 6vh;
+      display: block;
+      resize: none; }
+    .timeline-actions .post-riv input[type="submit"] {
+      width: 96%;
+      font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #E9E9E9;
+      border: 1px solid #67AECA;
+      padding: 5px;
+      background: #67AECA; }
 
 /*# sourceMappingURL=main.css.map */

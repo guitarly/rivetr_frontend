@@ -757,32 +757,57 @@ nav {
   position: fixed; }
 
 .home-container {
-  display: flex;
-  justify-content: space-around;
-  padding-top: 100px; }
+  padding-top: 70px; }
+  @media (min-width: 900px) {
+    .home-container {
+      display: flex;
+      justify-content: space-around;
+      padding-top: 100px; } }
   .home-container h3 {
     color: #E52A6F;
     text-transform: uppercase;
     font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
     font-size: 30px;
-    border-bottom: 1px solid #E9E9E9;
-    padding: 5px;
-    margin-bottom: 10px; }
+    margin: -5px 0 10px 0;
+    border-bottom: 1px solid #E9E9E9; }
+    @media (min-width: 900px) {
+      .home-container h3 {
+        margin-top: 0px;
+        padding: 5px; } }
+    .home-container h3.med {
+      display: none; }
+      @media (min-width: 900px) {
+        .home-container h3.med {
+          display: block; } }
+    .home-container h3.small {
+      border-bottom: 1px solid #d0c9db; }
+      @media (min-width: 900px) {
+        .home-container h3.small {
+          display: none; } }
 
 .user-stats {
-  width: 30%;
-  max-height: 44vh;
+  display: flex;
+  justify-content: space-around;
   padding: 20px;
-  background: whitesmoke;
   box-sizing: border-box;
   font-weight: 300; }
+  @media (min-width: 900px) {
+    .user-stats {
+      width: 30%;
+      max-height: 44vh;
+      display: block;
+      background: whitesmoke; } }
   .user-stats span {
     font-size: 13px; }
 
 .user-content {
+  width: 40%;
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px; }
+  @media (min-width: 900px) {
+    .user-content {
+      width: 100%; } }
   .user-content .row {
     display: flex;
     justify-content: space-between;
@@ -808,11 +833,16 @@ nav {
   width: 70%; }
 
 .timeline {
-  width: 50%;
-  min-height: 90vh;
-  padding: 20px;
+  width: 100%;
+  min-height: 70vh;
+  padding: 40px;
   box-sizing: border-box;
   background: whitesmoke; }
+  @media (min-width: 900px) {
+    .timeline {
+      width: 50%;
+      min-height: 90vh;
+      padding: 20px; } }
 
 .timeline-actions {
   display: flex;

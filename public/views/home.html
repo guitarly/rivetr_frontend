@@ -1,3 +1,6 @@
+<!-- =============== MODALS =============== -->
+<section ng-include="'../partials/modals/image.html'"></section>
+
 <!-- ================= NAVIGATION ================= -->
 <section ng-include="'../partials/navbar.html'"></section>
 <div class="home-nav"></div>
@@ -7,7 +10,7 @@
 
   <!-- ============ USER STATS ==================== -->
   <div class="user-stats">
-    <h3>{{currentUser.display_name}}</h3>
+    <h3 class="med">{{currentUser.display_name}}</h3>
     <div class="user-content">
       <div class="user-img" style="background:url('{{currentUser.profile_photo}}'); background-size:cover;background-position:center"></div>
       <div class="user-num">
@@ -33,8 +36,11 @@
         </div>
       </div>
     </div>
-    <h3>ABOUT</h3>
-    <span>{{currentUser.biography}}</span>
+    <div class="user-about">
+      <h3 class="med">ABOUT</h3>
+      <h3 class="small">ABOUT {{currentUser.display_name}}</h3>
+      <span>{{currentUser.biography}}</span>
+    </div>
   </div>
 
   <!-- ============ TIMELINE ====================== -->

@@ -144,6 +144,19 @@
     }
 
     // ========== TIMELINE RIVS ====================
+    // modal variables
+    this.showFullImage = false;
+
+    // toggle modals
+    this.modalToggle = function(modal, riv) {
+      switch(modal) {
+        case 'image':
+          this.showFullImage = !this.showFullImage;
+          this.currentRiv = riv.riv;
+          break;
+      }
+    }
+
     // toggle riv actions
     this.toggleAction = function(action, riv) {
       switch(action) {

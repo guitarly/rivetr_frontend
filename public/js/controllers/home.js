@@ -122,6 +122,9 @@
     // toggle riv actions
     this.toggleAction = function(action, riv) {
       switch(action) {
+        case 'addPhoto':
+          this.addPhotoForm = this.addPhotoForm === true ? false:true;
+          break;
         case 'reply':
           riv.replyBox = riv.replyBox === true ? false:true;
           riv.correctionBox = false;

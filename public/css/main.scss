@@ -65,7 +65,7 @@ input:focus, textarea:focus, select:focus {
   outline: none;
   border: 1px solid lighten($faded-purp, 25%);
 }
-input[placeholder] {
+input[placeholder], textarea[placeholder] {
   text-transform: uppercase;
   font-family: $font;
   font-size: 10px;
@@ -933,6 +933,9 @@ nav {
       height: 6vh;
       display: block;
       resize: none;
+    }
+    input[type="text"] {
+      width: 90%;
     }
     input[type="submit"] {
       width: 96%;

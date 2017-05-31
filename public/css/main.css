@@ -30,7 +30,7 @@ input:focus, textarea:focus, select:focus {
   outline: none;
   border: 1px solid #a89bbd; }
 
-input[placeholder] {
+input[placeholder], textarea[placeholder] {
   text-transform: uppercase;
   font-family: "Open Sans", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
   font-size: 10px; }
@@ -828,6 +828,8 @@ nav {
       height: 6vh;
       display: block;
       resize: none; }
+    .timeline-actions .post-riv input[type="text"] {
+      width: 90%; }
     .timeline-actions .post-riv input[type="submit"] {
       width: 96%;
       font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;

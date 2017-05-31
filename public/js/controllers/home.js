@@ -74,13 +74,14 @@
             url: URL + 'replies',
             data: {
               user_id: user,
-              riv_id: riv.id,
+              riv_id: riv.riv.id,
               content: home.replyData.content,
               photo: home.replyData.photo
             }
           }).then(function(response) {
-              riv.replied = true;
-          });
+              riv.replyBox = false;
+              this.refresh();
+          }.bind(this));
           break;
         case 'correction':
           $http({
@@ -88,13 +89,14 @@
             url: URL + 'replies',
             data: {
               user_id: user,
-              riv_id: riv.id,
+              riv_id: riv.riv.id,
               content: home.correctionData.content,
               photo: home.correctionData.photo,
               correction: true
             }
           }).then(function(response) {
-              riv.corrected = true;
+              riv.correctionBox = false;
+              this.refresh();
           });
           break;
       }
@@ -193,7 +195,7 @@
         });
       });
     }
-    
+
     // refreshes data without refreshing page
     this.refresh = function() {
       this.sessionCheck();

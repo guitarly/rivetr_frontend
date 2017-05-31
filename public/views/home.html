@@ -62,11 +62,14 @@
         <span ng-class="{'correction': riv.riv.correction, 'normal': !riv.riv.correction}">{{riv.riv.content}}</span>
         <div ng-if="riv.riv.photo" class="rivs-photo" style="background: url('{{riv.riv.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;" ng-click="vm.modalToggle('image', riv)"></div>
         <div class="rivs-actions">
-          <i class="fa fa-star" aria-hidden="true" ng-click="vm.favoriteRivReply('riv', currentUser.id, riv)" ng-class="{'liked': riv.liked}"></i>
+          <i class="fa fa-star" aria-hidden="true" ng-if="!riv.reply"
+          ng-click="vm.favoriteRivReply('riv', currentUser.id, riv)" ng-class="{'liked': riv.liked}"></i>
+          <i class="fa fa-star" aria-hidden="true" ng-if="riv.reply"
+          ng-click="vm.favoriteRivReply('reply', currentUser.id, riv)" ng-class="{'liked': riv.liked}"></i>
           <i class="fa fa-reply" aria-hidden="true" ng-click="vm.toggleAction('reply', riv)"></i>
           <i class="fa fa-wrench" aria-hidden="true"  ng-click="vm.toggleAction('correction', riv)"></i>
           <i class="fa fa-globe" aria-hidden="true" ng-click="vm.toggleAction('translate', riv)"></i>
-          <i class="fa fa-trash" aria-hidden="true" ng-if="vm.isCurrentUser" ng-click="vm.deleteOneRiv(riv.id)"></i>
+          <i class="fa fa-trash" aria-hidden="true" ng-if="currentUser.id === riv.user.id" ng-click="vm.deleteOneRiv(riv.id)"></i>
         </div>
       </div>
       <!-- ==== REPLY BOX ======================== -->

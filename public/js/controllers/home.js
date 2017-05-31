@@ -1,26 +1,10 @@
-(function(){
-  const app = angular.module('Rivetr');
-
-  // ==============================================
-  //              SCROLL DIRECTIVE               //
-  // ==============================================
-  app.directive("scroll", function ($window) {
-      return function(scope, element, attrs) {
-
-          angular.element($window).bind("scroll", function() {
-              if (this.pageYOffset >= 100) {
-                   scope.fullHeader = false;
-               } else {
-                   scope.fullHeader = true;
-               }
-              scope.$apply();
-          });
-      };
-  });
-
   // ================================================
   //                HOME PAGE CTRL                 //
   // ================================================
+
+(function(){
+  const app = angular.module('Rivetr');
+
   app.controller('HomeCtrl', ['$http', '$scope', '$rootScope', '$location', '$document', '$routeParams', function($http, $scope, $rootScope, $location, $document, $routeParams){
 
     // =========== CONTROLLER VARIABLES =============
@@ -31,7 +15,112 @@
     $scope.compiledRivs = [];
 
     // =========== HTTP REQUESTS ====================
+    // to delete a single riv
+    this.deleteOneRiv = function(id) {
+      $http({
+        method: 'DELETE',
+        url: URL + 'rivs/' + id
+      }).then(function(response) {
+          location.reload();
+      })
+    }
 
+    // to delete a single reply
+    this.deleteOneReply = function(id) {
+      $http({
+        method: 'DELETE',
+        url: URL + 'replies/' + id
+      }).then(function(response) {
+          location.reload();
+      })
+    }
+
+    // to favorite a riv/reply
+    this.favoriteRivReply = function(type, user, riv) {
+      switch(type) {
+        case 'riv':
+          $http({
+            method: 'POST',
+            url: URL + 'likes',
+            data: {
+              user_id: user,
+              riv_id: riv.riv.id
+            }
+          }).then(function(response) {
+            riv.liked = true;
+          })
+          break;
+        case 'reply':
+          $http({
+            method: 'POST',
+            url: URL + 'likes',
+            data: {
+              user_id: user,
+              reply_id: riv.riv.id
+            }
+          }).then(function(response) {
+              riv.liked = true;
+          })
+          break;
+      }
+    }
+
+    // to send a reply
+    this.sendReply = function(type, user, riv) {
+      switch(type) {
+        case 'reply':
+          $http({
+            method: 'POST',
+            url: URL + 'replies',
+            data: {
+              user_id: user,
+              riv_id: riv.id,
+              content: home.replyData.content,
+              photo: home.replyData.photo
+            }
+          }).then(function(response) {
+              riv.replied = true;
+          });
+          break;
+        case 'correction':
+          $http({
+            method: 'POST',
+            url: URL + 'replies',
+            data: {
+              user_id: user,
+              riv_id: riv.id,
+              content: home.correctionData.content,
+              photo: home.correctionData.photo,
+              correction: true
+            }
+          }).then(function(response) {
+              riv.corrected = true;
+          });
+          break;
+      }
+    }
+
+    // ========== TIMELINE RIVS ====================
+    // toggle riv actions
+    this.toggleAction = function(action, riv) {
+      switch(action) {
+        case 'reply':
+          riv.replyBox = riv.replyBox === true ? false:true;
+          riv.correctionBox = false;
+          riv.translationBox = false;
+          break;
+        case 'correction':
+          riv.correctionBox = riv.correctionBox === true ? false:true;
+          riv.replyBox = false;
+          riv.translationBox = false;
+          break;
+        case 'translate':
+          riv.translationBox = riv.translationBox === true ? false:true;
+          riv.replyBox = false;
+          riv.correctionBox = false;
+          break;
+      }
+    }
 
     // ========== ETC. DOM MANIPULATION ============
     // scrolls window back to top
@@ -89,9 +178,23 @@
       $rootScope.currentUser.replies.forEach(function(reply) {
         $scope.compiledRivs.push({'riv': reply, 'user': $rootScope.currentUser, 'reply': true});
       });
+      this.checkLikes();
     }
 
-    // refreshes data
+    // checks liked rivs
+    this.checkLikes = function() {
+      $rootScope.currentUser.likes.forEach(function(liked) {
+        $scope.compiledRivs.forEach(function(riv) {
+          if((!riv.reply) && (liked.riv_id === riv.riv.id)) {
+            riv.liked = true;
+          } else if ((riv.reply) && (liked.reply_id === riv.riv.id)) {
+            riv.liked = true;
+          }
+        });
+      });
+    }
+    
+    // refreshes data without refreshing page
     this.refresh = function() {
       this.sessionCheck();
     }

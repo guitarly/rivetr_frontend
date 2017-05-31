@@ -723,7 +723,7 @@ nav {
     width: 50%;
   }
 }
-.rivs-filters {
+.rivs-filters, .timeline-filters {
   width: 100%;
   padding: 10px;
   box-sizing: border-box;
@@ -747,6 +747,7 @@ nav {
     }
   }
 }
+
 .rivs {
   width: 100%;
   margin: 20px 0;
@@ -790,48 +791,6 @@ nav {
   span.correction {
     color: $blue;
   }
-  .rivs-reply, .rivs-correction, .rivs-translation {
-    width: 100%;
-    margin-top: 10px;
-    strong {
-      font-family: $accent-font;
-      font-size: 14px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: $blue;
-    }
-    div {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px;
-    }
-    select {
-      width: 20%;
-    }
-    textarea {
-      resize: none;
-      width: 93%;
-      height: 6vh;
-      border: 1px solid darken($grey, 10%);
-      margin-bottom: 0px;
-    }
-    input[type="submit"] {
-      background: $pink;
-      width: 96%;
-      @include for-medium {
-        width: 97.5%;
-      }
-      margin-top: 0px;
-      font-family: $accent-font;
-      font-size: 15px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: $grey;
-      &:focus {
-        border: 1px solid $pink;
-      }
-    }
-  }
   .rivs-actions {
     color: darken($grey, 30%);
     width: 50%;
@@ -846,6 +805,48 @@ nav {
       &.liked {
         color: $purple;
       }
+    }
+  }
+}
+.rivs-reply, .rivs-correction, .rivs-translation {
+  width: 100%;
+  margin-top: 10px;
+  strong {
+    font-family: $accent-font;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $blue;
+  }
+  div {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  select {
+    width: 20%;
+  }
+  textarea {
+    resize: none;
+    width: 93%;
+    height: 6vh;
+    border: 1px solid darken($grey, 10%);
+    margin-bottom: 0px;
+  }
+  input[type="submit"] {
+    background: $pink;
+    width: 96%;
+    @include for-medium {
+      width: 97.5%;
+    }
+    margin-top: 0px;
+    font-family: $accent-font;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $grey;
+    &:focus {
+      border: 1px solid $pink;
     }
   }
 }
@@ -888,6 +889,9 @@ nav {
       }
     }
   }
+}
+.timeline-filters {
+  margin-bottom: 10px;
 }
 .user-stats {
   display: flex;
@@ -954,10 +958,12 @@ nav {
   }
 }
 .timeline-actions {
-  display: flex;
-  justify-content: space-around;
   border-bottom: 1px solid $grey;
   padding-bottom: 10px;
+  .row {
+    display: flex;
+    justify-content: space-around;
+  }
   .actions {
     width: 30%;
     margin-top: 5px;

@@ -646,25 +646,25 @@ nav {
       margin: 0 0;
       width: 50%; } }
 
-.rivs-filters {
+.rivs-filters, .timeline-filters {
   width: 100%;
   padding: 10px;
   box-sizing: border-box;
   border-bottom: 1px solid #E9E9E9;
   display: flex;
   justify-content: space-around; }
-  .rivs-filters strong {
+  .rivs-filters strong, .timeline-filters strong {
     font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
     font-size: 22px;
     text-transform: uppercase;
     color: #E52A6F; }
-  .rivs-filters a {
+  .rivs-filters a, .timeline-filters a {
     color: #67AECA;
     font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
     font-weight: 300;
     font-size: 22px;
     text-transform: uppercase; }
-    .rivs-filters a.selected {
+    .rivs-filters a.selected, .timeline-filters a.selected {
       color: #675682; }
 
 .rivs {
@@ -702,41 +702,6 @@ nav {
     color: #E52A6F; }
   .rivs span.correction {
     color: #67AECA; }
-  .rivs .rivs-reply, .rivs .rivs-correction, .rivs .rivs-translation {
-    width: 100%;
-    margin-top: 10px; }
-    .rivs .rivs-reply strong, .rivs .rivs-correction strong, .rivs .rivs-translation strong {
-      font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: #67AECA; }
-    .rivs .rivs-reply div, .rivs .rivs-correction div, .rivs .rivs-translation div {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px; }
-    .rivs .rivs-reply select, .rivs .rivs-correction select, .rivs .rivs-translation select {
-      width: 20%; }
-    .rivs .rivs-reply textarea, .rivs .rivs-correction textarea, .rivs .rivs-translation textarea {
-      resize: none;
-      width: 93%;
-      height: 6vh;
-      border: 1px solid #d0d0d0;
-      margin-bottom: 0px; }
-    .rivs .rivs-reply input[type="submit"], .rivs .rivs-correction input[type="submit"], .rivs .rivs-translation input[type="submit"] {
-      background: #E52A6F;
-      width: 96%;
-      margin-top: 0px;
-      font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: #E9E9E9; }
-      @media (min-width: 900px) {
-        .rivs .rivs-reply input[type="submit"], .rivs .rivs-correction input[type="submit"], .rivs .rivs-translation input[type="submit"] {
-          width: 97.5%; } }
-      .rivs .rivs-reply input[type="submit"]:focus, .rivs .rivs-correction input[type="submit"]:focus, .rivs .rivs-translation input[type="submit"]:focus {
-        border: 1px solid #E52A6F; }
   .rivs .rivs-actions {
     color: #9d9d9d;
     width: 50%;
@@ -748,6 +713,42 @@ nav {
       cursor: pointer; }
     .rivs .rivs-actions i.liked {
       color: #5F0F4E; }
+
+.rivs-reply, .rivs-correction, .rivs-translation {
+  width: 100%;
+  margin-top: 10px; }
+  .rivs-reply strong, .rivs-correction strong, .rivs-translation strong {
+    font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #67AECA; }
+  .rivs-reply div, .rivs-correction div, .rivs-translation div {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px; }
+  .rivs-reply select, .rivs-correction select, .rivs-translation select {
+    width: 20%; }
+  .rivs-reply textarea, .rivs-correction textarea, .rivs-translation textarea {
+    resize: none;
+    width: 93%;
+    height: 6vh;
+    border: 1px solid #d0d0d0;
+    margin-bottom: 0px; }
+  .rivs-reply input[type="submit"], .rivs-correction input[type="submit"], .rivs-translation input[type="submit"] {
+    background: #E52A6F;
+    width: 96%;
+    margin-top: 0px;
+    font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #E9E9E9; }
+    @media (min-width: 900px) {
+      .rivs-reply input[type="submit"], .rivs-correction input[type="submit"], .rivs-translation input[type="submit"] {
+        width: 97.5%; } }
+    .rivs-reply input[type="submit"]:focus, .rivs-correction input[type="submit"]:focus, .rivs-translation input[type="submit"]:focus {
+      border: 1px solid #E52A6F; }
 
 /* ============ HOME (TIMELINE) ============= */
 .home-nav {
@@ -784,6 +785,9 @@ nav {
       @media (min-width: 900px) {
         .home-container h3.small {
           display: none; } }
+
+.timeline-filters {
+  margin-bottom: 10px; }
 
 .user-stats {
   display: flex;
@@ -845,10 +849,11 @@ nav {
       padding: 20px; } }
 
 .timeline-actions {
-  display: flex;
-  justify-content: space-around;
   border-bottom: 1px solid #E9E9E9;
   padding-bottom: 10px; }
+  .timeline-actions .row {
+    display: flex;
+    justify-content: space-around; }
   .timeline-actions .actions {
     width: 30%;
     margin-top: 5px; }

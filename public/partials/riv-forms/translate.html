@@ -10,5 +10,6 @@
       <option ng-repeat="lang in vm.languages" value="{{lang.languageCode}}">{{lang.languageName}}</option>
     </select>
   </center>
+  <textarea ng-if="vm.translate.translated" ng-model="vm.translate.translatedText"></textarea>
   <input type="submit" value="translate" />
 </form>

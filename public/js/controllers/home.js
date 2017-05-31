@@ -139,7 +139,8 @@
         method: 'GET',
         url: 'http://transltr.org/api/translate?text=' + text + '&to=' + to + '&from=' + from,
       }).then(function(response){
-        console.log(response);
+        this.translate.translated = true;
+        this.translate.translatedText = response.data.translationText;
       }.bind(this))
     }
 
@@ -157,11 +158,43 @@
       }
     }
 
+    // timeline variables
+    this.following = true;
+    this.community = false;
+    this.likes = false;
+
+    // toggle timeline rivs
+    this.toggleRivs = function(filter) {
+      switch(filter) {
+        case 'following':
+          this.following = true;
+          this.community = false;
+          this.likes = false;
+          break;
+        case 'community':
+          this.following = false;
+          this.community = true;
+          this.likes = false;
+          break;
+        case 'likes':
+          this.following = false;
+          this.community = false;
+          this.likes = true;
+      }
+    }
+
     // toggle riv actions
     this.toggleAction = function(action, riv) {
       switch(action) {
         case 'addPhoto':
           this.addPhotoForm = this.addPhotoForm === true ? false:true;
+          break;
+        case 'translator':
+          this.translate = {};
+          if(this.newPostData) {
+            this.translate.text = this.newPostData.content;
+          }
+          this.translator = this.translator === true? false:true;
           break;
         case 'reply':
           riv.replyBox = riv.replyBox === true ? false:true;

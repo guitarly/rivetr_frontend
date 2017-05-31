@@ -45,77 +45,53 @@
 
   <!-- ============ TIMELINE ====================== -->
   <div class="timeline">
-    <h3>TIMELINE</h3>
+    <!-- ========== TIMELINE FILTERS ============== -->
+    <div class="timeline-filters">
+      <strong>TIMELINE</strong>
+      <a ng-class="{selected: vm.following}" ng-click="vm.toggleRivs('following')">following</a>
+      <a ng-class="{selected: vm.community}" ng-click="vm.toggleRivs('community')">community</a>
+      <a ng-class="{selected: vm.likes}" ng-click="vm.toggleRivs('likes')">likes</a>
+    </div>
     <!-- ========== POST RIV FORM & ETC. ACTIONS == -->
     <section class="timeline-actions">
-      <div class="post-riv">
-        <form ng-submit="vm.postRiv(currentUser.id)">
-          <textarea ng-model="vm.newPostData.content" placeholder="SHARE YOUR THOUGHTS..."></textarea>
-          <input type="text" ng-model="vm.newPostData.photo" ng-if="vm.addPhotoForm" placeholder="ENTER PHOTO URL..."/>
-          <input type="submit" value="post riv" />
-        </form>
-      </div>
-      <div class="actions">
-        <div class="btn" ng-click="vm.refresh()">
-          REFRESH
+      <section class="row">
+        <div class="post-riv">
+          <form ng-submit="vm.postRiv(currentUser.id)">
+            <textarea ng-model="vm.newPostData.content" placeholder="SHARE YOUR THOUGHTS..."></textarea>
+            <input type="text" ng-model="vm.newPostData.photo" ng-if="vm.addPhotoForm" placeholder="ENTER PHOTO URL..."/>
+            <input type="submit" value="post riv" />
+          </form>
         </div>
-        <div class="btn">
-          TRANSLATE
+        <div class="actions">
+          <div class="btn" ng-click="vm.refresh()">
+            REFRESH
+          </div>
+          <div class="btn" ng-click="vm.toggleAction('translator')">
+            TRANSLATOR
+          </div>
+          <div class="btn" ng-click="vm.toggleAction('addPhoto')">
+            ADD PHOTO
+          </div>
         </div>
-        <div class="btn" ng-click="vm.toggleAction('addPhoto')">
-          ADD PHOTO
-        </div>
-      </div>
+      </section>
+      <div class="rivs-translation" ng-include="'../partials/riv-forms/translate.html'" ng-if="vm.translator"></div>
     </section>
-    <!-- ========== EMPTY MESSAGE IF NO RIVS ====== -->
-    <div class="empty" ng-if="compiledRivs.length === 0">
-      no rivs, post now or follow people
+    <!-- ========== EMPTY MESSAGES ================= -->
+    <!-- no following rivs -->
+    <div class="empty" ng-if="(compiledRivs.length === 0) && (vm.following)">
+      no rivs, post now or follow people!
     </div>
-    <!-- ========== RIVS ORDERED BY NEWEST ========= -->
-    <div class="rivs" ng-repeat="riv in compiledRivs | orderBy: '-riv.created_at'" ng-if="compiledRivs.length > 0">
-      <div class="rivs-user-img" style="
-        background:url('{{riv.user.profile_photo}}');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;">
-      </div>
-      <div class="rivs-content">
-        <strong>{{riv.user.display_name || riv.user.username}}</strong> <span ng-if="!riv.reply" class="at-user">@{{riv.user.username}}</span>
-        <!-- if reply/correction -->
-        <!-- reply -->
-        <span ng-if="riv.reply && !riv.riv.correction" class="at-user">replied to</span>
-        <!-- correction -->
-        <span ng-if="riv.reply && riv.riv.correction" class="at-user">corrected</span>
-        <!-- replied to/corrected user -->
-        <strong ng-if="riv.reply">{{riv.riv.riv.user.username}}</strong><br />
-        <!-- original riv if correction -->
-        <s ng-if="riv.riv.correction" class="correction">{{riv.riv.riv.content}}</s> <br ng-if="riv.riv.correction" />
-        <!-- riv content -->
-        <span ng-class="{'correction': riv.riv.correction, 'normal': !riv.riv.correction}">{{riv.riv.content}}</span>
-        <div ng-if="riv.riv.photo" class="rivs-photo" style="background: url('{{riv.riv.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;" ng-click="vm.modalToggle('image', riv)"></div>
-        <div class="rivs-actions">
-          <!-- like if regular riv -->
-          <i class="fa fa-star" aria-hidden="true" ng-if="!riv.reply"
-          ng-click="vm.favoriteRivReply('riv', currentUser.id, riv)" ng-class="{'liked': riv.liked}"></i>
-          <!-- like if reply -->
-          <i class="fa fa-star" aria-hidden="true" ng-if="riv.reply"
-          ng-click="vm.favoriteRivReply('reply', currentUser.id, riv)" ng-class="{'liked': riv.liked}"></i>
-          <i class="fa fa-reply" aria-hidden="true" ng-if="!riv.reply" ng-click="vm.toggleAction('reply', riv)"></i>
-          <i class="fa fa-wrench" aria-hidden="true" ng-if="!riv.reply" ng-click="vm.toggleAction('correction', riv)"></i>
-          <i class="fa fa-globe" aria-hidden="true" ng-click="vm.toggleAction('translate', riv)"></i>
-          <!-- delete if regular riv -->
-          <i class="fa fa-trash" aria-hidden="true" ng-if="(currentUser.id === riv.user.id) && !riv.reply" ng-click="vm.deleteOneRiv(riv.riv.id)"></i>
-          <!-- delete if reply -->
-          <i class="fa fa-trash" aria-hidden="true" ng-if="(currentUser.id === riv.user.id) && riv.reply" ng-click="vm.deleteOneReply(riv.riv.id)"></i>
-        </div>
-      </div>
-      <!-- ==== REPLY BOX ======================== -->
-      <div class="rivs-reply" ng-if="riv.replyBox" ng-include="'../partials/riv-forms/reply.html'"></div>
-      <!-- ==== CORRECTION BOX =================== -->
-      <div class="rivs-correction" ng-if="riv.correctionBox"  ng-include="'../partials/riv-forms/correct.html'"></div>
-      <!-- ==== TRANSLATION BOX ================== -->
-      <div class="rivs-translation" ng-if="riv.translationBox" ng-include="'../partials/riv-forms/translate.html'"></div>
+    <!-- no community -->
+    <div class="empty" ng-if="(compiledRivs.length === 0) && (vm.community)">
+      no users related to that language, invite your friends!
     </div>
+    <!-- no likes -->
+    <div class="empty" ng-if="(currentUser.likes.length === 0) && (vm.likes)">
+      no liked rivs, go like some now!
+    </div>
+    <!-- ========== FOLLOWED RIVS ================== -->
+    <div class="rivs" ng-repeat="riv in compiledRivs | orderBy: '-riv.created_at'" ng-if="(compiledRivs.length > 0) && (vm.following)" ng-include="'../partials/home/following-rivs.html'"></div>
+    <!-- ========== GO BACK TO TOP ================= -->
     <div class="window-top">
       <a ng-click="vm.goToTop();">GO BACK TO TOP</a>
     </div>

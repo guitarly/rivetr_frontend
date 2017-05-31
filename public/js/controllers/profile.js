@@ -294,7 +294,8 @@
         method: 'GET',
         url: 'http://transltr.org/api/translate?text=' + text + '&to=' + to + '&from=' + from,
       }).then(function(response){
-        console.log(response);
+        this.translate.translated = true;
+        this.translate.translatedText = response.data.translationText;
       }.bind(this))
     }
 

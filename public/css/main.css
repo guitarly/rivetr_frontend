@@ -24,16 +24,16 @@ input, textarea, select {
   padding: 10px;
   margin: 5px;
   border-radius: 3px;
-  background: whitesmoke; }
+  background: whitesmoke;
+  text-transform: none; }
 
 input:focus, textarea:focus, select:focus {
   outline: none;
   border: 1px solid #a89bbd; }
 
 input[placeholder], textarea[placeholder] {
-  text-transform: uppercase;
   font-family: "Open Sans", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
-  font-size: 10px; }
+  font-size: 11px; }
 
 input[type="submit"]:hover {
   cursor: pointer; }

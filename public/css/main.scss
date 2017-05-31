@@ -60,15 +60,15 @@ input, textarea, select {
   margin: 5px;
   border-radius: 3px;
   background: whitesmoke;
+  text-transform: none;
 }
 input:focus, textarea:focus, select:focus {
   outline: none;
   border: 1px solid lighten($faded-purp, 25%);
 }
 input[placeholder], textarea[placeholder] {
-  text-transform: uppercase;
   font-family: $font;
-  font-size: 10px;
+  font-size: 11px;
 }
 input[type="submit"] {
   &:hover {

@@ -18,8 +18,8 @@
     <div class="login-form">
       <form ng-submit="vm.login();">
         <h1>ACCOUNT INFO</h1>
-        <input type="text" ng-model="vm.loginData.username" placeholder="username" />
-        <input type="password" ng-model="vm.loginData.password" placeholder="password"/>
+        <input type="text" ng-model="vm.loginData.username" placeholder="USERNAME" />
+        <input type="password" ng-model="vm.loginData.password" placeholder="PASSWORD"/>
         <input type="submit" />
         <div class="login-error" ng-if="vm.loginError">{{vm.loginError}}</div>
       </form>

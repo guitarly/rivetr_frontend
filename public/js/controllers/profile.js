@@ -25,8 +25,8 @@
 
     // =========== CONTROLLER VARIABLES =============
     const landing = this;
-    const URL = 'http://localhost:3000/';
-    // const URL = 'http://rivetrapi.herokuapp.com/'
+    // const URL = 'http://localhost:3000/';
+    const URL = 'http://rivetrapi.herokuapp.com/'
     $scope.fullHeader = true;
 
     // =========== HTTP REQUESTS ====================

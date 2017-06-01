@@ -1,0 +1,11 @@
+<section class="modal" ng-if="vm.showDetails">
+  <div class="close" ng-click="vm.modalToggle('details')">
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </div>
+  <section class="main-riv">
+    the main riv
+  </section>
+  <section class="riv-replies" ng-if="riv.riv.replies.length > 0">
+    if it has replies
+  </section>
+</section>

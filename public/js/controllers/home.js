@@ -55,56 +55,61 @@
     this.favoriteRivReply = function(type, user, riv) {
       switch(type) {
         case 'riv':
-          if(!riv.liked) {
-            $http({
-              method: 'POST',
-              url: URL + 'likes',
-              data: {
-                user_id: user,
-                riv_id: riv.riv.id
-              }
-            }).then(function(response) {
-              riv.liked = true;
-            })
-          } else if(riv.liked) {
-            $rootScope.currentUser.likes.forEach(function(liked) {
-              if(liked.riv_id === riv.riv.id) {
-                $http({
-                  method: 'DELETE',
-                  url: URL + 'likes/' + liked.id
-                }).then(function(response) {
-                    console.log(response);
-                    riv.liked = false;
-                })
-              }
-            })
-          }
+          console.log(riv);
+          $http({
+            method: 'POST',
+            url: URL + 'likes',
+            data: {
+              user_id: user,
+              riv_id: riv.riv.id
+            }
+          }).then(function(response) {
+            riv.liked = true;
+            riv.unliked = false;
+            riv.liked_id = response.data.id;
+          });
           break;
         case 'reply':
-          if(!riv.liked) {
-            $http({
-              method: 'POST',
-              url: URL + 'likes',
-              data: {
-                user_id: user,
-                reply_id: riv.riv.id
-              }
-            }).then(function(response) {
-                riv.liked = true;
-            })
-          } else if(riv.liked) {
-            $rootScope.currentUser.likes.forEach(function(liked) {
-              if(liked.reply_id === riv.riv.id) {
-                $http({
-                  method: 'DELETE',
-                  url: URL + 'likes/' + liked.id
-                }).then(function(response) {
-                    console.log(response);
-                    riv.liked = false;
-                })
-              }
-            })
+          if(riv.riv) {
+            riv.reply_liked = riv.riv.id;
+          } else {
+            riv.reply_liked = riv.reply.id;
           }
+          $http({
+            method: 'POST',
+            url: URL + 'likes',
+            data: {
+              user_id: user,
+              reply_id: riv.reply_liked
+            }
+          }).then(function(response) {
+              riv.liked = true;
+              riv.unliked = false;
+              riv.liked_id = response.data.id;
+          });
+          break;
+      }
+    }
+
+    // to unfavorite a riv/reply
+    this.unfavoriteRivReply = function(page, riv) {
+      switch(page) {
+        case 'timeline':
+          $http({
+            method: 'DELETE',
+            url: URL + 'likes/' + riv.liked_id
+          }).then(function(response) {
+              riv.liked = false;
+              riv.liked_id = null;
+          });
+          break;
+        case 'likes':
+          $http({
+            method: 'DELETE',
+            url: URL + 'likes/' + riv.id
+          }).then(function(response) {
+              riv.unliked = true;
+          });
           break;
       }
     }
@@ -172,9 +177,66 @@
       }.bind(this))
     }
 
+    // to search by language
+    this.communitySearch = function() {
+      $http({
+        method: 'GET',
+        url: URL + 'find/' + this.communitySearchForm.status + '/' + this.communitySearchForm.language
+      }).then(function(response) {
+          if(response.data.length > 0) {
+            this.found = true;
+            this.noneFound = false;
+            this.foundUsers = response.data;
+            this.checkFollows();
+          } else {
+            this.noneFound = true;
+            this.found = false;
+          }
+      }.bind(this))
+    }
+
+    // checks current users follows
+    this.checkFollows = function() {
+      this.foundUsers.forEach(function(found){
+        $rootScope.currentUser.followed_follows.forEach(function(followed) {
+          if(followed.followed_id === found.id) {
+            found.followed = true;
+            found.followed_id = followed.id;
+          }
+        });
+      });
+    }
+
+    // follow user
+    this.followUser = function(user) {
+      $http({
+        method: 'POST',
+        url: URL + 'follows',
+        data: {
+          follower_id: $rootScope.currentUser.id,
+          followed_id: user.id
+        }
+      }).then(function(response) {
+          user.followed = true;
+          user.followed_id = response.data.id;
+      });
+    }
+
+    // unfollow user
+    this.unfollowUser = function(user) {
+      $http({
+        method: 'DELETE',
+        url: URL + 'follows/' + user.followed_id
+      }).then(function(response) {
+          user.followed = false;
+          user.followed_id = null;
+      })
+    }
+
     // ========== TIMELINE RIVS ====================
     // modal variables
     this.showFullImage = false;
+    this.showDetails = false;
 
     // toggle modals
     this.modalToggle = function(modal, riv) {
@@ -182,6 +244,10 @@
         case 'image':
           this.showFullImage = !this.showFullImage;
           this.currentRiv = riv.riv;
+          break;
+        case 'details':
+          this.showDetails = !this.showDetails;
+          this.detailedRiv = riv.riv;
           break;
       }
     }
@@ -256,7 +322,6 @@
 
     // goes to index page
     this.indexPage = function() {
-      console.log('index page');
       $location.url('/');
     }
 
@@ -313,8 +378,10 @@
         $scope.compiledRivs.forEach(function(riv) {
           if((!riv.reply) && (liked.riv_id === riv.riv.id)) {
             riv.liked = true;
+            riv.liked_id = liked.id;
           } else if ((riv.reply) && (liked.reply_id === riv.riv.id)) {
             riv.liked = true;
+            riv.liked_id = liked.id;
           }
         });
       });

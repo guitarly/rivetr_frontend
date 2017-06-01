@@ -1,0 +1,46 @@
+<div class="community">
+  <!-- =========== SEARCH FORM ============== -->
+  <div class="community-form">
+    <h4>LOOKING FOR PEOPLE...</h4>
+    <form ng-submit="vm.communitySearch()">
+      <div class="radio">
+        <input type="radio" ng-model="vm.communitySearchForm.status" value="learning"/> LEARNING <br />
+        <input type="radio" ng-model="vm.communitySearchForm.status" value="known"/> WHO KNOW
+      </div>
+      <div class="language-select">
+        <select ng-model="vm.communitySearchForm.language">
+          <option ng-repeat="lang in vm.languages" value="{{lang.languageName}}">{{lang.languageName}}</option>
+        </select><br />
+        <input type="submit" value="search"/>
+      </div>
+    </form>
+  </div>
+  <!-- ========= EMPTY MESSAGE ============== -->
+  <div class="empty" ng-if="vm.noneFound">
+    NO USERS FOUND
+  </div>
+  <!-- ========= USERS ==================== -->
+  <div class="found-users" ng-if="(vm.found) && (user.id !== currentUser.id)" ng-repeat="user in vm.foundUsers">
+    <div class="found-users-photo" style="background:url('{{user.profile_photo}}');background-size:cover;background-position:center"></div>
+    <div class="found-users-name">
+      <h4><a ng-href="#!/{{user.username}}">{{user.display_name || user.username}}</a></h4>
+      <a ng-href="#!/{{user.username}}">@{{user.username}}</a>
+    </div>
+    <div class="found-users-lang">
+      <div>
+        <strong>known</strong><br />
+        {{user.language_known}}
+      </div>
+      <div>
+        <strong>learning</strong><br />
+        {{user.language_learning}}
+      </div>
+    </div>
+    <div class="found-users-follow" ng-if="!user.followed" ng-click="vm.followUser(user)">
+      <i class="fa fa-user-plus" aria-hidden="true"></i>
+    </div>
+    <div class="found-users-follow followed" ng-if="user.followed" ng-click="vm.unfollowUser(user)">
+      <i class="fa fa-check" aria-hidden="true"></i>
+    </div>
+  </div>
+</div>

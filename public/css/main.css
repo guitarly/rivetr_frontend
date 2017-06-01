@@ -896,4 +896,113 @@ nav {
 .home-liked .not-liked {
   color: #9d9d9d; }
 
+.community {
+  width: 100%; }
+  .community .radio {
+    width: 30%;
+    padding-top: 5px;
+    font-size: 15px;
+    font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
+    font-weight: 700;
+    color: #67AECA; }
+  .community .language-select {
+    width: 30%;
+    text-align: left; }
+  .community .found-users {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid #E9E9E9;
+    padding: 10px 0px; }
+    .community .found-users:last-of-type {
+      padding-bottom: 0px; }
+  .community .found-users-photo {
+    width: 70px;
+    height: 70px;
+    border-radius: 3px; }
+  .community .found-users-name {
+    width: 20%;
+    padding-top: 10px;
+    font-weight: 300;
+    font-size: 13px; }
+    .community .found-users-name h4 {
+      padding-left: 0px;
+      text-transform: uppercase;
+      font-size: 17px; }
+      .community .found-users-name h4 a {
+        color: #675682;
+        transition: 0.2s ease-in;
+        -moz-transition: 0.2s ease-in;
+        -webkit-transition: 0.2s ease-in;
+        -o-transition: 0.2s ease-in; }
+        .community .found-users-name h4 a:hover {
+          color: #67AECA;
+          transition: 0.2s ease-in;
+          -moz-transition: 0.2s ease-in;
+          -webkit-transition: 0.2s ease-in;
+          -o-transition: 0.2s ease-in; }
+    .community .found-users-name a {
+      color: #9d9d9d;
+      transition: 0.2s ease-in;
+      -moz-transition: 0.2s ease-in;
+      -webkit-transition: 0.2s ease-in;
+      -o-transition: 0.2s ease-in; }
+      .community .found-users-name a:hover {
+        color: #67AECA;
+        transition: 0.2s ease-in;
+        -moz-transition: 0.2s ease-in;
+        -webkit-transition: 0.2s ease-in;
+        -o-transition: 0.2s ease-in; }
+  .community .found-users-lang {
+    display: flex;
+    justify-content: space-around;
+    width: 45%;
+    padding-top: 10px;
+    font-size: 13px;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-align: center;
+    color: #6a6a6a; }
+    .community .found-users-lang strong {
+      font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
+      font-size: 15px;
+      color: #67AECA;
+      text-transform: uppercase; }
+  .community .found-users-follow {
+    background: #E52A6F;
+    color: whitesmoke;
+    width: 10%;
+    height: 50px;
+    margin-top: 10px;
+    border-radius: 3px;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box; }
+    .community .found-users-follow:hover {
+      cursor: pointer; }
+  .community .followed {
+    background: #675682; }
+  .community h4 {
+    font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
+    font-size: 20px;
+    color: #675682;
+    padding-left: 10px; }
+  .community form {
+    display: flex;
+    justify-content: center; }
+  .community input[type="radio"] {
+    margin-bottom: 14px; }
+  .community input[type="submit"], .community select {
+    padding: 3px;
+    width: 100%; }
+  .community input[type="submit"] {
+    background: #E52A6F;
+    text-transform: uppercase;
+    border: 1px solid #E52A6F;
+    font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: whitesmoke; }
+
 /*# sourceMappingURL=main.css.map */

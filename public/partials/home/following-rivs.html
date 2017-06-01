@@ -20,11 +20,14 @@
   <div ng-if="riv.riv.photo" class="rivs-photo" style="background: url('{{riv.riv.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;" ng-click="vm.modalToggle('image', riv)"></div>
   <div class="rivs-actions">
     <!-- like if regular riv -->
-    <i class="fa fa-star" aria-hidden="true" ng-if="!riv.reply"
+    <i class="fa fa-star" aria-hidden="true" ng-if="!riv.reply && !riv.liked"
     ng-click="vm.favoriteRivReply('riv', currentUser.id, riv)" ng-class="{'liked': riv.liked}"></i>
     <!-- like if reply -->
-    <i class="fa fa-star" aria-hidden="true" ng-if="riv.reply"
-    ng-click="vm.favoriteRivReply('reply', currentUser.id, riv)" ng-class="{'liked': riv.liked}"></i>
+    <i class="fa fa-star" aria-hidden="true" ng-if="riv.reply && !riv.liked"
+    ng-click="vm.favoriteRivReply('reply', currentUser.id, riv)"></i>
+    <!-- if already liked -->
+    <i class="fa fa-star liked" aria-hidden="true" ng-if="riv.liked"
+    ng-click="vm.unfavoriteRivReply(riv)"></i>
     <i class="fa fa-reply" aria-hidden="true" ng-if="!riv.reply" ng-click="vm.toggleAction('reply', riv)"></i>
     <i class="fa fa-wrench" aria-hidden="true" ng-if="!riv.reply" ng-click="vm.toggleAction('correction', riv)"></i>
     <i class="fa fa-globe" aria-hidden="true" ng-click="vm.toggleAction('translate', riv)"></i>

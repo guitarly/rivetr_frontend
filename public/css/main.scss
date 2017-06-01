@@ -1016,3 +1016,44 @@ nav {
     color: darken($grey, 30%);
   }
 }
+.community {
+  width: 100%;
+  h4 {
+    font-family: $accent-font;
+    font-size: 20px;
+    color: $faded-purp;
+    padding-left: 10px;
+  }
+  form {
+    display: flex;
+    justify-content: center;
+  }
+  .radio {
+    width:  30%;
+    padding-top: 5px;
+    font-size: 15px;
+    font-family: $accent-font;
+    font-weight: 700;
+    color: $blue;
+  }
+  .language-select {
+    width: 30%;
+    text-align: left;
+  }
+  input[type="radio"] {
+    margin-bottom: 14px;
+  }
+  input[type="submit"], select {
+    padding: 3px;
+    width: 100%;
+  }
+  input[type="submit"] {
+    background: $pink;
+    text-transform: uppercase;
+    border: 1px solid $pink;
+    font-family: $accent-font;
+    font-size: 13px;
+    font-weight: 700;
+    color: whitesmoke;
+  }
+}

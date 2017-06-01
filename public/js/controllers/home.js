@@ -175,6 +175,7 @@
     // ========== TIMELINE RIVS ====================
     // modal variables
     this.showFullImage = false;
+    this.showDetails = false;
 
     // toggle modals
     this.modalToggle = function(modal, riv) {
@@ -182,6 +183,12 @@
         case 'image':
           this.showFullImage = !this.showFullImage;
           this.currentRiv = riv.riv;
+          break;
+        case 'details':
+          console.log(riv);
+          this.showDetails = !this.showDetails;
+          this.detailedRiv = riv.riv;
+          console.log(this.showDetails);
           break;
       }
     }

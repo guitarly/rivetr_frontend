@@ -896,4 +896,38 @@ nav {
 .home-liked .not-liked {
   color: #9d9d9d; }
 
+.community {
+  width: 100%; }
+  .community h4 {
+    font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
+    font-size: 20px;
+    color: #675682;
+    padding-left: 10px; }
+  .community form {
+    display: flex;
+    justify-content: center; }
+  .community .radio {
+    width: 30%;
+    padding-top: 5px;
+    font-size: 15px;
+    font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
+    font-weight: 700;
+    color: #67AECA; }
+  .community .language-select {
+    width: 30%;
+    text-align: left; }
+  .community input[type="radio"] {
+    margin-bottom: 14px; }
+  .community input[type="submit"], .community select {
+    padding: 3px;
+    width: 100%; }
+  .community input[type="submit"] {
+    background: #E52A6F;
+    text-transform: uppercase;
+    border: 1px solid #E52A6F;
+    font-family: "Open Sans Condensed", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", "MS PGothic", Osaka, "Apple SD Gothic Neo", sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: whitesmoke; }
+
 /*# sourceMappingURL=main.css.map */

@@ -1,0 +1,17 @@
+<div class="community">
+  <div class="community-form">
+    <h4>LOOKING FOR PEOPLE...</h4>
+    <form>
+      <div class="radio">
+        <input type="radio" ng-model="vm.communitySearchForm.status" value="learning"/> LEARNING <br />
+        <input type="radio" ng-model="vm.communitySearchForm.status" value="known"/> WHO KNOW
+      </div>
+      <div class="language-select">
+        <select ng-model="vm.communitySearchForm.language">
+          <option ng-repeat="lang in vm.languages" value="{{lang.languageName}}">{{lang.languageName}}</option>
+        </select><br />
+        <input type="submit" value="search"/>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 <!-- =============== MODALS =============== -->
 <section ng-include="'../partials/modals/image.html'"></section>
-
+<section ng-include="'../partials/modals/riv.html'"></section>
 <!-- ================= NAVIGATION ================= -->
 <section ng-include="'../partials/navbar.html'"></section>
 <div class="home-nav"></div>
@@ -92,7 +92,7 @@
     <!-- ========== FOLLOWED RIVS ================== -->
     <div class="rivs" ng-repeat="riv in compiledRivs | orderBy: '-riv.created_at'" ng-if="(compiledRivs.length > 0) && (vm.following)" ng-include="'../partials/home/following-rivs.html'"></div>
     <!-- ========== COMMUNITY ====================== -->
-
+    <div class="rivs" ng-if="vm.community" ng-include="'../partials/home/community.html'"></div>
     <!-- ========== LIKED RIVS ===================== -->
     <div class="rivs home-liked" ng-repeat="liked in currentUser.likes | orderBy: '-liked.created_at'" ng-if="(currentUser.likes.length > 0) && (vm.likes)" ng-include="'../partials/home/liked-rivs.html'"></div>
     <!-- ========== GO BACK TO TOP ================= -->

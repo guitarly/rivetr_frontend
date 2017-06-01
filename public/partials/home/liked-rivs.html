@@ -35,12 +35,16 @@
   <!-- replies -->
   <span ng-class="normal" ng-if="liked.reply_id">{{liked.reply.content}}</span>
   <div class="rivs-actions">
-    <!-- like if regular riv -->
-    <i class="fa fa-star" aria-hidden="true" ng-if="!liked.reply_id"
-    ng-click="vm.favoriteRivReply('riv', currentUser.id, liked.riv)" ng-class="{'not-liked': liked.riv.unliked}"></i>
-    <!-- like if reply -->
-    <i class="fa fa-star" aria-hidden="true" ng-if="liked.reply_id"
-    ng-click="vm.favoriteRivReply('reply', currentUser.id, liked.reply)" ng-class="{'not-liked': liked.reply.unliked}"></i>
+    <!-- already liked -->
+    <i class="fa fa-star" aria-hidden="true" ng-if="!liked.unliked"
+    ng-click="vm.unfavoriteRivReply('likes', liked)"></i>
+    <!-- like if normal (if unliked) -->
+    <i class="fa fa-star not-liked" aria-hidden="true" ng-if="liked.unliked && !liked.reply_id"
+    ng-click="vm.favoriteRivReply('riv', currentUser.id, liked)"></i>
+    <!-- like if reply (if unliked) -->
+    <i class="fa fa-star not-liked" aria-hidden="true" ng-if="liked.unliked && liked.reply_id"
+    ng-click="vm.favoriteRivReply('reply', currentUser.id, liked)"></i>
+    <!-- other actions -->
     <i class="fa fa-reply" aria-hidden="true" ng-if="!liked.reply_id" ng-click="vm.toggleAction('reply', liked.riv)"></i>
     <i class="fa fa-wrench" aria-hidden="true" ng-if="!liked.reply_id" ng-click="vm.toggleAction('correction', liked.riv)"></i>
     <i class="fa fa-globe" aria-hidden="true" ng-if="!liked.reply_id" ng-click="vm.toggleAction('translate', liked.riv)"></i>

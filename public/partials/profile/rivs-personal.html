@@ -1,0 +1,24 @@
+<div class="rivs-user-img" style="
+  background:url('{{vm.profileUser.profile_photo}}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;" ng-click="vm.modalToggle('image', $index)">
+</div>
+<div class="rivs-content">
+  <strong>{{vm.profileUser.display_name || vm.profileUser.username}}</strong> <span class="at-user">@{{vm.profileUser.username}}</span><br />
+  {{riv.content}}
+  <div ng-if="riv.photo" class="rivs-photo" style="background: url('{{riv.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;" ng-click="vm.modalToggle('image', riv)"></div>
+  <div class="rivs-actions">
+    <i class="fa fa-star" aria-hidden="true" ng-click="vm.favoriteRivReply('riv', currentUser.id, riv)" ng-class="{'liked': riv.liked}"></i>
+    <i class="fa fa-reply" aria-hidden="true" ng-click="vm.toggleAction('reply', riv)"></i>
+    <i class="fa fa-wrench" aria-hidden="true"  ng-click="vm.toggleAction('correction', riv)"></i>
+    <i class="fa fa-globe" aria-hidden="true" ng-click="vm.toggleAction('translate', riv)"></i>
+    <i class="fa fa-trash" aria-hidden="true" ng-if="vm.isCurrentUser" ng-click="vm.deleteOneRiv(riv.id)"></i>
+  </div>
+</div>
+<!-- ==== REPLY BOX ======================== -->
+<div class="rivs-reply" ng-if="riv.replyBox" ng-include="'../partials/riv-forms/reply.html'"></div>
+<!-- ==== CORRECTION BOX =================== -->
+<div class="rivs-correction" ng-if="riv.correctionBox"  ng-include="'../partials/riv-forms/correct.html'"></div>
+<!-- ==== TRANSLATION BOX ================== -->
+<div class="rivs-translation" ng-if="riv.translationBox" ng-include="'../partials/riv-forms/translate.html'"></div>

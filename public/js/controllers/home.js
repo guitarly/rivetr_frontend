@@ -9,8 +9,8 @@
 
     // =========== CONTROLLER VARIABLES =============
     const home = this;
-    // const URL = 'http://localhost:3000/';
-    const URL = 'http://rivetrapi.herokuapp.com/'
+    const URL = 'http://localhost:3000/';
+    // const URL = 'http://rivetrapi.herokuapp.com/'
     $scope.fullHeader = true;
     $scope.compiledRivs = [];
 
@@ -55,28 +55,56 @@
     this.favoriteRivReply = function(type, user, riv) {
       switch(type) {
         case 'riv':
-          $http({
-            method: 'POST',
-            url: URL + 'likes',
-            data: {
-              user_id: user,
-              riv_id: riv.riv.id
-            }
-          }).then(function(response) {
-            riv.liked = true;
-          })
+          if(!riv.liked) {
+            $http({
+              method: 'POST',
+              url: URL + 'likes',
+              data: {
+                user_id: user,
+                riv_id: riv.riv.id
+              }
+            }).then(function(response) {
+              riv.liked = true;
+            })
+          } else if(riv.liked) {
+            $rootScope.currentUser.likes.forEach(function(liked) {
+              if(liked.riv_id === riv.riv.id) {
+                $http({
+                  method: 'DELETE',
+                  url: URL + 'likes/' + liked.id
+                }).then(function(response) {
+                    console.log(response);
+                    riv.liked = false;
+                })
+              }
+            })
+          }
           break;
         case 'reply':
-          $http({
-            method: 'POST',
-            url: URL + 'likes',
-            data: {
-              user_id: user,
-              reply_id: riv.riv.id
-            }
-          }).then(function(response) {
-              riv.liked = true;
-          })
+          if(!riv.liked) {
+            $http({
+              method: 'POST',
+              url: URL + 'likes',
+              data: {
+                user_id: user,
+                reply_id: riv.riv.id
+              }
+            }).then(function(response) {
+                riv.liked = true;
+            })
+          } else if(riv.liked) {
+            $rootScope.currentUser.likes.forEach(function(liked) {
+              if(liked.reply_id === riv.riv.id) {
+                $http({
+                  method: 'DELETE',
+                  url: URL + 'likes/' + liked.id
+                }).then(function(response) {
+                    console.log(response);
+                    riv.liked = false;
+                })
+              }
+            })
+          }
           break;
       }
     }
@@ -118,12 +146,83 @@
       }
     }
 
+    // gets languages available
+    this.getLanguages = function() {
+      $http({
+        method: 'GET',
+        url: 'http://transltr.org/api/getlanguagesfortranslate'
+      }).then(function(response){
+          this.languages =  response.data;
+      }.bind(this))
+    }
+
+    // to translate
+    this.translateText = function() {
+      // sets variables for url params
+      let text = this.translate.text;
+      let from = this.translate.from;
+      let to = this.translate.to;
+      // sends request to translatr
+      $http({
+        method: 'GET',
+        url: 'http://transltr.org/api/translate?text=' + text + '&to=' + to + '&from=' + from,
+      }).then(function(response){
+        this.translate.translated = true;
+        this.translate.translatedText = response.data.translationText;
+      }.bind(this))
+    }
+
     // ========== TIMELINE RIVS ====================
+    // modal variables
+    this.showFullImage = false;
+
+    // toggle modals
+    this.modalToggle = function(modal, riv) {
+      switch(modal) {
+        case 'image':
+          this.showFullImage = !this.showFullImage;
+          this.currentRiv = riv.riv;
+          break;
+      }
+    }
+
+    // timeline variables
+    this.following = true;
+    this.community = false;
+    this.likes = false;
+
+    // toggle timeline rivs
+    this.toggleRivs = function(filter) {
+      switch(filter) {
+        case 'following':
+          this.following = true;
+          this.community = false;
+          this.likes = false;
+          break;
+        case 'community':
+          this.following = false;
+          this.community = true;
+          this.likes = false;
+          break;
+        case 'likes':
+          this.following = false;
+          this.community = false;
+          this.likes = true;
+      }
+    }
+
     // toggle riv actions
     this.toggleAction = function(action, riv) {
       switch(action) {
         case 'addPhoto':
           this.addPhotoForm = this.addPhotoForm === true ? false:true;
+          break;
+        case 'translator':
+          this.translate = {};
+          if(this.newPostData) {
+            this.translate.text = this.newPostData.content;
+          }
+          this.translator = this.translator === true? false:true;
           break;
         case 'reply':
           riv.replyBox = riv.replyBox === true ? false:true;
@@ -136,6 +235,12 @@
           riv.translationBox = false;
           break;
         case 'translate':
+          // sets ng-model to populate translation box
+          this.translate = {};
+          if(riv.riv){
+            this.translate.text = riv.riv.content;
+          }
+          // opens translation box
           riv.translationBox = riv.translationBox === true ? false:true;
           riv.replyBox = false;
           riv.correctionBox = false;
@@ -222,7 +327,7 @@
 
     // ============ AUTOMATIC FUNCTION CALLS =======
     this.sessionCheck();
-
+    this.getLanguages();
   }]); // ends controller
 
 })(); // ends closure

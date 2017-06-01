@@ -86,7 +86,7 @@
           <div class="sidebar-followers" ng-if="(vm.profileUser.follower_follows.length > 0) && (vm.followers)" ng-repeat="follower in vm.profileUser.follower_follows">
             <div class="follow-img" style="background: url('{{follower.follower.profile_photo}}'); background-size: cover; background-position: center;"></div>
             <div class="follow-info">
-              <h3><a ng-href="http://localhost:8000/#!/{{follower.follower.username}}">{{follower.follower.display_name}}</a></h3>
+              <h3><a ng-href="#!/{{follower.follower.username}}">{{follower.follower.display_name}}</a></h3>
               @{{follower.follower.username}}
             </div>
           </div>
@@ -108,140 +108,25 @@
       <div class="rivs-filters">
         <strong>{{vm.profileUser.display_name || vm.profileUser.username}}'s rivs</strong> <a ng-class="{selected: vm.personal}" ng-click="vm.toggleRivs('personal')">personal</a> <a ng-class="{selected: vm.replies}" ng-click="vm.toggleRivs('replies')">replies</a> <a ng-class="{selected: vm.corrections}" ng-click="vm.toggleRivs('corrections')">corrections</a>
       </div>
-      <!-- ======= RIVS (PERSONAL) ================= -->
+      <!-- ========== EMPTY MESSAGES ================= -->
+      <!-- no personal -->
       <div class="empty" ng-if="(vm.profileUser.rivs.length === 0) && vm.personal">
         {{vm.profileUser.display_name || vm.profileUser.username}} has no rivs
       </div>
-      <div class="rivs" ng-if="(vm.profileUser.rivs.length > 0) && (vm.personal)" ng-repeat="riv in vm.profileUser.rivs">
-        <div class="rivs-user-img" style="
-          background:url('{{vm.profileUser.profile_photo}}');
-          background-size: cover;
-          background-position: center;
-          background-repeat: no-repeat;" ng-click="vm.modalToggle('image', $index)">
-        </div>
-        <div class="rivs-content">
-          <strong>{{vm.profileUser.display_name || vm.profileUser.username}}</strong> <span class="at-user">@{{vm.profileUser.username}}</span><br />
-          {{riv.content}}
-          <div ng-if="riv.photo" class="rivs-photo" style="background: url('{{riv.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;" ng-click="vm.modalToggle('image', riv)"></div>
-          <div class="rivs-actions">
-            <i class="fa fa-star" aria-hidden="true" ng-click="vm.favoriteRivReply('riv', currentUser.id, riv)" ng-class="{'liked': riv.liked}"></i>
-            <i class="fa fa-reply" aria-hidden="true" ng-click="vm.toggleAction('reply', riv)"></i>
-            <i class="fa fa-wrench" aria-hidden="true"  ng-click="vm.toggleAction('correction', riv)"></i>
-            <i class="fa fa-globe" aria-hidden="true" ng-click="vm.toggleAction('translate', riv)"></i>
-            <i class="fa fa-trash" aria-hidden="true" ng-if="vm.isCurrentUser" ng-click="vm.deleteOneRiv(riv.id)"></i>
-          </div>
-        </div>
-        <!-- ==== REPLY BOX ======================== -->
-        <div class="rivs-reply" ng-if="riv.replyBox">
-          <form ng-submit="vm.sendReply('reply', currentUser.id, riv)">
-            <textarea ng-model="vm.replyData.content"></textarea>
-            <input type="submit" value="reply" />
-          </form>
-        </div>
-        <!-- ==== CORRECTION BOX =================== -->
-        <div class="rivs-correction" ng-if="riv.correctionBox">
-          <form ng-submit="vm.sendReply('correction', currentUser.id, riv)">
-            <textarea ng-model="vm.correctionData.content">{{riv.content}}</textarea>
-            <input type="submit" value="correct" />
-          </form>
-        </div>
-        <!-- ==== TRANSLATION BOX ================== -->
-        <div class="rivs-translation" ng-if="riv.translationBox">
-          <form>
-            <textarea>{{riv.content}}</textarea>
-            <center>
-              <strong>translate from</strong>
-              <select>
-                <option>language</option>
-              </select>
-              <strong>translate to</strong>
-              <select>
-                <option>language</option>
-              </select>
-            </center>
-            <input type="submit" value="translate" />
-          </form>
-        </div>
-      </div>
-      <!-- ======= RIVS (REPLIES) ================= -->
+      <!-- no replies -->
       <div class="empty" ng-if="(vm.profileUser.replies.length === 0) && vm.replies">
         {{vm.profileUser.display_name || vm.profileUser.username}} has no replies
       </div>
-      <div class="rivs" ng-repeat="reply in vm.profileUser.replies" ng-if="(vm.profileUser.replies.length > 0) && (vm.replies) && (!reply.correction)">
-        <div class="rivs-user-img" style="
-          background:url('{{vm.profileUser.profile_photo}}');
-          background-size: cover;
-          background-position: center;
-          background-repeat: no-repeat;" ng-click="vm.modalToggle('image', $index)">
-        </div>
-        <div class="rivs-content">
-          <strong>{{vm.profileUser.display_name || vm.profileUser.username}}</strong> <span class="at-user">replied to</span> <strong><a ng-href="http://localhost:8000/#!/{{reply.riv.user.username}}">{{reply.riv.user.display_name}}</a></strong><br />
-          {{reply.content}}
-          <div ng-if="reply.photo" class="rivs-photo" style="background: url('{{reply.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;" ng-click="vm.modalToggle('image', reply)"></div>
-          <div class="rivs-actions">
-            <i class="fa fa-star" aria-hidden="true" ng-click="vm.favoriteRivReply('reply', currentUser.id, reply)" ng-class="{liked: reply.liked}"></i>
-            <i class="fa fa-globe" aria-hidden="true" ng-click="vm.toggleAction('translate', reply)"></i>
-            <i class="fa fa-trash" aria-hidden="true" ng-if="vm.isCurrentUser" ng-click="vm.deleteOneReply(reply.id)"></i>
-          </div>
-        </div>
-        <!-- ==== TRANSLATION BOX ================== -->
-        <div class="rivs-translation" ng-if="reply.translationBox">
-          <form>
-            <textarea>{{reply.content}}</textarea>
-            <center>
-              <strong>translate from</strong>
-              <select>
-                <option>language</option>
-              </select>
-              <strong>translate to</strong>
-              <select>
-                <option>language</option>
-              </select>
-            </center>
-            <input type="submit" value="translate" />
-          </form>
-        </div>
-      </div>
-      <!-- ======= RIVS (CORRECTIONS) ================= -->
+      <!-- no corrections -->
       <div class="empty" ng-if="(vm.profileUser.replies.length === 0) && vm.corrections">
         {{vm.profileUser.display_name || vm.profileUser.username}} has no corrections
       </div>
-      <div class="rivs" ng-repeat="correction in vm.profileUser.replies" ng-if="(vm.profileUser.replies.length > 0) && (vm.corrections) && (correction.correction)">
-        <div class="rivs-user-img" style="
-          background:url('{{vm.profileUser.profile_photo}}');
-          background-size: cover;
-          background-position: center;
-          background-repeat: no-repeat;" ng-click="vm.modalToggle('image', $index)">
-        </div>
-        <div class="rivs-content">
-          <strong>{{vm.profileUser.display_name || vm.profileUser.username}}</strong> <span class="at-user">corrected</span> <strong><a ng-href="http://localhost:8000/#!/{{correction.riv.user.username}}">{{correction.riv.user.display_name}}</a></strong><br />
-          <s class="correction">{{correction.riv.content}}</s><br />
-          <span class="correction">{{correction.content}}</span>
-          <div ng-if="correction.photo" class="rivs-photo" style="background: url('{{correction.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;" ng-click="vm.modalToggle('image', correction)"></div>
-          <div class="rivs-actions">
-            <i class="fa fa-star" aria-hidden="true" ng-click="vm.favoriteRivReply('reply', currentUser.id, correction)" ng-class="{liked: correction.liked}"></i>
-            <i class="fa fa-globe" aria-hidden="true" ng-click="vm.toggleAction('translate', correction)"></i>
-            <i class="fa fa-trash" aria-hidden="true" ng-if="vm.isCurrentUser" ng-click="vm.deleteOneReply(correction.id)"></i>
-          </div>
-        </div>
-        <!-- ==== TRANSLATION BOX ================== -->
-        <div class="rivs-translation" ng-if="correction.translationBox">
-          <form>
-            <textarea>{{correction.content}}</textarea>
-            <center>
-              <strong>translate from</strong>
-              <select>
-                <option>language</option>
-              </select>
-              <strong>translate to</strong>
-              <select>
-                <option>language</option>
-              </select>
-            </center>
-            <input type="submit" value="translate" />
-          </form>
-        </div>
-      </div>
+      <!-- ======= RIVS (PERSONAL) ================= -->
+      <div class="rivs" ng-if="(vm.profileUser.rivs.length > 0) && (vm.personal)" ng-repeat="riv in vm.profileUser.rivs | orderBy: '-created_at'" ng-include="'../partials/profile/rivs-personal.html'"></div>
+      <!-- ======= RIVS (REPLIES) ================= -->
+      <div class="rivs" ng-repeat="reply in vm.profileUser.replies | orderBy: '-created_at'" ng-if="(vm.profileUser.replies.length > 0) && (vm.replies) && (!reply.correction)" ng-include="'../partials/profile/rivs-replies.html'"></div>
+      <!-- ======= RIVS (CORRECTIONS) ================= -->
+      <div class="rivs" ng-repeat="correction in vm.profileUser.replies | orderBy: '-created_at'" ng-if="(vm.profileUser.replies.length > 0) && (vm.corrections) && (correction.correction)" ng-include="'../partials/profile/rivs-corrections.html'"></div>
       <!-- ======= RETURN TO TOP =================== -->
       <div class="window-top">
         <a ng-click="vm.goToTop();">GO BACK TO TOP</a>

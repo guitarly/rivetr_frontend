@@ -1,0 +1,68 @@
+<!-- user icon if normal -->
+<div class="rivs-user-img" style="
+  background:url('{{liked.riv.user.profile_photo}}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;"
+  ng-if="!liked.reply_id">
+</div>
+<!-- user icon if reply -->
+<div class="rivs-user-img" style="
+  background:url('{{liked.reply.user.profile_photo}}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;"
+  ng-if="liked.reply_id">
+</div>
+<div class="rivs-content">
+  <!-- if normal -->
+  <strong><a ng-href="#!/{{liked.riv.user.username}}" ng-if="!liked.reply_id">{{liked.riv.user.display_name || liked.riv.user.username}}</a></strong>
+  <span ng-if="!liked.reply_id" class="at-user">@{{liked.riv.user.username}}</span>
+  <!-- if reply/correction -->
+  <!-- reply -->
+  <strong><a ng-href="#!/{{liked.riv.user.username}}" ng-if="liked.reply_id">{{liked.reply.user.display_name || liked.reply.user.username}}</a></strong>
+  <span ng-if="liked.reply_id && !liked.reply.correction" class="at-user">replied to</span>
+  <!-- correction -->
+  <span ng-if="liked.reply_id && liked.reply.correction" class="at-user">corrected</span>
+  <!-- replied to/corrected user -->
+  <strong ng-if="liked.reply_id"><a ng-href="#!/{{liked.reply.riv.user.username}}">{{liked.reply.riv.user.display_name || liked.reply.riv.user.username}}</a></strong><br />
+  <!-- original riv if correction -->
+  <s ng-if="liked.reply.correction" class="correction">{{liked.reply.riv.content}}</s> <br ng-if="riv.riv.correction" />
+  <!-- riv content -->
+  <!-- normal -->
+  <span ng-class="normal" ng-if="!liked.reply_id">{{liked.riv.content}}</span>
+  <div ng-if="liked.riv.photo" class="rivs-photo" style="background: url('{{liked.riv.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;" ng-click="vm.modalToggle('image', riv)"></div>
+  <!-- replies -->
+  <span ng-class="normal" ng-if="liked.reply_id">{{liked.reply.content}}</span>
+  <div class="rivs-actions">
+    <!-- like if regular riv -->
+    <i class="fa fa-star" aria-hidden="true" ng-if="!liked.reply_id"
+    ng-click="vm.favoriteRivReply('riv', currentUser.id, liked.riv)" ng-class="{'not-liked': liked.riv.unliked}"></i>
+    <!-- like if reply -->
+    <i class="fa fa-star" aria-hidden="true" ng-if="liked.reply_id"
+    ng-click="vm.favoriteRivReply('reply', currentUser.id, liked.reply)" ng-class="{'not-liked': liked.reply.unliked}"></i>
+    <i class="fa fa-reply" aria-hidden="true" ng-if="!liked.reply_id" ng-click="vm.toggleAction('reply', liked.riv)"></i>
+    <i class="fa fa-wrench" aria-hidden="true" ng-if="!liked.reply_id" ng-click="vm.toggleAction('correction', liked.riv)"></i>
+    <i class="fa fa-globe" aria-hidden="true" ng-if="!liked.reply_id" ng-click="vm.toggleAction('translate', liked.riv)"></i>
+    <i class="fa fa-globe" aria-hidden="true" ng-if="liked.reply_id" ng-click="vm.toggleAction('translate', liked.reply)"></i>
+  </div>
+</div>
+<!-- ==== REPLY BOX ======================== -->
+<div class="rivs-reply" ng-if="liked.riv.replyBox">
+  <form ng-submit="vm.sendReply('reply', currentUser.id, liked)">
+    <textarea ng-model="vm.replyData.content"></textarea>
+    <input type="submit" value="reply" />
+  </form>
+</div>
+<!-- ==== CORRECTION BOX =================== -->
+<div class="rivs-correction" ng-if="liked.riv.correctionBox">
+  <form ng-submit="vm.sendReply('correction', currentUser.id, liked)">
+    <textarea ng-model="vm.correctionData.content"></textarea>
+    <input type="submit" value="correct" />
+  </form>
+</div>
+<!-- ==== TRANSLATION BOX ================== -->
+<!-- normal -->
+<div class="rivs-translation" ng-if="liked.riv.translationBox" ng-include="'../partials/riv-forms/translate.html'"></div>
+<!-- reply -->
+<div class="rivs-translation" ng-if="liked.reply.translationBox" ng-include="'../partials/riv-forms/translate.html'"></div>

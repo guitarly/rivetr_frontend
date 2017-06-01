@@ -9,8 +9,8 @@
 
     // =========== CONTROLLER VARIABLES ==============
     const landing = this;
-    // const URL = 'http://localhost:3000/';
-    const URL = 'http://rivetrapi.herokuapp.com/'
+    const URL = 'http://localhost:3000/';
+    // const URL = 'http://rivetrapi.herokuapp.com/'
 
     // =========== HTTP REQUESTS ======================
     // to create a user
@@ -27,17 +27,6 @@
           }
           this.newUserData = null;
           this.login();
-      }.bind(this));
-    };
-
-    // to create a riv
-    this.postRiv = function(){
-      $http({
-        method: 'POST',
-        url: URL + 'rivs',
-        data: this.newRivData
-      }).then(function(response){
-          console.log(response);
       }.bind(this));
     };
 
@@ -63,6 +52,16 @@
       }.bind(this))
     }
 
+    // gets languages available
+    this.getLanguages = function() {
+      $http({
+        method: 'GET',
+        url: 'http://transltr.org/api/getlanguagesfortranslate'
+      }).then(function(response){
+          this.languages =  response.data;
+      }.bind(this))
+    }
+
     // ============ MODAL DE/ACTIVATION =============
     // default variables
     this.showRegister = false;
@@ -73,10 +72,13 @@
       switch(modal) {
         case 'register':
           this.showRegister = !this.showRegister;
+          this.newUserData.language_learning = 'LANGUAGE LEARNING';
+          this.newUserData.language_known = 'LANGUAGE KNOWN';
           this.loginError = null;
           break;
         case 'login':
           this.showLogin = !this.showLogin;
+          this.loginError = null;
           break;
       }
     }
@@ -101,7 +103,9 @@
       }
     }
 
+    // ============ AUTOMATIC FUNCTION CALLS =======
     this.sessionCheck();
+    this.getLanguages();
 
   }]); // ends controller
 

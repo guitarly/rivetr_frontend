@@ -274,6 +274,10 @@ nav {
       margin-top: 5px;
     }
   }
+  strong {
+    color: $faded-purp;
+    font-size: 13px;
+  }
   input {
     width: 92%;
     &[type="submit"] {
@@ -289,6 +293,22 @@ nav {
       }
     }
   }
+  .languages {
+    padding-left: 5px;
+    select {
+      width: calc(100% - 20px);
+      padding: 10px;
+    }
+    @include for-large {
+      padding-left: 10px;
+      select {
+        width: 57%;
+        &:nth-of-type(2) {
+          width: 60%;
+        }
+      }
+    }
+  }
   @include for-medium {
     input {
       width: 85%;
@@ -300,7 +320,7 @@ nav {
   @media (min-width: 1088px) {
     input {
       width: 40%;
-      &:nth-of-type(7) {
+      &:nth-of-type(5) {
         width: calc(80% + 35px);
       }
       &[type="submit"] {
@@ -703,7 +723,7 @@ nav {
     width: 50%;
   }
 }
-.rivs-filters {
+.rivs-filters, .timeline-filters {
   width: 100%;
   padding: 10px;
   box-sizing: border-box;
@@ -727,6 +747,7 @@ nav {
     }
   }
 }
+
 .rivs {
   width: 100%;
   margin: 20px 0;
@@ -770,48 +791,6 @@ nav {
   span.correction {
     color: $blue;
   }
-  .rivs-reply, .rivs-correction, .rivs-translation {
-    width: 100%;
-    margin-top: 10px;
-    strong {
-      font-family: $accent-font;
-      font-size: 14px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: $blue;
-    }
-    div {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px;
-    }
-    select {
-      width: 20%;
-    }
-    textarea {
-      resize: none;
-      width: 93%;
-      height: 6vh;
-      border: 1px solid darken($grey, 10%);
-      margin-bottom: 0px;
-    }
-    input[type="submit"] {
-      background: $pink;
-      width: 96%;
-      @include for-medium {
-        width: 97.5%;
-      }
-      margin-top: 0px;
-      font-family: $accent-font;
-      font-size: 15px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: $grey;
-      &:focus {
-        border: 1px solid $pink;
-      }
-    }
-  }
   .rivs-actions {
     color: darken($grey, 30%);
     width: 50%;
@@ -829,6 +808,48 @@ nav {
     }
   }
 }
+.rivs-reply, .rivs-correction, .rivs-translation {
+  width: 100%;
+  margin-top: 10px;
+  strong {
+    font-family: $accent-font;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $blue;
+  }
+  div {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  select {
+    width: 20%;
+  }
+  textarea {
+    resize: none;
+    width: 93%;
+    height: 6vh;
+    border: 1px solid darken($grey, 10%);
+    margin-bottom: 0px;
+  }
+  input[type="submit"] {
+    background: $pink;
+    width: 96%;
+    @include for-medium {
+      width: 97.5%;
+    }
+    margin-top: 0px;
+    font-family: $accent-font;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $grey;
+    &:focus {
+      border: 1px solid $pink;
+    }
+  }
+}
 
 /* ============ HOME (TIMELINE) ============= */
 .home-nav {
@@ -838,24 +859,50 @@ nav {
   position: fixed;
 }
 .home-container {
-  display: flex;
-  justify-content: space-around;
-  padding-top: 100px;
+  padding-top: 70px;
+  @include for-medium {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 100px;
+  }
   h3 {
     color: $pink;
     text-transform: uppercase;
     font-family: $accent-font;
     font-size: 30px;
+    margin: -5px 0 10px 0;
     border-bottom: 1px solid $grey;
-    padding: 5px;
-    margin-bottom: 10px;
+    @include for-medium {
+      margin-top: 0px;
+      padding: 5px;
+    }
+    &.med {
+      display: none;
+      @include for-medium {
+        display: block;
+      }
+    }
+    &.small {
+      border-bottom: 1px solid lighten($faded-purp, 40%);
+      @include for-medium {
+        display: none;
+      }
+    }
   }
 }
+.timeline-filters {
+  margin-bottom: 10px;
+}
 .user-stats {
-  width: 30%;
-  max-height: 44vh;
+  display: flex;
+  justify-content: space-around;
+  @include for-medium {
+    width: 30%;
+    max-height: 44vh;
+    display: block;
+    background: whitesmoke;
+  }
   padding: 20px;
-  background: whitesmoke;
   box-sizing: border-box;
   font-weight: 300;
   span {
@@ -863,6 +910,10 @@ nav {
   }
 }
 .user-content {
+  width: 40%;
+  @include for-medium {
+    width: 100%;
+  }
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
@@ -895,17 +946,24 @@ nav {
   width: 70%;
 }
 .timeline {
-  width: 50%;
-  min-height: 90vh;
-  padding: 20px;
+  width: 100%;
+  min-height: 70vh;
+  padding: 40px;
   box-sizing: border-box;
   background: whitesmoke;
+  @include for-medium {
+    width: 50%;
+    min-height: 90vh;
+    padding: 20px;
+  }
 }
 .timeline-actions {
-  display: flex;
-  justify-content: space-around;
   border-bottom: 1px solid $grey;
   padding-bottom: 10px;
+  .row {
+    display: flex;
+    justify-content: space-around;
+  }
   .actions {
     width: 30%;
     margin-top: 5px;
@@ -948,5 +1006,13 @@ nav {
       padding: 5px;
       background: $blue;
     }
+  }
+}
+.home-liked {
+  .fa-star {
+    color: $purple;
+  }
+  .not-liked {
+    color: darken($grey, 30%);
   }
 }

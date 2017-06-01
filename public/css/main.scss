@@ -1008,3 +1008,11 @@ nav {
     }
   }
 }
+.home-liked {
+  .fa-star {
+    color: $purple;
+  }
+  .not-liked {
+    color: darken($grey, 30%);
+  }
+}

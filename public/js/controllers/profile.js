@@ -25,8 +25,8 @@
 
     // =========== CONTROLLER VARIABLES =============
     const landing = this;
-    // const URL = 'http://localhost:3000/';
-    const URL = 'http://rivetrapi.herokuapp.com/'
+    const URL = 'http://localhost:3000/';
+    // const URL = 'http://rivetrapi.herokuapp.com/'
     $scope.fullHeader = true;
 
     // =========== HTTP REQUESTS ====================
@@ -212,28 +212,56 @@
     this.favoriteRivReply = function(type, user, riv) {
       switch(type) {
         case 'riv':
-          $http({
-            method: 'POST',
-            url: URL + 'likes',
-            data: {
-              user_id: user,
-              riv_id: riv.id
-            }
-          }).then(function(response) {
-            riv.liked = true;
-          })
+          if(!riv.liked) {
+            $http({
+              method: 'POST',
+              url: URL + 'likes',
+              data: {
+                user_id: user,
+                riv_id: riv.id
+              }
+            }).then(function(response) {
+              riv.liked = true;
+            })
+          } else if(riv.liked) {
+            $rootScope.currentUser.likes.forEach(function(liked) {
+              if(liked.riv_id === riv.id) {
+                $http({
+                  method: 'DELETE',
+                  url: URL + 'likes/' + liked.id
+                }).then(function(response) {
+                    console.log(response);
+                    riv.liked = false;
+                })
+              }
+            })
+          }
           break;
         case 'reply':
-          $http({
-            method: 'POST',
-            url: URL + 'likes',
-            data: {
-              user_id: user,
-              reply_id: riv.id
-            }
-          }).then(function(response) {
-              riv.liked = true;
-          })
+          if(!riv.liked) {
+            $http({
+              method: 'POST',
+              url: URL + 'likes',
+              data: {
+                user_id: user,
+                reply_id: riv.id
+              }
+            }).then(function(response) {
+                riv.liked = true;
+            })
+          } else if(riv.liked) {
+            $rootScope.currentUser.likes.forEach(function(liked) {
+              if(liked.reply_id === riv.id) {
+                $http({
+                  method: 'DELETE',
+                  url: URL + 'likes/' + liked.id
+                }).then(function(response) {
+                    console.log(response);
+                    riv.liked = false;
+                })
+              }
+            })
+          }
           break;
       }
     }

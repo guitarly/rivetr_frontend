@@ -9,8 +9,8 @@
 
     // =========== CONTROLLER VARIABLES =============
     const home = this;
-    // const URL = 'http://localhost:3000/';
-    const URL = 'http://rivetrapi.herokuapp.com/'
+    const URL = 'http://localhost:3000/';
+    // const URL = 'http://rivetrapi.herokuapp.com/'
     $scope.fullHeader = true;
     $scope.compiledRivs = [];
 
@@ -55,28 +55,56 @@
     this.favoriteRivReply = function(type, user, riv) {
       switch(type) {
         case 'riv':
-          $http({
-            method: 'POST',
-            url: URL + 'likes',
-            data: {
-              user_id: user,
-              riv_id: riv.riv.id
-            }
-          }).then(function(response) {
-            riv.liked = true;
-          })
+          if(!riv.liked) {
+            $http({
+              method: 'POST',
+              url: URL + 'likes',
+              data: {
+                user_id: user,
+                riv_id: riv.riv.id
+              }
+            }).then(function(response) {
+              riv.liked = true;
+            })
+          } else if(riv.liked) {
+            $rootScope.currentUser.likes.forEach(function(liked) {
+              if(liked.riv_id === riv.riv.id) {
+                $http({
+                  method: 'DELETE',
+                  url: URL + 'likes/' + liked.id
+                }).then(function(response) {
+                    console.log(response);
+                    riv.liked = false;
+                })
+              }
+            })
+          }
           break;
         case 'reply':
-          $http({
-            method: 'POST',
-            url: URL + 'likes',
-            data: {
-              user_id: user,
-              reply_id: riv.riv.id
-            }
-          }).then(function(response) {
-              riv.liked = true;
-          })
+          if(!riv.liked) {
+            $http({
+              method: 'POST',
+              url: URL + 'likes',
+              data: {
+                user_id: user,
+                reply_id: riv.riv.id
+              }
+            }).then(function(response) {
+                riv.liked = true;
+            })
+          } else if(riv.liked) {
+            $rootScope.currentUser.likes.forEach(function(liked) {
+              if(liked.reply_id === riv.riv.id) {
+                $http({
+                  method: 'DELETE',
+                  url: URL + 'likes/' + liked.id
+                }).then(function(response) {
+                    console.log(response);
+                    riv.liked = false;
+                })
+              }
+            })
+          }
           break;
       }
     }
@@ -209,7 +237,9 @@
         case 'translate':
           // sets ng-model to populate translation box
           this.translate = {};
-          this.translate.text = riv.riv.content;
+          if(riv.riv){
+            this.translate.text = riv.riv.content;
+          }
           // opens translation box
           riv.translationBox = riv.translationBox === true ? false:true;
           riv.replyBox = false;

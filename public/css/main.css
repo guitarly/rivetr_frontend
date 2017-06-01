@@ -891,4 +891,9 @@ nav {
       padding: 5px;
       background: #67AECA; }
 
+.home-liked .fa-star {
+  color: #5F0F4E; }
+.home-liked .not-liked {
+  color: #9d9d9d; }
+
 /*# sourceMappingURL=main.css.map */

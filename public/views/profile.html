@@ -122,11 +122,11 @@
         {{vm.profileUser.display_name || vm.profileUser.username}} has no corrections
       </div>
       <!-- ======= RIVS (PERSONAL) ================= -->
-      <div class="rivs" ng-if="(vm.profileUser.rivs.length > 0) && (vm.personal)" ng-repeat="riv in vm.profileUser.rivs" ng-include="'../partials/profile/rivs-personal.html'"></div>
+      <div class="rivs" ng-if="(vm.profileUser.rivs.length > 0) && (vm.personal)" ng-repeat="riv in vm.profileUser.rivs | orderBy: '-created_at'" ng-include="'../partials/profile/rivs-personal.html'"></div>
       <!-- ======= RIVS (REPLIES) ================= -->
-      <div class="rivs" ng-repeat="reply in vm.profileUser.replies" ng-if="(vm.profileUser.replies.length > 0) && (vm.replies) && (!reply.correction)" ng-include="'../partials/profile/rivs-replies.html'"></div>
+      <div class="rivs" ng-repeat="reply in vm.profileUser.replies | orderBy: '-created_at'" ng-if="(vm.profileUser.replies.length > 0) && (vm.replies) && (!reply.correction)" ng-include="'../partials/profile/rivs-replies.html'"></div>
       <!-- ======= RIVS (CORRECTIONS) ================= -->
-      <div class="rivs" ng-repeat="correction in vm.profileUser.replies" ng-if="(vm.profileUser.replies.length > 0) && (vm.corrections) && (correction.correction)" ng-include="'../partials/profile/rivs-corrections.html'"></div>
+      <div class="rivs" ng-repeat="correction in vm.profileUser.replies | orderBy: '-created_at'" ng-if="(vm.profileUser.replies.length > 0) && (vm.corrections) && (correction.correction)" ng-include="'../partials/profile/rivs-corrections.html'"></div>
       <!-- ======= RETURN TO TOP =================== -->
       <div class="window-top">
         <a ng-click="vm.goToTop();">GO BACK TO TOP</a>

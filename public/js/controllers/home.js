@@ -73,7 +73,6 @@
                   method: 'DELETE',
                   url: URL + 'likes/' + liked.id
                 }).then(function(response) {
-                    console.log(response);
                     riv.liked = false;
                 })
               }
@@ -99,7 +98,6 @@
                   method: 'DELETE',
                   url: URL + 'likes/' + liked.id
                 }).then(function(response) {
-                    console.log(response);
                     riv.liked = false;
                 })
               }
@@ -172,6 +170,62 @@
       }.bind(this))
     }
 
+    // to search by language
+    this.communitySearch = function() {
+      $http({
+        method: 'GET',
+        url: URL + 'find/' + this.communitySearchForm.status + '/' + this.communitySearchForm.language
+      }).then(function(response) {
+          if(response.data.length > 0) {
+            this.found = true;
+            this.noneFound = false;
+            this.foundUsers = response.data;
+            this.checkFollows();
+          } else {
+            this.noneFound = true;
+            this.found = false;
+          }
+      }.bind(this))
+    }
+
+    // checks current users follows
+    this.checkFollows = function() {
+      this.foundUsers.forEach(function(found){
+        $rootScope.currentUser.followed_follows.forEach(function(followed) {
+          if(followed.followed_id === found.id) {
+            found.followed = true;
+            found.followed_id = followed.id;
+          }
+        });
+      });
+    }
+
+    // follow user
+    this.followUser = function(user) {
+      $http({
+        method: 'POST',
+        url: URL + 'follows',
+        data: {
+          follower_id: $rootScope.currentUser.id,
+          followed_id: user.id
+        }
+      }).then(function(response) {
+          user.followed = true;
+          user.followed_id = response.data.id;
+      });
+    }
+
+    // unfollow user
+    this.unfollowUser = function(user) {
+      $http({
+        method: 'DELETE',
+        url: URL + 'follows/' + user.followed_id
+      }).then(function(response) {
+          user.followed = false;
+          user.followed_id = null;
+      })
+    }
+
     // ========== TIMELINE RIVS ====================
     // modal variables
     this.showFullImage = false;
@@ -185,10 +239,8 @@
           this.currentRiv = riv.riv;
           break;
         case 'details':
-          console.log(riv);
           this.showDetails = !this.showDetails;
           this.detailedRiv = riv.riv;
-          console.log(this.showDetails);
           break;
       }
     }
@@ -263,7 +315,6 @@
 
     // goes to index page
     this.indexPage = function() {
-      console.log('index page');
       $location.url('/');
     }
 

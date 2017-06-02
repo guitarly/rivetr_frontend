@@ -66,18 +66,23 @@
     // to edit user
     this.editUser = function(){
       if(this.profileUser.id === $rootScope.currentUser.id) {
-        this.profileUser.username = this.profileUser.username.toLowerCase();
-        $http({
-          method: 'PUT',
-          url: URL + 'users/' + this.profileUser.id,
-          data: this.profileUser,
-          headers: {
-            'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token'))
-          }
-        }).then(function(response){
-            this.showEdit = false;
-            this.sessionCheck();
-        }.bind(this));
+        if(!this.profileUser.username || !this.profileUser.password) {
+          profile.editErrorMessage = "username and password required";
+        } else {
+          this.editErrorMessage = null;
+          this.profileUser.username = this.profileUser.username.toLowerCase();
+          $http({
+            method: 'PUT',
+            url: URL + 'users/' + this.profileUser.id,
+            data: this.profileUser,
+            headers: {
+              'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token'))
+            }
+          }).then(function(response){
+              this.showEdit = false;
+              this.sessionCheck();
+          }.bind(this));
+        }
       }
     };
 
@@ -172,8 +177,9 @@
           followed_id: following
         }
       }).then(function(response) {
-          location.reload();
-      })
+          this.followed = true;
+          this.sessionCheck();
+      }.bind(this))
     }
 
     // to unfollow a user
@@ -182,15 +188,16 @@
         method: 'DELETE',
         url: URL + 'follows/' + this.followedId
       }).then(function(response) {
-          location.reload();
-      });
+          this.followed = false;
+          this.sessionCheck();
+      }.bind(this));
     }
 
     // to delete a single riv
     this.deleteOneRiv = function(riv) {
       if(this.profileUser.id === $rootScope.currentUser.id) {
         riv.likes.forEach(function(like) {
-          profile.deleteLikes(like);
+          profile.deleteAssociatedLikes(like);
         })
         $http({
           method: 'DELETE',
@@ -205,7 +212,7 @@
     this.deleteOneReply = function(reply) {
       if(this.profileUser.id === $rootScope.currentUser.id) {
         reply.likes.forEach(function(like) {
-          profile.deleteLikes(like)
+          profile.deleteAssociatedLikes(like)
         })
         $http({
           method: 'DELETE',
@@ -216,8 +223,8 @@
       }
     }
 
-    // to delete likes
-    this.deleteLikes = function(like) {
+    // to delete associated likes
+    this.deleteAssociatedLikes = function(like) {
       $http({
         method: 'DELETE',
         url: URL + 'likes/' + like.id
@@ -311,6 +318,7 @@
               riv_id: riv.id,
               content: profile.correctionData.content,
               photo: profile.correctionData.photo,
+              explanation: profile.correctionData.explanation,
               correction: true
             }
           }).then(function(response) {

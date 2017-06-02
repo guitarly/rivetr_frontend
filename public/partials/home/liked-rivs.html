@@ -37,7 +37,8 @@
   <span ng-class="normal" ng-if="!liked.reply_id">{{liked.riv.content}}</span>
   <div ng-if="liked.riv.photo" class="rivs-photo" style="background: url('{{liked.riv.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;" ng-click="vm.modalToggle('image', riv)"></div>
   <!-- replies -->
-  <span ng-class="{'correction': liked.reply.correction, 'normal': !liked.reply.correction}" ng-if="liked.reply_id">{{liked.reply.content}}</span>
+  <span ng-class="{'correction': liked.reply.correction, 'normal': !liked.reply.correction}" ng-if="liked.reply_id">{{liked.reply.content}}</span><br />
+  {{liked.reply.explanation}}
   <div class="rivs-actions">
     <!-- already liked -->
     <i class="fa fa-star" aria-hidden="true" ng-if="!liked.unliked"

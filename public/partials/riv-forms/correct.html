@@ -1,4 +1,5 @@
 <form ng-submit="vm.sendReply('correction', currentUser.id, riv)">
-  <textarea ng-model="vm.correctionData.content"></textarea>
+  <textarea ng-model="vm.correctionData.content" placeholder="MAKE A CORRECTION..."></textarea>
+  <textarea ng-model="vm.correctionData.explanation" placeholder="EXPLAIN YOUR CORRECTION..."></textarea>
   <input type="submit" value="correct" />
 </form>

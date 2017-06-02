@@ -152,12 +152,13 @@
               riv_id: riv.riv.id,
               content: home.correctionData.content,
               photo: home.correctionData.photo,
+              explanation: home.correctionData.explanation,
               correction: true
             }
           }).then(function(response) {
               riv.correctionBox = false;
               this.refresh();
-          });
+          }.bind(this));
           break;
       }
     }

@@ -31,7 +31,7 @@
     ng-click="vm.favoriteRivReply('reply', currentUser.id, riv)"></i>
     <!-- if already liked -->
     <i class="fa fa-star liked" aria-hidden="true" ng-if="riv.liked"
-    ng-click="vm.unfavoriteRivReply(riv)"></i>
+    ng-click="vm.unfavoriteRivReply('timeline', riv)"></i>
     <!-- reply -->
     <i class="fa fa-reply" aria-hidden="true" ng-if="!riv.reply" ng-click="vm.toggleAction('reply', riv)"></i>
     <!-- correct -->

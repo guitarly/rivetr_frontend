@@ -20,7 +20,7 @@
   <span ng-if="!liked.reply_id" class="at-user">@{{liked.riv.user.username}}</span>
   <!-- if reply/correction -->
   <!-- reply -->
-  <strong><a ng-href="#!/{{liked.riv.user.username}}" ng-if="liked.reply_id">{{liked.reply.user.display_name || liked.reply.user.username}}</a></strong>
+  <strong><a ng-href="#!/{{liked.reply.user.username}}" ng-if="liked.reply_id">{{liked.reply.user.display_name || liked.reply.user.username}}</a></strong>
   <span ng-if="liked.reply_id && !liked.reply.correction" class="at-user">replied to</span>
   <!-- correction -->
   <span ng-if="liked.reply_id && liked.reply.correction" class="at-user">corrected</span>

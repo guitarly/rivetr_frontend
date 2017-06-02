@@ -190,7 +190,7 @@
     this.deleteOneRiv = function(riv) {
       if(this.profileUser.id === $rootScope.currentUser.id) {
         riv.likes.forEach(function(like) {
-          profile.deleteLikes(like);
+          profile.deleteAssociatedLikes(like);
         })
         $http({
           method: 'DELETE',
@@ -205,7 +205,7 @@
     this.deleteOneReply = function(reply) {
       if(this.profileUser.id === $rootScope.currentUser.id) {
         reply.likes.forEach(function(like) {
-          profile.deleteLikes(like)
+          profile.deleteAssociatedLikes(like)
         })
         $http({
           method: 'DELETE',
@@ -216,8 +216,8 @@
       }
     }
 
-    // to delete likes
-    this.deleteLikes = function(like) {
+    // to delete associated likes
+    this.deleteAssociatedLikes = function(like) {
       $http({
         method: 'DELETE',
         url: URL + 'likes/' + like.id

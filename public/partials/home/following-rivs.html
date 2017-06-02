@@ -28,9 +28,14 @@
     <!-- if already liked -->
     <i class="fa fa-star liked" aria-hidden="true" ng-if="riv.liked"
     ng-click="vm.unfavoriteRivReply(riv)"></i>
+    <!-- reply -->
     <i class="fa fa-reply" aria-hidden="true" ng-if="!riv.reply" ng-click="vm.toggleAction('reply', riv)"></i>
+    <!-- correct -->
     <i class="fa fa-wrench" aria-hidden="true" ng-if="!riv.reply" ng-click="vm.toggleAction('correction', riv)"></i>
+    <!-- translate -->
     <i class="fa fa-globe" aria-hidden="true" ng-click="vm.toggleAction('translate', riv)"></i>
+    <!-- details -->
+    <i class="fa fa-search" aria-hidden="true" ng-click="vm.modalToggle('details', riv)"></i>
     <!-- delete if regular riv -->
     <i class="fa fa-trash" aria-hidden="true" ng-if="(currentUser.id === riv.user.id) && !riv.reply" ng-click="vm.deleteOneRiv(riv.riv.id)"></i>
     <!-- delete if reply -->

@@ -47,12 +47,15 @@
   </section>
   <!-- ============== REPLY RIV ============== -->
   <section class="reply-riv" ng-if="vm.detailedRiv.isReply">
-    <section class="original-riv">
+    <section class="original-riv" ng-if="vm.detailedRiv.riv">
       <div class="original-image" style="background:url('{{vm.detailedRiv.riv.user.profile_photo}}');background-size:cover;background-position:center;"></div>
       <div class="original-info">
         <strong><a ng-href="#!/{{vm.detailedRiv.riv.user.username}}">{{vm.detailedRiv.riv.user.display_name || vm.detailedRiv.riv.user.username}}</a></strong> <span><a nf-href="#!/{{vm.detailedRiv.riv.user.username}}">@{{vm.detailedRiv.riv.user.username}}</a></span><br />
         {{vm.detailedRiv.riv.content}}
       </div>
+    </section>
+    <section class="original-riv" ng-if="!vm.detailedRiv.riv">
+      <em>original riv deleted</em>
     </section>
     <section class="main-reply">
       <div class="riv-user">

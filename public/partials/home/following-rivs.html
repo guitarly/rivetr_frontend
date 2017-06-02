@@ -11,10 +11,14 @@
   <span ng-if="riv.reply && !riv.riv.correction" class="at-user">replied to</span>
   <!-- correction -->
   <span ng-if="riv.reply && riv.riv.correction" class="at-user">corrected</span>
+  <!-- if deleted -->
+  <span class="at-user" ng-if="riv.reply && !riv.riv.riv.user"><em>deleted</em></span>
   <!-- replied to/corrected user -->
-  <strong ng-if="riv.reply"><a ng-href="#!/{{riv.riv.riv.user.username}}">{{riv.riv.riv.user.display_name || riv.riv.riv.user.username}}</a></strong><br />
+  <strong ng-if="riv.reply" ng-if="riv.riv.riv.user"><a ng-href="#!/{{riv.riv.riv.user.username}}">{{riv.riv.riv.user.display_name || riv.riv.riv.user.username}}</a></strong><br />
+  <!-- if deleted original riv -->
+  <em ng-if="riv.riv.correction && !riv.riv.riv">original riv deleted</em>
   <!-- original riv if correction -->
-  <s ng-if="riv.riv.correction" class="correction">{{riv.riv.riv.content}}</s> <br ng-if="riv.riv.correction" />
+  <s ng-if="riv.riv.riv && riv.riv.correction" class="correction">{{riv.riv.riv.content}}</s> <br ng-if="riv.riv.correction" />
   <!-- riv content -->
   <span ng-class="{'correction': riv.riv.correction, 'normal': !riv.riv.correction}">{{riv.riv.content}}</span>
   <div ng-if="riv.riv.photo" class="rivs-photo" style="background: url('{{riv.riv.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;" ng-click="vm.modalToggle('image', riv)"></div>

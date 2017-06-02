@@ -512,6 +512,10 @@ nav {
   padding: 30px;
   display: flex;
   justify-content: space-around;
+  em {
+    font-weight: 300;
+    color: darken($grey, 30%);
+  }
 }
 .original-image {
   width: 60px;
@@ -927,6 +931,9 @@ nav {
     font-size: 12px;
     @include for-medium {
       width: 85%;
+    }
+    em {
+      color: #aaa;
     }
     strong, strong a {
       color: $faded-purp;

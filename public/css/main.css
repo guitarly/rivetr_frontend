@@ -440,6 +440,9 @@ nav {
   padding: 30px;
   display: flex;
   justify-content: space-around; }
+  .original-riv em {
+    font-weight: 300;
+    color: #9d9d9d; }
 
 .original-image {
   width: 60px;
@@ -843,6 +846,8 @@ nav {
     @media (min-width: 900px) {
       .rivs .rivs-content {
         width: 85%; } }
+    .rivs .rivs-content em {
+      color: #aaa; }
     .rivs .rivs-content strong, .rivs .rivs-content strong a {
       color: #675682;
       font-size: 13px; }

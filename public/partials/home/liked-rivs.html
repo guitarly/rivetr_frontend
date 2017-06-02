@@ -24,10 +24,14 @@
   <span ng-if="liked.reply_id && !liked.reply.correction" class="at-user">replied to</span>
   <!-- correction -->
   <span ng-if="liked.reply_id && liked.reply.correction" class="at-user">corrected</span>
+  <!-- if deleted -->
+  <span class="at-user" ng-if="liked.reply_id && !liked.reply.riv"><em>deleted</em></span>
   <!-- replied to/corrected user -->
   <strong ng-if="liked.reply_id"><a ng-href="#!/{{liked.reply.riv.user.username}}">{{liked.reply.riv.user.display_name || liked.reply.riv.user.username}}</a></strong><br />
+  <!-- if original riv deleted -->
+  <em ng-if="liked.reply.correction && !liked.reply.riv">original riv deleted</em>
   <!-- original riv if correction -->
-  <s ng-if="liked.reply.correction" class="correction">{{liked.reply.riv.content}}</s> <br ng-if="riv.riv.correction" />
+  <s ng-if="liked.reply.correction" class="correction">{{liked.reply.riv.content}}</s> <br ng-if="liked.reply.correction" />
   <!-- riv content -->
   <!-- normal -->
   <span ng-class="normal" ng-if="!liked.reply_id">{{liked.riv.content}}</span>

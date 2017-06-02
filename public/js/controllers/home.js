@@ -233,13 +233,35 @@
       })
     }
 
+    // finds a riv
+    this.findRiv = function(riv) {
+      $http({
+        method: 'GET',
+        url: URL + 'rivs/' + riv.id
+      }).then(function(response){
+          this.detailedRiv = response.data;
+          this.detailedRiv.isReply = false;
+      }.bind(this))
+    }
+
+    // find a reply
+    this.findReply = function(reply) {
+      $http({
+        method: 'GET',
+        url: URL + 'replies/' + reply.id
+      }).then(function(response) {
+          this.detailedRiv = response.data;
+          this.detailedRiv.isReply = true;
+      }.bind(this))
+    }
+
     // ========== TIMELINE RIVS ====================
     // modal variables
     this.showFullImage = false;
     this.showDetails = false;
 
     // toggle modals
-    this.modalToggle = function(modal, riv) {
+    this.modalToggle = function(modal, riv, likes) {
       switch(modal) {
         case 'image':
           this.showFullImage = !this.showFullImage;
@@ -247,7 +269,17 @@
           break;
         case 'details':
           this.showDetails = !this.showDetails;
-          this.detailedRiv = riv.riv;
+          if(riv) {
+            if(riv.reply) {
+              if(likes) {
+                this.findReply(riv.reply)
+              } else {
+                this.findReply(riv.riv);
+              }
+            } else {
+              this.findRiv(riv.riv);
+            }
+          }
           break;
       }
     }

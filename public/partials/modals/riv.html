@@ -1,11 +1,81 @@
-<section class="modal" ng-if="vm.showDetails">
-  <div class="close" ng-click="vm.modalToggle('details')">
+<section class="modal details" ng-if="vm.showDetails">
+  <!-- close button -->
+  <div class="close details-close" ng-click="vm.modalToggle('details')">
     <i class="fa fa-times" aria-hidden="true"></i>
   </div>
-  <section class="main-riv">
-    the main riv
+  <!-- ============== REGULAR RIV ============== -->
+  <section class="regular-riv" ng-if="!vm.detailedRiv.isReply">
+    <div class="riv-user">
+      <!-- riv poster information -->
+      <div class="riv-user-img" style="background:url('{{vm.detailedRiv.user.profile_photo}}');background-size:cover;background-position:center;"></div>
+      <div class="riv-user-name">
+        <h4><a ng-href="#!/{{vm.detailedRiv.user.username}}">{{vm.detailedRiv.user.display_name || vm.detailedRiv.user.username}}</a></h4>
+        <a ng-href="#!/{{vm.detailedRiv.user.username}}">@{{vm.detailedRiv.user.username}}</a>
+      </div>
+    </div>
+    <!-- riv content -->
+    <div class="main-riv">
+      <div class="content">
+        {{vm.detailedRiv.content}}
+      </div>
+      <!-- riv date and likes -->
+      <div class="date">
+        <span>{{vm.detailedRiv.created_at | date:'MMMM d, h:mm a'}}</span>
+        <span>{{vm.detailedRiv.likes.length}} likes</span>
+      </div>
+    </div>
+    <!-- ========== REG RIV REPLIES ============ -->
+    <div class="riv-replies" ng-if="vm.detailedRiv.replies.length > 0">
+      <div class="riv-replies-header">
+        <h4>REPLIES</h4>
+      </div>
+      <div class="riv-replies-info" ng-repeat="reply in vm.detailedRiv.replies">
+        <div class="reply-img" style="background:url('{{reply.user.profile_photo}}');background-size:cover;background-position:center;"></div>
+        <!-- regular -->
+        <div class="riv-replies-content" ng-if="!reply.correction">
+          <strong><a ng-href="#!/{{reply.user.username}}">{{reply.user.display_name || reply.user.username}}</a></strong> <span><a ng-href="#!/{{reply.user.username}}">@{{reply.user.username}}</a></span><br />
+          {{reply.content}}
+        </div>
+        <!-- correction -->
+        <div class="riv-replies-content correction" ng-if="reply.correction">
+          <strong><a ng-href="#!/{{reply.user.username}}">{{reply.user.display_name || reply.user.username}}</a></strong> <span><a ng-href="#!/{{reply.user.username}}">(@{{reply.user.username}})</a> corrected</span><br />
+          <span class="content">{{reply.content}}</span><br />
+          explanation will go here {{reply.explanation}}
+        </div>
+      </div>
+    </div>
   </section>
-  <section class="riv-replies" ng-if="riv.riv.replies.length > 0">
-    if it has replies
+  <!-- ============== REPLY RIV ============== -->
+  <section class="reply-riv" ng-if="vm.detailedRiv.isReply">
+    <section class="original-riv">
+      <div class="original-image" style="background:url('{{vm.detailedRiv.riv.user.profile_photo}}');background-size:cover;background-position:center;"></div>
+      <div class="original-info">
+        <strong><a ng-href="#!/{{vm.detailedRiv.riv.user.username}}">{{vm.detailedRiv.riv.user.display_name || vm.detailedRiv.riv.user.username}}</a></strong> <span><a nf-href="#!/{{vm.detailedRiv.riv.user.username}}">@{{vm.detailedRiv.riv.user.username}}</a></span><br />
+        {{vm.detailedRiv.riv.content}}
+      </div>
+    </section>
+    <section class="main-reply">
+      <div class="riv-user">
+        <!-- riv poster information -->
+        <div class="riv-user-img" style="background:url('{{vm.detailedRiv.user.profile_photo}}');background-size:cover;background-position:center;"></div>
+        <div class="riv-user-name">
+          <h4><a ng-href="#!/{{vm.detailedRiv.user.username}}">{{vm.detailedRiv.user.display_name || vm.detailedRiv.user.username}}</a></h4>
+          <a ng-href="#!/{{vm.detailedRiv.user.username}}">@{{vm.detailedRiv.user.username}}</a>
+        </div>
+      </div>
+      <!-- riv content -->
+      <div class="main-riv">
+        <div class="content">
+          <span ng-class="{'correction': vm.detailedRiv.correction, 'normal-reply': !vm.detailedRiv.correction}">{{vm.detailedRiv.content}}</span><br />
+          <span class="normal-reply" ng-if="vm.detailedRiv.explanation">{{vm.detailedRiv.explanation}}</span>
+        </div>
+        <!-- riv date and likes -->
+        <div class="date">
+          <span>{{vm.detailedRiv.created_at | date:'MMMM d, h:mm a'}}</span>
+          <span>{{vm.detailedRiv.likes.length}} likes</span>
+        </div>
+      </div>
+    </section>
   </section>
+  <!-- ============ CORRECTION RIV =========== -->
 </section>

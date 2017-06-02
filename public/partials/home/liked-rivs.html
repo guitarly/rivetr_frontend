@@ -44,11 +44,15 @@
     <!-- like if reply (if unliked) -->
     <i class="fa fa-star not-liked" aria-hidden="true" ng-if="liked.unliked && liked.reply_id"
     ng-click="vm.favoriteRivReply('reply', currentUser.id, liked)"></i>
-    <!-- other actions -->
+    <!-- reply -->
     <i class="fa fa-reply" aria-hidden="true" ng-if="!liked.reply_id" ng-click="vm.toggleAction('reply', liked.riv)"></i>
+    <!-- correct -->
     <i class="fa fa-wrench" aria-hidden="true" ng-if="!liked.reply_id" ng-click="vm.toggleAction('correction', liked.riv)"></i>
+    <!-- translate -->
     <i class="fa fa-globe" aria-hidden="true" ng-if="!liked.reply_id" ng-click="vm.toggleAction('translate', liked.riv)"></i>
     <i class="fa fa-globe" aria-hidden="true" ng-if="liked.reply_id" ng-click="vm.toggleAction('translate', liked.reply)"></i>
+    <!-- details -->
+    <i class="fa fa-search" aria-hidden="true" ng-click="vm.modalToggle('details', liked, true)"></i>
   </div>
 </div>
 <!-- ==== REPLY BOX ======================== -->

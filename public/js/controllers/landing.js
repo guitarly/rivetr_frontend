@@ -15,19 +15,24 @@
     // =========== HTTP REQUESTS ======================
     // to create a user
     this.register = function(){
-      this.newUserData.username = this.newUserData.username.toLowerCase();
-      $http({
-        method: 'POST',
-        url: URL + 'users',
-        data: this.newUserData
-      }).then(function(response){
-          this.loginData = {
-            username: response.data.username,
-            password: this.newUserData.password
-          }
-          this.newUserData = null;
-          this.login();
-      }.bind(this));
+      if(!this.newUserData || !this.newUserData.username || !this.newUserData.password || !this.newUserData.language_known || !this.newUserData.language_learning) {
+        landing.registrationErrorMessage = "everything with * required!";
+      } else {
+        this.registrationErrorMessage = null;
+        this.newUserData.username = this.newUserData.username.toLowerCase();
+        $http({
+          method: 'POST',
+          url: URL + 'users',
+          data: this.newUserData
+        }).then(function(response){
+            this.loginData = {
+              username: response.data.username,
+              password: this.newUserData.password
+            }
+            this.newUserData = null;
+            this.login();
+        }.bind(this));
+      }
     };
 
     // to login

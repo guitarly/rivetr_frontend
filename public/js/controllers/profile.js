@@ -66,18 +66,23 @@
     // to edit user
     this.editUser = function(){
       if(this.profileUser.id === $rootScope.currentUser.id) {
-        this.profileUser.username = this.profileUser.username.toLowerCase();
-        $http({
-          method: 'PUT',
-          url: URL + 'users/' + this.profileUser.id,
-          data: this.profileUser,
-          headers: {
-            'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token'))
-          }
-        }).then(function(response){
-            this.showEdit = false;
-            this.sessionCheck();
-        }.bind(this));
+        if(!this.profileUser.username || !this.profileUser.password) {
+          profile.editErrorMessage = "username and password required";
+        } else {
+          this.editErrorMessage = null;
+          this.profileUser.username = this.profileUser.username.toLowerCase();
+          $http({
+            method: 'PUT',
+            url: URL + 'users/' + this.profileUser.id,
+            data: this.profileUser,
+            headers: {
+              'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token'))
+            }
+          }).then(function(response){
+              this.showEdit = false;
+              this.sessionCheck();
+          }.bind(this));
+        }
       }
     };
 

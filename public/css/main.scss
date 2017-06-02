@@ -329,6 +329,14 @@ nav {
     }
   }
 }
+.edit-error {
+  width: 100%;
+  font-family: $accent-font;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  color: $pink;
+}
 /* LOGIN */
 .login-container {
   .close {

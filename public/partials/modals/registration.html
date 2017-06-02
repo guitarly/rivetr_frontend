@@ -15,23 +15,24 @@
     <div class="registration-form">
       <form ng-submit="vm.register();">
         <h1>account details</h1>
-        <input type="text" ng-model="vm.newUserData.username" placeholder="USERNAME">
-        <input type="password" ng-model="vm.newUserData.password" placeholder="PASSWORD">
+        <input type="text" ng-model="vm.newUserData.username" placeholder="USERNAME *">
+        <input type="password" ng-model="vm.newUserData.password" placeholder="PASSWORD *">
         <input type="text" ng-model="vm.newUserData.display_name" placeholder="DISPLAY NAME">
         <input type="text" ng-model="vm.newUserData.profile_photo" placeholder="PROFILE PHOTO">
         <h1>user details</h1>
         <section class="languages">
-          <strong>LANGUAGE LEARNING</strong>
+          <strong>LANGUAGE LEARNING *</strong>
           <select ng-model="vm.newUserData.language_learning">
             <option ng-repeat="lang in vm.languages" value="{{lang.languageName}}">{{lang.languageName}}</option>
           </select><br/>
-          <strong>LANGUAGE KNOWN</strong>
+          <strong>LANGUAGE KNOWN *</strong>
           <select ng-model="vm.newUserData.language_known">
             <option ng-repeat="lang in vm.languages" value="{{lang.languageName}}">{{lang.languageName}}</option>
           </select>
         </section>
         <input type="text" ng-model="vm.newUserData.biography" placeholder="A SHORT BIO" /><br />
         <input type="submit" value="REGISTER" />
+        <div class="edit-error">{{vm.registrationErrorMessage}}</div>
       </form>
     </div>
   </div>

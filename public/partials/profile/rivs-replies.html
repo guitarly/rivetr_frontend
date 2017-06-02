@@ -5,14 +5,16 @@
   background-repeat: no-repeat;" ng-click="vm.modalToggle('image', $index)">
 </div>
 <div class="rivs-content">
-  <strong>{{vm.profileUser.display_name || vm.profileUser.username}}</strong> <span class="at-user">replied to</span> <strong><a ng-href="http://localhost:8000/#!/{{reply.riv.user.username}}">{{reply.riv.user.display_name}}</a></strong><br />
+  <strong>{{vm.profileUser.display_name || vm.profileUser.username}}</strong> <span class="at-user">replied to</span>
+  <em ng-if="!reply.riv">deleted</em>
+  <strong ng-if="reply.riv"><a ng-href="#!/{{reply.riv.user.username}}">{{reply.riv.user.display_name}}</a></strong><br />
   {{reply.content}}
   <div ng-if="reply.photo" class="rivs-photo" style="background: url('{{reply.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;" ng-click="vm.modalToggle('image', reply)"></div>
   <div class="rivs-actions">
     <i class="fa fa-star" aria-hidden="true" ng-click="vm.favoriteRivReply('reply', currentUser.id, reply)" ng-class="{liked: reply.liked}"></i>
     <i class="fa fa-globe" aria-hidden="true" ng-click="vm.toggleAction('translate', reply)"></i>
     <i class="fa fa-search" aria-hidden="true" ng-click="vm.modalToggle('details', reply, 'replies')"></i>
-    <i class="fa fa-trash" aria-hidden="true" ng-if="vm.isCurrentUser" ng-click="vm.deleteOneReply(reply.id)"></i>
+    <i class="fa fa-trash" aria-hidden="true" ng-if="vm.isCurrentUser" ng-click="vm.deleteOneReply(reply)"></i>
   </div>
 </div>
 <!-- ==== TRANSLATION BOX ================== -->

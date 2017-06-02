@@ -20,20 +20,24 @@
   <span ng-if="!liked.reply_id" class="at-user">@{{liked.riv.user.username}}</span>
   <!-- if reply/correction -->
   <!-- reply -->
-  <strong><a ng-href="#!/{{liked.riv.user.username}}" ng-if="liked.reply_id">{{liked.reply.user.display_name || liked.reply.user.username}}</a></strong>
+  <strong><a ng-href="#!/{{liked.reply.user.username}}" ng-if="liked.reply_id">{{liked.reply.user.display_name || liked.reply.user.username}}</a></strong>
   <span ng-if="liked.reply_id && !liked.reply.correction" class="at-user">replied to</span>
   <!-- correction -->
   <span ng-if="liked.reply_id && liked.reply.correction" class="at-user">corrected</span>
+  <!-- if deleted -->
+  <span class="at-user" ng-if="liked.reply_id && !liked.reply.riv"><em>deleted</em></span>
   <!-- replied to/corrected user -->
   <strong ng-if="liked.reply_id"><a ng-href="#!/{{liked.reply.riv.user.username}}">{{liked.reply.riv.user.display_name || liked.reply.riv.user.username}}</a></strong><br />
+  <!-- if original riv deleted -->
+  <em ng-if="liked.reply.correction && !liked.reply.riv">original riv deleted</em>
   <!-- original riv if correction -->
-  <s ng-if="liked.reply.correction" class="correction">{{liked.reply.riv.content}}</s> <br ng-if="riv.riv.correction" />
+  <s ng-if="liked.reply.correction" class="correction">{{liked.reply.riv.content}}</s> <br ng-if="liked.reply.correction" />
   <!-- riv content -->
   <!-- normal -->
   <span ng-class="normal" ng-if="!liked.reply_id">{{liked.riv.content}}</span>
   <div ng-if="liked.riv.photo" class="rivs-photo" style="background: url('{{liked.riv.photo}}'); background-size: cover; background-position: center; background-repeat: no-repeat;" ng-click="vm.modalToggle('image', riv)"></div>
   <!-- replies -->
-  <span ng-class="normal" ng-if="liked.reply_id">{{liked.reply.content}}</span>
+  <span ng-class="{'correction': liked.reply.correction, 'normal': !liked.reply.correction}" ng-if="liked.reply_id">{{liked.reply.content}}</span>
   <div class="rivs-actions">
     <!-- already liked -->
     <i class="fa fa-star" aria-hidden="true" ng-if="!liked.unliked"

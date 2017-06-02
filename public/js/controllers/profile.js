@@ -24,7 +24,7 @@
   app.controller('ProfileCtrl', ['$http', '$scope', '$rootScope', '$location', '$document', '$routeParams', function($http, $scope, $rootScope, $location, $document, $routeParams){
 
     // =========== CONTROLLER VARIABLES =============
-    const landing = this;
+    const profile = this;
     // const URL = 'http://localhost:3000/';
     const URL = 'http://rivetrapi.herokuapp.com/'
     $scope.fullHeader = true;
@@ -40,19 +40,20 @@
           if(this.profileUser.id === $rootScope.currentUser.id) {
             this.isCurrentUser = true;
           } else {
+            console.log('checking follows');
             $rootScope.currentUser.followed_follows.forEach(function(followed) {
-              if(followed.followed.id === landing.profileUser.id) {
-                landing.followed = true;
-                landing.followedId = followed.id;
+              if(followed.followed.id === profile.profileUser.id) {
+                profile.followed = true;
+                profile.followedId = followed.id;
               }
             });
             $rootScope.currentUser.likes.forEach(function(liked) {
-              landing.profileUser.rivs.forEach(function(riv) {
+              profile.profileUser.rivs.forEach(function(riv) {
                 if(liked.riv_id === riv.id) {
                   riv.liked = true;
                 }
               })
-              landing.profileUser.replies.forEach(function(reply) {
+              profile.profileUser.replies.forEach(function(reply) {
                 if(liked.reply_id === reply.id) {
                   reply.liked = true;
                 }
@@ -74,7 +75,8 @@
             'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token'))
           }
         }).then(function(response){
-            $location.path('/' + response.data.username);
+            this.showEdit = false;
+            this.sessionCheck();
         }.bind(this));
       }
     };
@@ -185,27 +187,44 @@
     }
 
     // to delete a single riv
-    this.deleteOneRiv = function(id) {
+    this.deleteOneRiv = function(riv) {
       if(this.profileUser.id === $rootScope.currentUser.id) {
+        riv.likes.forEach(function(like) {
+          profile.deleteLikes(like);
+        })
         $http({
           method: 'DELETE',
-          url: URL + 'rivs/' + id
+          url: URL + 'rivs/' + riv.id
         }).then(function(response) {
-            location.reload();
-        })
+            this.sessionCheck();
+        }.bind(this))
       }
     }
 
     // to delete a single reply
-    this.deleteOneReply = function(id) {
+    this.deleteOneReply = function(reply) {
       if(this.profileUser.id === $rootScope.currentUser.id) {
+        reply.likes.forEach(function(like) {
+          profile.deleteLikes(like)
+        })
         $http({
           method: 'DELETE',
-          url: URL + 'replies/' + id
+          url: URL + 'replies/' + reply.id
         }).then(function(response) {
-            location.reload();
-        })
+            this.sessionCheck();
+        }.bind(this))
       }
+    }
+
+    // to delete likes
+    this.deleteLikes = function(like) {
+      $http({
+        method: 'DELETE',
+        url: URL + 'likes/' + like.id
+      }).then(function(response) {
+          console.log(like);
+          console.log(response);
+      });
     }
 
     // to favorite a riv/reply
@@ -276,12 +295,12 @@
             data: {
               user_id: user,
               riv_id: riv.id,
-              content: landing.replyData.content,
-              photo: landing.replyData.photo
+              content: profile.replyData.content,
+              photo: profile.replyData.photo
             }
           }).then(function(response) {
-              riv.replied = true;
-          });
+              riv.replyBox = false;
+          }.bind(this));
           break;
         case 'correction':
           $http({
@@ -290,13 +309,13 @@
             data: {
               user_id: user,
               riv_id: riv.id,
-              content: landing.correctionData.content,
-              photo: landing.correctionData.photo,
+              content: profile.correctionData.content,
+              photo: profile.correctionData.photo,
               correction: true
             }
           }).then(function(response) {
-              riv.corrected = true;
-          });
+              riv.correctionBox = false;
+          }.bind(this));
           break;
       }
     }

@@ -32,20 +32,28 @@
     }
 
     // to delete a single riv
-    this.deleteOneRiv = function(id) {
+    this.deleteOneRiv = function(riv) {
+      // deletes associated likes
+      riv.likes.forEach(function(like) {
+        home.unfavoriteRivReply('likes', like);
+      });
       $http({
         method: 'DELETE',
-        url: URL + 'rivs/' + id
+        url: URL + 'rivs/' + riv.id
       }).then(function(response) {
           this.refresh();
       }.bind(this))
     }
 
     // to delete a single reply
-    this.deleteOneReply = function(id) {
+    this.deleteOneReply = function(reply) {
+      // deletes associated likes
+      reply.likes.forEach(function(like) {
+        home.unfavoriteRivReply('likes', like);
+      });
       $http({
         method: 'DELETE',
-        url: URL + 'replies/' + id
+        url: URL + 'replies/' + reply.id
       }).then(function(response) {
           this.refresh();
       }.bind(this))
@@ -55,7 +63,6 @@
     this.favoriteRivReply = function(type, user, riv) {
       switch(type) {
         case 'riv':
-          console.log(riv);
           $http({
             method: 'POST',
             url: URL + 'likes',
@@ -67,7 +74,8 @@
             riv.liked = true;
             riv.unliked = false;
             riv.liked_id = response.data.id;
-          });
+            this.sessionCheck();
+          }.bind(this));
           break;
         case 'reply':
           if(riv.riv) {
@@ -86,7 +94,8 @@
               riv.liked = true;
               riv.unliked = false;
               riv.liked_id = response.data.id;
-          });
+              this.sessionCheck();
+          }.bind(this));
           break;
       }
     }
@@ -101,7 +110,8 @@
           }).then(function(response) {
               riv.liked = false;
               riv.liked_id = null;
-          });
+              this.sessionCheck();
+          }.bind(this));
           break;
         case 'likes':
           $http({
@@ -109,7 +119,8 @@
             url: URL + 'likes/' + riv.id
           }).then(function(response) {
               riv.unliked = true;
-          });
+              this.sessionCheck();
+          }.bind(this));
           break;
       }
     }

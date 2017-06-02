@@ -11,6 +11,7 @@
   <div class="rivs-actions">
     <i class="fa fa-star" aria-hidden="true" ng-click="vm.favoriteRivReply('reply', currentUser.id, reply)" ng-class="{liked: reply.liked}"></i>
     <i class="fa fa-globe" aria-hidden="true" ng-click="vm.toggleAction('translate', reply)"></i>
+    <i class="fa fa-search" aria-hidden="true" ng-click="vm.modalToggle('details', reply, 'replies')"></i>
     <i class="fa fa-trash" aria-hidden="true" ng-if="vm.isCurrentUser" ng-click="vm.deleteOneReply(reply.id)"></i>
   </div>
 </div>

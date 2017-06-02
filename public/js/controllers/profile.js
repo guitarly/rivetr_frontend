@@ -327,14 +327,37 @@
       }.bind(this))
     }
 
+    // finds a riv
+    this.findRiv = function(riv) {
+      $http({
+        method: 'GET',
+        url: URL + 'rivs/' + riv.id
+      }).then(function(response){
+          this.detailedRiv = response.data;
+          this.detailedRiv.isReply = false;
+      }.bind(this))
+    }
+
+    // find a reply
+    this.findReply = function(reply) {
+      $http({
+        method: 'GET',
+        url: URL + 'replies/' + reply.id
+      }).then(function(response) {
+          this.detailedRiv = response.data;
+          this.detailedRiv.isReply = true;
+      }.bind(this))
+    }
+
     // ============ MODAL DE/ACTIVATION =============
     // default variables
     this.showEdit = false;
     this.showDelete = false;
     this.showFullImage = false;
+    this.showDetails = false;
 
     // toggle switch
-    this.modalToggle = function(modal, riv) {
+    this.modalToggle = function(modal, riv, page) {
       switch(modal) {
         case 'edit':
           this.showEdit = !this.showEdit;
@@ -345,6 +368,14 @@
         case 'image':
           this.showFullImage = !this.showFullImage;
           this.currentRiv = riv;
+          break;
+        case 'details':
+          this.showDetails = !this.showDetails;
+          if(page === 'personal') {
+            this.findRiv(riv);
+          } else if(page === 'replies') {
+            this.findReply(riv);
+          }
           break;
       }
     }

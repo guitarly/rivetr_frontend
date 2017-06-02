@@ -13,6 +13,7 @@
     <i class="fa fa-reply" aria-hidden="true" ng-click="vm.toggleAction('reply', riv)"></i>
     <i class="fa fa-wrench" aria-hidden="true"  ng-click="vm.toggleAction('correction', riv)"></i>
     <i class="fa fa-globe" aria-hidden="true" ng-click="vm.toggleAction('translate', riv)"></i>
+    <i class="fa fa-search" aria-hidden="true" ng-click="vm.modalToggle('details', riv, 'personal')"></i>
     <i class="fa fa-trash" aria-hidden="true" ng-if="vm.isCurrentUser" ng-click="vm.deleteOneRiv(riv.id)"></i>
   </div>
 </div>

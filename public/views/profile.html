@@ -94,7 +94,7 @@
           <div class="sidebar-followers" ng-if="(vm.profileUser.followed_follows.length > 0) && (vm.following)" ng-repeat="following in vm.profileUser.followed_follows">
             <div class="follow-img" style="background: url('{{following.followed.profile_photo}}'); background-size: cover; background-position: center;"></div>
             <div class="follow-info">
-              <h3><a ng-href="http://localhost:8000/#!/{{following.followed.username}}">{{following.followed.display_name}}</a></h3>
+              <h3><a ng-href="#!/{{following.followed.username}}">{{following.followed.display_name}}</a></h3>
               @{{following.followed.username}}
             </div>
           </div>

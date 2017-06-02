@@ -261,7 +261,7 @@
     this.showDetails = false;
 
     // toggle modals
-    this.modalToggle = function(modal, riv) {
+    this.modalToggle = function(modal, riv, likes) {
       switch(modal) {
         case 'image':
           this.showFullImage = !this.showFullImage;
@@ -271,7 +271,11 @@
           this.showDetails = !this.showDetails;
           if(riv) {
             if(riv.reply) {
-              this.findReply(riv.riv);
+              if(likes) {
+                this.findReply(riv.reply)
+              } else {
+                this.findReply(riv.riv);
+              }
             } else {
               this.findRiv(riv.riv);
             }

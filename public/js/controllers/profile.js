@@ -24,7 +24,7 @@
   app.controller('ProfileCtrl', ['$http', '$scope', '$rootScope', '$location', '$document', '$routeParams', function($http, $scope, $rootScope, $location, $document, $routeParams){
 
     // =========== CONTROLLER VARIABLES =============
-    const landing = this;
+    const profile = this;
     // const URL = 'http://localhost:3000/';
     const URL = 'http://rivetrapi.herokuapp.com/'
     $scope.fullHeader = true;
@@ -185,27 +185,44 @@
     }
 
     // to delete a single riv
-    this.deleteOneRiv = function(id) {
+    this.deleteOneRiv = function(riv) {
       if(this.profileUser.id === $rootScope.currentUser.id) {
+        riv.likes.forEach(function(like) {
+          profile.deleteLikes(like);
+        })
         $http({
           method: 'DELETE',
-          url: URL + 'rivs/' + id
+          url: URL + 'rivs/' + riv.id
         }).then(function(response) {
-            location.reload();
-        })
+            this.sessionCheck();
+        }.bind(this))
       }
     }
 
     // to delete a single reply
-    this.deleteOneReply = function(id) {
+    this.deleteOneReply = function(reply) {
       if(this.profileUser.id === $rootScope.currentUser.id) {
+        reply.likes.forEach(function(like) {
+          profile.deleteLikes(like)
+        })
         $http({
           method: 'DELETE',
-          url: URL + 'replies/' + id
+          url: URL + 'replies/' + reply.id
         }).then(function(response) {
-            location.reload();
-        })
+            this.sessionCheck();
+        }.bind(this))
       }
+    }
+
+    // to delete likes
+    this.deleteLikes = function(like) {
+      $http({
+        method: 'DELETE',
+        url: URL + 'likes/' + like.id
+      }).then(function(response) {
+          console.log(like);
+          console.log(response);
+      });
     }
 
     // to favorite a riv/reply

@@ -90,7 +90,7 @@
     <!-- ========== COMMUNITY ====================== -->
     <div class="rivs" ng-if="vm.community" ng-include="'../partials/home/community.html'"></div>
     <!-- ========== LIKED RIVS ===================== -->
-    <div class="rivs home-liked" ng-repeat="liked in currentUser.likes | orderBy: '-liked.created_at'" ng-if="(currentUser.likes.length > 0) && (vm.likes)" ng-include="'../partials/home/liked-rivs.html'"></div>
+    <div class="rivs home-liked" ng-repeat="liked in currentUser.likes | orderBy: '-created_at'" ng-if="(currentUser.likes.length > 0) && (vm.likes)" ng-include="'../partials/home/liked-rivs.html'"></div>
     <!-- ========== GO BACK TO TOP ================= -->
     <div class="window-top">
       <a ng-click="vm.goToTop();">GO BACK TO TOP</a>

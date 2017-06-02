@@ -14,7 +14,7 @@
     <i class="fa fa-star" aria-hidden="true" ng-click="vm.favoriteRivReply('reply', currentUser.id, correction)" ng-class="{liked: correction.liked}"></i>
     <i class="fa fa-globe" aria-hidden="true" ng-click="vm.toggleAction('translate', correction)"></i>
     <i class="fa fa-search" aria-hidden="true" ng-click="vm.modalToggle('details', correction, 'replies')"></i>
-    <i class="fa fa-trash" aria-hidden="true" ng-if="vm.isCurrentUser" ng-click="vm.deleteOneReply(correction.id)"></i>
+    <i class="fa fa-trash" aria-hidden="true" ng-if="vm.isCurrentUser" ng-click="vm.deleteOneReply(correction)"></i>
   </div>
 </div>
 <!-- ==== TRANSLATION BOX ================== -->

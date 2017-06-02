@@ -41,9 +41,9 @@
     <!-- details -->
     <i class="fa fa-search" aria-hidden="true" ng-click="vm.modalToggle('details', riv)"></i>
     <!-- delete if regular riv -->
-    <i class="fa fa-trash" aria-hidden="true" ng-if="(currentUser.id === riv.user.id) && !riv.reply" ng-click="vm.deleteOneRiv(riv.riv.id)"></i>
+    <i class="fa fa-trash" aria-hidden="true" ng-if="(currentUser.id === riv.user.id) && !riv.reply" ng-click="vm.deleteOneRiv(riv.riv)"></i>
     <!-- delete if reply -->
-    <i class="fa fa-trash" aria-hidden="true" ng-if="(currentUser.id === riv.user.id) && riv.reply" ng-click="vm.deleteOneReply(riv.riv.id)"></i>
+    <i class="fa fa-trash" aria-hidden="true" ng-if="(currentUser.id === riv.user.id) && riv.reply" ng-click="vm.deleteOneReply(riv.riv)"></i>
   </div>
 </div>
 <!-- ==== REPLY BOX ======================== -->

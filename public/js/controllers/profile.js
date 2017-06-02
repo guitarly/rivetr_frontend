@@ -172,8 +172,9 @@
           followed_id: following
         }
       }).then(function(response) {
-          location.reload();
-      })
+          this.followed = true;
+          this.sessionCheck();
+      }.bind(this))
     }
 
     // to unfollow a user
@@ -182,8 +183,9 @@
         method: 'DELETE',
         url: URL + 'follows/' + this.followedId
       }).then(function(response) {
-          location.reload();
-      });
+          this.followed = false;
+          this.sessionCheck();
+      }.bind(this));
     }
 
     // to delete a single riv
@@ -311,6 +313,7 @@
               riv_id: riv.id,
               content: profile.correctionData.content,
               photo: profile.correctionData.photo,
+              explanation: profile.correctionData.explanation,
               correction: true
             }
           }).then(function(response) {

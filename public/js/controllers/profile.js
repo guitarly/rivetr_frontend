@@ -71,6 +71,9 @@
         } else {
           this.editErrorMessage = null;
           this.profileUser.username = this.profileUser.username.toLowerCase();
+          if(!this.profileUser.profile_photo) {
+            this.newUserData.profile_photo = '../../img/default_icon.png';
+          }
           $http({
             method: 'PUT',
             url: URL + 'users/' + this.profileUser.id,

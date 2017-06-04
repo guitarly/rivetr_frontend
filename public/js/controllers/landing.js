@@ -20,6 +20,9 @@
       } else {
         this.registrationErrorMessage = null;
         this.newUserData.username = this.newUserData.username.toLowerCase();
+        if(!this.newUserData.profile_photo) {
+          this.newUserData.profile_photo = '../../img/default_icon.png';
+        }
         $http({
           method: 'POST',
           url: URL + 'users',

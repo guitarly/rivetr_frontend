@@ -10,7 +10,7 @@
 
   <!-- ============ USER STATS ==================== -->
   <div class="user-stats">
-    <h3 class="med">{{currentUser.display_name}}</h3>
+    <h3 class="med">{{currentUser.display_name || currentUser.username}}</h3>
     <div class="user-content">
       <div class="user-img" style="background:url('{{currentUser.profile_photo}}'); background-size:cover;background-position:center"></div>
       <div class="user-num">

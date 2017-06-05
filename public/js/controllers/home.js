@@ -231,7 +231,8 @@
       }).then(function(response) {
           user.followed = true;
           user.followed_id = response.data.id;
-      });
+          this.sessionCheck();
+      }.bind(this));
     }
 
     // unfollow user
@@ -242,7 +243,8 @@
       }).then(function(response) {
           user.followed = false;
           user.followed_id = null;
-      })
+          this.sessionCheck();
+      }.bind(this));
     }
 
     // finds a riv
